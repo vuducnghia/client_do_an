@@ -13,6 +13,11 @@ import { HistoryComponent } from './components/layout/history/history.component'
 import { ShowVideoComponent } from './components/layout/show-video/show-video.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PageNotFoundComponent } from './components/layout/page-not-found/page-not-found.component';
+import { AuthService } from './services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './services/user.service';
+import { VideoService } from './services/video.service';
+import { FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -25,15 +30,21 @@ import { PageNotFoundComponent } from './components/layout/page-not-found/page-n
     UploadComponent,
     HistoryComponent,
     ShowVideoComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    UserService,
+    VideoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

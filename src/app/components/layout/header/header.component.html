@@ -21,15 +21,37 @@
       </div>
       <div class="header-top-right">
         <div class="file">
-          <a routerLink="upload">Upload</a>
+          <a (click)="gotoUpload()">Upload</a>
         </div>
-        <div class="signin">
+        <!-- <div class="signin" *ngIf="!isLogin">
           <a href="#small-dialog2" class="play-icon popup-with-zoom-anim" data-toggle="modal"
             data-target="#signupModal">Sign Up</a>
-        </div>
-        <div class="signin">
+        </div> -->
+        <div class="signin" *ngIf="!isLogin">
           <a href="#small-dialog" class="play-icon popup-with-zoom-anim" data-toggle="modal"
             data-target="#loginModal">Sign In</a>
+        </div>
+        <div class="profile_details" *ngIf="isLogin">
+          <ul>
+            <li class="dropdown profile_details_drop">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <div class="profile_img">
+                  <span class="prfil-img"><img src="../../../../assets/images/b3.png" alt=""> </span>
+                  <div class="user-name">
+                    <p>Malorum</p>
+                    <span>Administrator</span>
+                  </div>
+                  <i class="fa fa-angle-down lnr"></i>
+                  <i class="fa fa-angle-up lnr"></i>
+                  <div class="clearfix"></div>
+                </div>
+              </a>
+              <ul class="dropdown-menu drp-mnu">
+                <li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>
+                <li> <a href="#" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a> </li>
+              </ul>
+            </li>
+          </ul>
         </div>
         <div class="clearfix"></div>
       </div>
@@ -59,12 +81,12 @@
       </div>
       <div class="signup">
         <form [formGroup]="signInForm">
-          
+
           <input type="text" class="email" placeholder="Username" maxlength="50" pattern="[1-9]{1}\d{9}"
             formControlName="username" />
           <input type="password" class="email" placeholder="Password" maxlength="50" pattern="[1-9]{1}\d{9}"
             formControlName="password" />
-            <input type="submit" value="LOGIN" />
+          <input type="submit" value="LOGIN" (click)="login()" />
         </form>
         <div class="forgot">
           <a href="#">Forgot password ?</a>
@@ -95,7 +117,7 @@
         </div>
       </div>
       <div class="signup">
-        <!-- <form [formGroup]="signupForm">
+        <form [formGroup]="signupForm">
           <input type="text" class="email" placeholder="First name" maxlength="50" pattern="[1-9]{1}\d{9}"
             formControlName="firstName" />
           <input type="text" class="email" placeholder="Last name" maxlength="50" pattern="[1-9]{1}\d{9}"
@@ -108,9 +130,9 @@
             formControlName="password" />
           <input type="password" class="email" placeholder="Comfirm password" maxlength="50" pattern="[1-9]{1}\d{9}"
             formControlName="confirmPassword" />
-        </form> -->
+        </form>
         <div class="continue-button">
-          <a href="#small-dialog3" class="hvr-shutter-out-horizontal play-icon popup-with-zoom-anim">CONTINUE</a>
+          <a href="#small-dialog3" class="hvr-shutter-out-horizontal play-icon popup-with-zoom-anim" (click)="signup()">CONTINUE</a>
         </div>
       </div>
       <div class="clearfix"> </div>

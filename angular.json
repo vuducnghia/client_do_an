@@ -31,7 +31,8 @@
               "src/assets/css/bootstrap.min.scss",
               "src/assets/css/dashboard.scss",
               "src/assets/css/popuo-box.scss",
-              "src/assets/css/style.scss"
+              "src/assets/css/style.scss",
+              "src/assets/css/font-awesome.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

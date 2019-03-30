@@ -29,10 +29,10 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  login(user) {
-    return this.http.post<any>(`${apiUrl}/signin`, user)
+  loginUser(user) {
+    return this.http.post<any>(`${apiUrl}/signinUser`, user)
       .pipe(map(user => {
-        if (user && user.token) {
+        if (user && user.token && user.role === 'user') {
           console.log(user);
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
