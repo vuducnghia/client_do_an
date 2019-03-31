@@ -30,6 +30,7 @@ export class AuthService {
   }
 
   loginUser(user) {
+    console.log(user)
     return this.http.post<any>(`${apiUrl}/signinUser`, user)
       .pipe(map(user => {
         if (user && user.token && user.role === 'user') {
@@ -39,6 +40,7 @@ export class AuthService {
           document.cookie = `Authorization=${user.token}`;
           this.currentUserSubject.next(user);
         }
+        console.log(user)
         return user;
       }), catchError(this.handleError));
   }

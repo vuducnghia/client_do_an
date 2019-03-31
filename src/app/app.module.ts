@@ -14,10 +14,16 @@ import { ShowVideoComponent } from './components/layout/show-video/show-video.co
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PageNotFoundComponent } from './components/layout/page-not-found/page-not-found.component';
 import { AuthService } from './services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { VideoService } from './services/video.service';
 import { FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
+import { HomeComponent } from './components/layout/home/home.component';
+import { LayoutAdminComponent } from './components/layout-admin/layout-admin.component';
+import { CategoryService } from './services/category.service';
+import { JwtInterceptor } from '../../../../do_an/client/src/app/service/jwt.interceptor';
+import { ErrorInterceptor } from '../../../../do_an/client/src/app/service/error.interceptor';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -31,19 +37,27 @@ import { FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
     HistoryComponent,
     ShowVideoComponent,
     PageNotFoundComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    HomeComponent,
+    LayoutAdminComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    // CommonModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    
     FormsModule,
-    HttpClientModule
+    
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthService,
     UserService,
-    VideoService
+    VideoService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })

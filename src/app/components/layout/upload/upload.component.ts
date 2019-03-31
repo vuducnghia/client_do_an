@@ -3,6 +3,8 @@ import { VideoService } from '../../../services/video.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 import { Router } from '@angular/router';
+import { CategoryService } from '../../../services/category.service';
+import { map } from 'rxjs/operators';
 
 const URL = 'http://localhost:8081/api/video/';
 
@@ -18,8 +20,11 @@ export class UploadComponent implements OnInit {
   language = 'en-US'
   hasFile: boolean = false;
   file;
+  listCategory = []
+
   constructor(
     public videoService: VideoService,
+    private categoryService: CategoryService,
     private _formBuilder: FormBuilder,
     private router: Router
   ) { }
@@ -53,6 +58,15 @@ export class UploadComponent implements OnInit {
         })
       }
     };
+
+    this.categoryService.getAll().subscribe(data => {
+      this.listCategory = data.map(cate => {
+        return cate.category;
+      })
+      console.log('cate: ', this.listCategory)
+    }, err => {
+      console.log(err)
+    })
   }
 
 
@@ -62,11 +76,11 @@ export class UploadComponent implements OnInit {
     itemAlias: 'video'
   });
 
-  cancelUpload(){
+  cancelUpload() {
     this.router.navigate(['/']);
   }
 
-  upload(){
-
+  upload() {
+    this.uploader.uploadAll();
   }
 }

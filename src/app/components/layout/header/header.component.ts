@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   ) {
   }
 
-  isLogin: boolean = false;
+  isLogin: boolean;
   signupForm = new FormGroup(
     {
       firstName: new FormControl('', [Validators.required]),
@@ -40,6 +40,11 @@ export class HeaderComponent implements OnInit {
     }
   );
   ngOnInit() {
+    if(this.authService.currentUserValue){
+      this.isLogin = true;
+    }else{
+      this.isLogin = false;
+    }
   }
 
   showModelLogin() {
@@ -61,7 +66,6 @@ export class HeaderComponent implements OnInit {
     this.authService.loginUser(user)
       .pipe(first())
       .subscribe(data => {
-        console.log(data)
         this.isLogin = true;
         $('#loginModal').modal('hide');
         // if (this.authService.currentUserValue.role ==='user') {
@@ -100,8 +104,6 @@ export class HeaderComponent implements OnInit {
   }
 
   gotoUpload() {
-    console.log(111)
-    console.log(this.authService.currentUserValue)
     if (this.authService.currentUserValue) {
       this.router.navigate(['/upload']);
     }

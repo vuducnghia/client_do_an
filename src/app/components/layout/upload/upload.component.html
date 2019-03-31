@@ -1,4 +1,4 @@
-<app-header></app-header>
+<!-- <app-header></app-header> -->
 <div class="uploadTemplate">
   
   <div class="upload">
@@ -45,11 +45,7 @@
               <div class="form-group">
                 <label for="exampleFormControlSelect3">Category</label>
                 <select class="form-control" id="exampleFormControlSelect3">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
+                  <option *ngFor="let cate of listCategory">{{cate}}</option>
                 </select>
               </div>
             </form>
