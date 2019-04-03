@@ -32,9 +32,16 @@
               "src/assets/css/dashboard.scss",
               "src/assets/css/popuo-box.scss",
               "src/assets/css/style.scss",
-              "src/assets/css/font-awesome.css"
+              "src/assets/css/font-awesome.css",
+              "node_modules/video.js/dist/video-js.min.css",
+              "src/assets/css/video-js.css",
+              "src/assets/css/videojs-transcript.css",
+              "src/assets/css/videojs-transcript2.css",
+              "src/assets/css/videojs-transcript3.css"
             ],
             "scripts": [
+              "node_modules/video.js/dist/video.min.js",
+              "node_modules/videojs-contrib-hls/dist/videojs-contrib-hls.min.js",
               "node_modules/jquery/dist/jquery.min.js",
               "src/assets/js/jquery-1.11.1.min.js",
               "src/assets/js/bootstrap.min.js",
@@ -42,7 +49,8 @@
               "src/assets/js/jquery.polyglot.language.switcher.js",
 
               "src/assets/js/modernizr.custom.min.js",
-              "src/assets/js/responsiveslides.min.js"
+              "src/assets/js/responsiveslides.min.js",
+              "src/assets/js/videojs-transcript.js"
             ]
           },
           "configurations": {

@@ -24,6 +24,10 @@ import { CategoryService } from './services/category.service';
 import { JwtInterceptor } from '../../../../do_an/client/src/app/service/jwt.interceptor';
 import { ErrorInterceptor } from '../../../../do_an/client/src/app/service/error.interceptor';
 import { CommonModule } from '@angular/common';
+import { MyVideoComponent } from './components/layout/my-video/my-video.component';
+import { VideoTranscriptComponent, dateFormatPipe } from './components/layout/video-transcript/video-transcript.component';
+import { EngineService } from './services/engine.service';
+import { TestComponent } from './components/layout/test/test.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { CommonModule } from '@angular/common';
     PageNotFoundComponent,
     FileSelectDirective,
     HomeComponent,
-    LayoutAdminComponent
+    LayoutAdminComponent,
+    MyVideoComponent,
+    VideoTranscriptComponent,
+    dateFormatPipe,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -53,11 +61,12 @@ import { CommonModule } from '@angular/common';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthService,
     UserService,
     VideoService,
-    CategoryService
+    CategoryService,
+    EngineService
   ],
   bootstrap: [AppComponent]
 })

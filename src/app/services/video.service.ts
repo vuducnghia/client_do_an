@@ -34,9 +34,6 @@ export class VideoService {
     // return this.http.post(`${apiUrl}`)
   }
 
-  pingStartEngine(nameEngine, language, pathvideo){
-    return this.http.post(`${apiUrl}createEngine/${nameEngine}/${language}`, pathvideo);
-  }
   delete(id: number) {
     // return this.http.delete(`/users/` + id);
   }

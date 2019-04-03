@@ -23,29 +23,21 @@
           <div class="engine" *ngIf="hasFile">
             <form>
               <div class="form-group">
-                <label for="exampleFormControlSelect1">Engine Transcript</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
+                <label for="Select1">Engine Transcript</label>
+                <select class="form-control" id="Select1" [ngModel]="nameEngine" (change)="onChangeEngine($event.target.value)" name="test">
+                  <option *ngFor="let engine of listEngineTranscript" [value]="engine.name">{{engine.name}}</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="exampleFormControlSelect2">Language</label>
-                <select class="form-control" id="exampleFormControlSelect2">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
+                <label for="Select2">Language</label>
+                <select class="form-control" id="Select2" [ngModel]="language" (change)="onChangeLanguage($event.target.value)" name="test1">
+                  <option *ngFor="let language of listLanguage" [value]="language.name">{{language.name}}</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="exampleFormControlSelect3">Category</label>
-                <select class="form-control" id="exampleFormControlSelect3">
-                  <option *ngFor="let cate of listCategory">{{cate}}</option>
+                <label for="Select3">Category</label>
+                <select class="form-control" id="Select3" [ngModel]="language" name="test2">
+                  <option *ngFor="let cate of listCategory" [value]="cate">{{cate}}</option>
                 </select>
               </div>
             </form>

@@ -8,6 +8,9 @@ import { ShowVideoComponent } from './components/layout/show-video/show-video.co
 import { PageNotFoundComponent } from './components/layout/page-not-found/page-not-found.component';
 import { HomeComponent } from './components/layout/home/home.component';
 import { LayoutAdminComponent } from './components/layout-admin/layout-admin.component';
+import { MyVideoComponent } from './components/layout/my-video/my-video.component';
+import { VideoTranscriptComponent } from './components/layout/video-transcript/video-transcript.component';
+import { TestComponent } from './components/layout/test/test.component';
 
 const routes: Routes = [
   {
@@ -18,9 +21,11 @@ const routes: Routes = [
       // {path: 'show-video', component: ShowVideoComponent},
       {
         path: '', component: HomeComponent, children: [
-          {path: '', component: BodyComponent},
-          {path: 'history', component: HistoryComponent},
-          {path: 'show-video', component: ShowVideoComponent},
+          { path: '', component: BodyComponent },
+          { path: 'history', component: HistoryComponent },
+          { path: 'my-videos', component: MyVideoComponent },
+          { path: 'my-videos/:idVideo', component: VideoTranscriptComponent },
+          { path: 'show-video', component: ShowVideoComponent },
         ]
       },
       { path: 'upload', component: UploadComponent }
@@ -28,7 +33,8 @@ const routes: Routes = [
     ]
   },
   { path: 'admin', component: LayoutAdminComponent },
-  { path: 'not-found', component: PageNotFoundComponent }
+  { path: 'not-found', component: PageNotFoundComponent },
+  { path: 'test', component: TestComponent }
 
 ];
 
