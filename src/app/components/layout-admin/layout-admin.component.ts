@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-layout-admin',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private adminService:AdminService) { }
 
   ngOnInit() {
+    this.adminService.ping().subscribe(data => {
+      console.log(data)
+    }, err => {
+      console.log(err)
+    })
   }
 
 }
