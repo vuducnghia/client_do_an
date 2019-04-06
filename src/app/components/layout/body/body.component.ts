@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { VideoService } from 'src/app/services/video.service';
+import { CategoryService } from '../../../services/category.service';
 
 @Component({
   selector: 'app-body',
@@ -6,10 +8,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./body.component.scss']
 })
 export class BodyComponent implements OnInit {
-
-  constructor() { }
+  listCategory = []
+  listObjectVideo = []
+  constructor(
+    private videoservice: VideoService,
+    private categoryService: CategoryService
+  ) { }
 
   ngOnInit() {
+    this.categoryService.getAll().subscribe(data => {
+      this.listCategory = data.map(cate => {
+        return cate.category;
+      })
+      console.log('cate: ', this.listCategory)
+      this.listCategory.forEach(cate => {
+        this.videoservice.getVideoByCategory(cate).subscribe(video => {
+          if (video[0]){
+            this.listObjectVideo.push({
+              cate:cate,
+              video:video
+            })
+          }
+        })
+      })
+    }, err => {
+      console.log(err)
+    })
+
+
   }
 
 }

@@ -36,8 +36,8 @@
               </div>
               <div class="form-group">
                 <label for="Select3">Category</label>
-                <select class="form-control" id="Select3" [ngModel]="language" name="test2">
-                  <option *ngFor="let cate of listCategory" [value]="cate">{{cate}}</option>
+                <select class="form-control" id="Select3" [ngModel]="category" (change)="onChangeCategory($event.target.value)" name="test2">
+                  <option *ngFor="let category of listCategory" [value]="category">{{category}}</option>
                 </select>
               </div>
             </form>

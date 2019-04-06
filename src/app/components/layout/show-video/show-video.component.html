@@ -5,70 +5,32 @@
         <div class="song-info">
           <h3>Etiam molestie nisl eget consequat pharetra</h3>
         </div>
-        <div class="video-grid">
-          <iframe src="https://www.youtube.com/embed/oYiT-vLjhC4" allowfullscreen></iframe>
+        <div>
+          <video height="376px" width="100%" controls *ngIf="url">
+            <p>
+              Your browser doesn't support video.
+            </p>
+            <source src="{{url}}" type="video/mp4">
+            <track kind="captions" src="../../../../assets/test.vtt" srclang="en" label="English" default>
+          </video>
         </div>
       </div>
-      <div class="song-grid-right">
-        <div class="share">
-          <h5>Share this</h5>
-          <ul>
-            <li><a href="#" class="icon fb-icon">Facebook</a></li>
-            <li><a href="#" class="icon dribbble-icon">Dribbble</a></li>
-            <li><a href="#" class="icon twitter-icon">Twitter</a></li>
-            <li><a href="#" class="icon pinterest-icon">Pinterest</a></li>
-            <li><a href="#" class="icon whatsapp-icon">Whatsapp</a></li>
-            <li><a href="#" class="icon like">Like</a></li>
-            <li><a href="#" class="icon comment-icon">Comments</a></li>
-            <li class="view">200 Views</li>
-          </ul>
-        </div>
-      </div>
+
       <div class="clearfix"> </div>
       <div class="published">
-        <script src="jquery.min.js"></script>
-        <script>
-          $(document).ready(function () {
-            size_li = $("#myList li").size();
-            x = 1;
-            $('#myList li:lt(' + x + ')').show();
-            $('#loadMore').click(function () {
-              x = (x + 1 <= size_li) ? x + 1 : size_li;
-              $('#myList li:lt(' + x + ')').show();
-            });
-            $('#showLess').click(function () {
-              x = (x - 1 < 0) ? 1 : x - 1;
-              $('#myList li').not(':lt(' + x + ')').hide();
-            });
-          });
-        </script>
+
         <div class="load_more">
           <ul id="myList">
             <li>
               <h4>Published on 15 June 2015</h4>
-              <p>Nullam fringilla sagittis tortor ut rhoncus. Nam vel ultricies erat, vel sodales leo. Maecenas
-                pellentesque, est suscipit laoreet tincidunt, ipsum tortor vestibulum leo, ac dignissim diam velit id
-                tellus. Morbi luctus velit quis semper egestas. Nam condimentum sem eget ex iaculis bibendum. Nam
-                tortor felis, commodo faucibus sollicitudin ac, luctus a turpis. Donec congue pretium nisl, sed
-                fringilla tellus tempus in.</p>
             </li>
             <li>
-              <p>Nullam fringilla sagittis tortor ut rhoncus. Nam vel ultricies erat, vel sodales leo. Maecenas
-                pellentesque, est suscipit laoreet tincidunt, ipsum tortor vestibulum leo, ac dignissim diam velit id
-                tellus. Morbi luctus velit quis semper egestas. Nam condimentum sem eget ex iaculis bibendum. Nam
-                tortor felis, commodo faucibus sollicitudin ac, luctus a turpis. Donec congue pretium nisl, sed
-                fringilla tellus tempus in.</p>
-              <p>Nullam fringilla sagittis tortor ut rhoncus. Nam vel ultricies erat, vel sodales leo. Maecenas
-                pellentesque, est suscipit laoreet tincidunt, ipsum tortor vestibulum leo, ac dignissim diam velit id
-                tellus. Morbi luctus velit quis semper egestas. Nam condimentum sem eget ex iaculis bibendum. Nam
-                tortor felis, commodo faucibus sollicitudin ac, luctus a turpis. Donec congue pretium nisl, sed
-                fringilla tellus tempus in.</p>
               <div class="load-grids">
                 <div class="load-grid">
                   <p>Category</p>
                 </div>
                 <div class="load-grid">
-                  <a href="movies.html">Entertainment</a>
+                  <a href="/movies.html">{{videoOgirin.category}}</a>
                 </div>
                 <div class="clearfix"> </div>
               </div>
@@ -81,9 +43,9 @@
           <a href="#">All Comments (8,657)</a>
           <div class="box">
             <form>
-              <input type="text" placeholder="Name" required=" ">
+              <!-- <input type="text" placeholder="Name" required=" ">
               <input type="text" placeholder="Email" required=" ">
-              <input type="text" placeholder="Phone" required=" ">
+              <input type="text" placeholder="Phone" required=" "> -->
               <textarea placeholder="Message" required=" "></textarea>
               <input type="submit" value="SEND">
               <div class="clearfix"> </div>
@@ -195,20 +157,20 @@
     <div class="col-md-4 single-right">
       <h3>Up Next</h3>
       <div class="single-grid-right">
-        <div class="single-right-grids">
+        <div class="single-right-grids" *ngFor="let video of listVideo">
           <div class="col-md-4 single-right-grid-left">
-            <a href="single.html"><img src="images/r1.jpg" alt="" /></a>
+            <a routerLink="/show-video/{{video._id}}"><img src="http://localhost:8081/api/image/{{video.thumbnail}}" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
-            <a href="single.html" class="title"> Nullam interdum metus</a>
-            <p class="author"><a href="#" class="author">John Maniya</a></p>
-            <p class="views">2,114,200 views</p>
+            <a routerLink="/show-video/{{video._id}}" class="title">{{video.title}}</a>
+            <p class="author"><a href="#" class="author">{{video.owner}}</a></p>
+            <p class="views">{{video.views}} views</p>
           </div>
           <div class="clearfix"> </div>
         </div>
         <div class="single-right-grids">
           <div class="col-md-4 single-right-grid-left">
-            <a href="single.html"><img src="images/r2.jpg" alt="" /></a>
+            <a href="single.html"><img src="../../../../assets/images/r2.jpg" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
             <a href="single.html" class="title"> Nullam interdum metus</a>
@@ -219,7 +181,7 @@
         </div>
         <div class="single-right-grids">
           <div class="col-md-4 single-right-grid-left">
-            <a href="single.html"><img src="images/r3.jpg" alt="" /></a>
+            <a href="single.html"><img src="../../../../assets/images/r3.jpg" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
             <a href="single.html" class="title"> Nullam interdum metus</a>
@@ -230,7 +192,7 @@
         </div>
         <div class="single-right-grids">
           <div class="col-md-4 single-right-grid-left">
-            <a href="single.html"><img src="images/r4.jpg" alt="" /></a>
+            <a href="single.html"><img src="../../../../assets/images/r4.jpg" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
             <a href="single.html" class="title"> Nullam interdum metus</a>
@@ -241,7 +203,7 @@
         </div>
         <div class="single-right-grids">
           <div class="col-md-4 single-right-grid-left">
-            <a href="single.html"><img src="images/r5.jpg" alt="" /></a>
+            <a href="single.html"><img src="../../../../assets/images/r5.jpg" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
             <a href="single.html" class="title"> Nullam interdum metus</a>
@@ -252,7 +214,7 @@
         </div>
         <div class="single-right-grids">
           <div class="col-md-4 single-right-grid-left">
-            <a href="single.html"><img src="images/r6.jpg" alt="" /></a>
+            <a href="single.html"><img src="../../../../assets/images/r6.jpg" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
             <a href="single.html" class="title"> Nullam interdum metus</a>
@@ -263,7 +225,7 @@
         </div>
         <div class="single-right-grids">
           <div class="col-md-4 single-right-grid-left">
-            <a href="single.html"><img src="images/r1.jpg" alt="" /></a>
+            <a href="single.html"><img src="../../../../assets/images/r1.jpg" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
             <a href="single.html" class="title"> Nullam interdum metus</a>
@@ -274,7 +236,7 @@
         </div>
         <div class="single-right-grids">
           <div class="col-md-4 single-right-grid-left">
-            <a href="single.html"><img src="images/r2.jpg" alt="" /></a>
+            <a href="single.html"><img src="../../../../assets/images/r2.jpg" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
             <a href="single.html" class="title"> Nullam interdum metus</a>
@@ -285,7 +247,7 @@
         </div>
         <div class="single-right-grids">
           <div class="col-md-4 single-right-grid-left">
-            <a href="single.html"><img src="images/r3.jpg" alt="" /></a>
+            <a href="single.html"><img src="../../../../assets/images/r3.jpg" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
             <a href="single.html" class="title"> Nullam interdum metus</a>
@@ -296,7 +258,7 @@
         </div>
         <div class="single-right-grids">
           <div class="col-md-4 single-right-grid-left">
-            <a href="single.html"><img src="images/r4.jpg" alt="" /></a>
+            <a href="single.html"><img src="../../../../assets/images/r4.jpg" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
             <a href="single.html" class="title"> Nullam interdum metus</a>
@@ -307,7 +269,7 @@
         </div>
         <div class="single-right-grids">
           <div class="col-md-4 single-right-grid-left">
-            <a href="single.html"><img src="images/r5.jpg" alt="" /></a>
+            <a href="single.html"><img src="../../../../assets/images/r5.jpg" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
             <a href="single.html" class="title"> Nullam interdum metus</a>
@@ -318,7 +280,7 @@
         </div>
         <div class="single-right-grids">
           <div class="col-md-4 single-right-grid-left">
-            <a href="single.html"><img src="images/r6.jpg" alt="" /></a>
+            <a href="single.html"><img src="../../../../assets/images/r6.jpg" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
             <a href="single.html" class="title"> Nullam interdum metus</a>

@@ -1,8 +1,8 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-// import { videojs } from "video.js";
-// import{transcript} from '../../../../assets/js/videojs-transcript.min.js';
+import * as videojs from '../../../../assets/js/video.js'
+declare const videojs: any
+import '../../../../assets/js/videojs-transcript.js'
 
-declare var videojs: any;
 @Pipe({
   name: 'dateFormatPipe',
 })
@@ -29,23 +29,30 @@ export class dateFormatPipe implements PipeTransform {
 export class VideoTranscriptComponent implements OnInit {
 
   constructor() { }
-
+  status = 'Private'
   ngOnInit() {
-    // const video = videojs('video').ready(function(){
-    //   // Set up any options.
-    //   const options = {
-    //     showTitle: false,
-    //     showTrackSelector: false,
-    //   };
+    const player = videojs('video').ready(function () {
+      // fire up the plugin
+      // this['transcript'] = transcript
 
-    //   // Initialize the plugin.
-    //   const transcriptInstance = transcript(options);
-
-    //   // Then attach the widget to the page.
-    //   var transcriptContainer = document.querySelector('#transcript');
-    //   transcriptContainer.appendChild(transcript.el()); 
-    // });
+      console.log(this);
+      const transcriptElem = this.transcript({
+        autoscroll: true,
+        clickArea: 'text',
+        showTitle: true,
+        showTrackSelector: true,
+        followPlayerTrack: true,
+        scrollToCenter: false,
+        stopScrollWhenInUse: true,
+      })
+      console.log('transcript', transcriptElem)
+      // attach the widget to the page
+      const transcriptContainer = document.querySelector('#transcript');
+      transcriptContainer.appendChild(transcriptElem.el());
+    });
   }
 
-
+  changeStatus(){
+    this.status = 'Request Public'
+  }
 }

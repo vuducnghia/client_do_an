@@ -16,14 +16,15 @@ const URL = 'http://localhost:8081/api/video/';
 })
 export class UploadComponent implements OnInit {
   videoForm: FormGroup;
-  token = ''
-  nameEngine = ''
-  language = ''
+  token = '';
+  nameEngine = '';
+  language = '';
+  category= '';
   hasFile: boolean = false;
   file;
   listCategory = [];
-  listEngineTranscript = []
-  listLanguage = []
+  listEngineTranscript = [];
+  listLanguage = [];
   constructor(
     public videoService: VideoService,
     private categoryService: CategoryService,
@@ -83,9 +84,16 @@ export class UploadComponent implements OnInit {
       } else {
         // this.dialogRef.close();
 
-        let path = JSON.parse(response)
-        console.log(path)
-        this.engineService.startEngine(this.nameEngine, this.language, path).subscribe(data => {
+        let result = JSON.parse(response)
+        console.log(result)
+        this.engineService.startEngine(this.nameEngine, this.language, result.path).subscribe(data => {
+          // this.videosAccount = data;
+          console.log('videos: ', data)
+        }, err => {
+          console.log(err)
+        })
+
+        this.videoService.updateCategoryByIdVideo(result.id, {nameCate:this.category}).subscribe(data => {
           // this.videosAccount = data;
           console.log('videos: ', data)
         }, err => {
@@ -109,5 +117,9 @@ export class UploadComponent implements OnInit {
 
   onChangeLanguage(language) {
     this.language = language
+  }
+
+  onChangeCategory(category){
+    this.category = category;
   }
 }

@@ -26,14 +26,13 @@ export class VideoService {
     return this.http.get<any>(`${apiUrl}`);
   }
 
-  getById(id: number) {
+  getVideoById(id: number) {
     return this.http.get(`${apiUrl}` + id);
   }
 
-  uploadVideo() {
-    // return this.http.post(`${apiUrl}`)
+  getVideoByCategory(name){
+    return this.http.get<any>(`${apiUrl}getVideoByCate/${name}`);
   }
-
   delete(id: number) {
     // return this.http.delete(`/users/` + id);
   }
@@ -44,5 +43,9 @@ export class VideoService {
 
   getDataTranscriptById(id, engine) {
     return this.http.get(`${apiUrl}transcriptData/${id}?engine=${engine}`);
+  }
+
+  updateCategoryByIdVideo(idvideo, cate){
+    return this.http.put(`${apiUrl}updateCate/${idvideo}`, cate);
   }
 }

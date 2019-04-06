@@ -25,7 +25,7 @@ const routes: Routes = [
           { path: 'history', component: HistoryComponent },
           { path: 'my-videos', component: MyVideoComponent },
           { path: 'my-videos/:idVideo', component: VideoTranscriptComponent },
-          { path: 'show-video', component: ShowVideoComponent },
+          { path: 'show-video/:idVideo', component: ShowVideoComponent },
         ]
       },
       { path: 'upload', component: UploadComponent }

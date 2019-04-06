@@ -5,8 +5,8 @@
 }
 
 .transcript-body {
-  height: 200px;
-  overflow-y: scroll;
+  /* height: 200px; */
+  /* overflow-y: scroll; */
 }
 
 .transcript-line {
@@ -19,13 +19,18 @@
 .transcript-timestamp {
   position: absolute;
   display: inline-block;
-  color: #333;
+  /* color: #333; */
   width: 50px;
+  background: rgba(0,0,0,.12);
+  border-radius: 2px;
+  text-align: center;
+  font-size: 11px;
 }
 
 .transcript-text {
   display: block;
   margin-left: 50px;
+  font-size: 13px;
 }
 
 .transcript-line:hover {
