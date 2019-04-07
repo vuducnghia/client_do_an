@@ -45,6 +45,22 @@ export class AuthService {
       }), catchError(this.handleError));
   }
 
+  loginAdmin(user) {
+    console.log(user)
+    return this.http.post<any>(`${apiUrl}/signinAdmin`, user)
+      .pipe(map(user => {
+        if (user && user.token && user.role === 'user') {
+          console.log(user);
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          document.cookie = `Authorization=${user.token}`;
+          this.currentUserSubject.next(user);
+        }
+        console.log(user)
+        return user;
+      }), catchError(this.handleError));
+  }
+
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);

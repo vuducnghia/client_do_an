@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-admin',
@@ -7,9 +11,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
+  signInForm = new FormGroup(
+    {
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
+    }
+  );
 
+  login(): void {
+    let user = {
+      username: this.signInForm.get('username').value,
+      password: this.signInForm.get('password').value
+    }
+
+    this.authService.loginAdmin(user)
+      .pipe(first())
+      .subscribe(data => {
+        console.log(data)
+        this.router.navigate(['/admin']);
+      }, error => {
+        console.log(JSON.stringify(error))
+      })
+  }
 }

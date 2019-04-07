@@ -9,7 +9,7 @@ import { VideoService } from '../../../services/video.service';
 })
 export class ShowVideoComponent implements OnInit {
   idVideo
-  videoOgirin:any
+  videoOgirin: any
   url
   listVideo = []
   constructor(
@@ -20,17 +20,20 @@ export class ShowVideoComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.idVideo = params.idVideo;
-      // console.log(this.idVideo)
       this.videoService.getVideoById(this.idVideo).subscribe(video => {
-        // console.log(video)
+        console.log(video)
         this.videoOgirin = video
-        this.url = "http://localhost:8081/api/play/"+ this.videoOgirin.thumbnail;
+        this.url = "http://localhost:8081/api/play/" + this.videoOgirin.thumbnail;
         this.videoService.getVideoByCategory(this.videoOgirin.category).subscribe(videos => {
           this.listVideo = videos;
-          // console.log(this.listVideo)
         })
       })
     });
   }
 
+  a(id) {
+    this.url = "http://localhost:8081/api/play/" + id
+    let x = <HTMLVideoElement>document.getElementById("myVideo");
+    x.load();
+  }
 }

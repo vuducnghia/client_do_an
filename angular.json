@@ -37,7 +37,8 @@
               "src/assets/css/video-js.css",
               "src/assets/css/videojs-transcript.css",
               "src/assets/css/videojs-transcript2.css",
-              "src/assets/css/videojs-transcript3.css"
+              "src/assets/css/videojs-transcript3.css",
+              "src/assets/css/icon-font.min.css"
             ],
             "scripts": [
               "node_modules/video.js/dist/video.min.js",
@@ -47,7 +48,7 @@
               "src/assets/js/bootstrap.min.js",
               "src/assets/js/jquery.magnific-popup.js",
               "src/assets/js/jquery.polyglot.language.switcher.js",
-
+              
               "src/assets/js/modernizr.custom.min.js",
               "src/assets/js/responsiveslides.min.js",
               "src/assets/js/videojs-transcript.js"

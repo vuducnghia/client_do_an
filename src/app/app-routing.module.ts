@@ -11,6 +11,8 @@ import { LayoutAdminComponent } from './components/layout-admin/layout-admin.com
 import { MyVideoComponent } from './components/layout/my-video/my-video.component';
 import { VideoTranscriptComponent } from './components/layout/video-transcript/video-transcript.component';
 import { TestComponent } from './components/layout/test/test.component';
+import { LoginAdminComponent } from './components/layout-admin/login-admin/login-admin.component';
+import { ManagerRequestComponent } from './components/layout-admin/manager-request/manager-request.component';
 
 const routes: Routes = [
   {
@@ -32,7 +34,12 @@ const routes: Routes = [
 
     ]
   },
-  { path: 'admin', component: LayoutAdminComponent },
+  {
+    path: 'admin', component: LayoutAdminComponent, children: [
+      { path: '', component: ManagerRequestComponent }
+    ]
+  },
+  { path: 'login-admin', component: LoginAdminComponent },
   { path: 'not-found', component: PageNotFoundComponent },
   { path: 'test', component: TestComponent }
 

@@ -8,14 +8,9 @@ import { AdminService } from '../../services/admin.service';
 })
 export class LayoutAdminComponent implements OnInit {
 
-  constructor(private adminService:AdminService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.adminService.ping().subscribe(data => {
-      console.log(data)
-    }, err => {
-      console.log(err)
-    })
   }
 
 }

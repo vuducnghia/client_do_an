@@ -16,7 +16,7 @@ const URL = 'http://localhost:8081/api/video/';
 })
 export class UploadComponent implements OnInit {
   videoForm: FormGroup;
-  token = '';
+  // token = '';
   nameEngine = '';
   language = '';
   category= '';
@@ -43,8 +43,8 @@ export class UploadComponent implements OnInit {
       console.log(file)
       this.hasFile = true;
       file.withCredentials = false;
-      this.token = JSON.parse(localStorage.getItem('currentUser')).token || '';
-      this.uploader.authToken = this.token
+      // this.token = JSON.parse(localStorage.getItem('currentUser')).token || '';
+      // this.uploader.authToken = this.token
     }
 
 
@@ -52,7 +52,6 @@ export class UploadComponent implements OnInit {
       this.listCategory = data.map(cate => {
         return cate.category;
       })
-      console.log('cate: ', this.listCategory)
     }, err => {
       console.log(err)
     })

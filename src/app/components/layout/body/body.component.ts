@@ -20,10 +20,9 @@ export class BodyComponent implements OnInit {
       this.listCategory = data.map(cate => {
         return cate.category;
       })
-      console.log('cate: ', this.listCategory)
       this.listCategory.forEach(cate => {
         this.videoservice.getVideoByCategory(cate).subscribe(video => {
-          if (video[0]){
+          if (video && video[0]){
             this.listObjectVideo.push({
               cate:cate,
               video:video

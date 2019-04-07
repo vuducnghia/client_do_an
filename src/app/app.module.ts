@@ -28,6 +28,10 @@ import { MyVideoComponent } from './components/layout/my-video/my-video.componen
 import { VideoTranscriptComponent, dateFormatPipe } from './components/layout/video-transcript/video-transcript.component';
 import { EngineService } from './services/engine.service';
 import { TestComponent } from './components/layout/test/test.component';
+import { LoginAdminComponent } from './components/layout-admin/login-admin/login-admin.component';
+import { AdminService } from './services/admin.service';
+import { MenuAdminComponent } from './components/layout-admin/menu-admin/menu-admin.component';
+import { ManagerRequestComponent } from './components/layout-admin/manager-request/manager-request.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,10 @@ import { TestComponent } from './components/layout/test/test.component';
     MyVideoComponent,
     VideoTranscriptComponent,
     dateFormatPipe,
-    TestComponent
+    TestComponent,
+    LoginAdminComponent,
+    MenuAdminComponent,
+    ManagerRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -61,9 +68,10 @@ import { TestComponent } from './components/layout/test/test.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     AuthService,
     UserService,
+    AdminService,
     VideoService,
     CategoryService,
     EngineService
