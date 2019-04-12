@@ -5,7 +5,7 @@
         <div class="recommended-info">
           <h3>{{obj.cate}}</h3>
         </div>
-        <div class="col-md-3 resent-grid recommended-grid end" *ngFor="let video of obj.video">
+        <div class="col-md-3 resent-grid recommended-grid end" *ngFor="let video of obj.videos">
           <div class="resent-grid-img recommended-grid-img">
             <a routerLink="show-video/{{video._id}}"><img src="http://localhost:8081/api/image/{{video.thumbnail}}" alt="" /></a>
             <div class="time small-time">

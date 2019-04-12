@@ -26,7 +26,7 @@ const routes: Routes = [
           { path: '', component: BodyComponent },
           { path: 'history', component: HistoryComponent },
           { path: 'my-videos', component: MyVideoComponent },
-          { path: 'my-videos/:idVideo', component: VideoTranscriptComponent },
+          { path: 'my-videos/:idVideo/:path', component: VideoTranscriptComponent },
           { path: 'show-video/:idVideo', component: ShowVideoComponent },
         ]
       },

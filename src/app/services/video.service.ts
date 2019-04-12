@@ -45,7 +45,19 @@ export class VideoService {
     return this.http.get(`${apiUrl}transcriptData/${id}?engine=${engine}`);
   }
 
+  getVideoByStage(name){
+    return this.http.get<any>(`${apiUrl}getVideoByStage/${name}`);
+  }
+
   updateCategoryByIdVideo(idvideo, cate){
     return this.http.put(`${apiUrl}updateCate/${idvideo}`, cate);
+  }
+
+  updateStatusByIdVideo(idvideo, status){
+    return this.http.put(`${apiUrl}updateStatus/${idvideo}`, status);
+  }
+
+  updateStageByIdVideo(idvideo, stage){
+    return this.http.put(`${apiUrl}updateStage/${idvideo}`, stage);
   }
 }

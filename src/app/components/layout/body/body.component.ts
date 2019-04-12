@@ -21,11 +21,11 @@ export class BodyComponent implements OnInit {
         return cate.category;
       })
       this.listCategory.forEach(cate => {
-        this.videoservice.getVideoByCategory(cate).subscribe(video => {
-          if (video && video[0]){
+        this.videoservice.getVideoByCategory(cate).subscribe(videos => {
+          if (videos && videos[0]) {
             this.listObjectVideo.push({
-              cate:cate,
-              video:video
+              cate: cate,
+              videos: videos
             })
           }
         })

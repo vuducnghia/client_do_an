@@ -1,19 +1,19 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <div class="main-grids">
-    <div class="recommended">
+    <div class="recommended" *ngFor="let obj of listObjectVideo">
       <div class="recommended-grids english-grid">
         <div class="recommended-info">
           <div class="heading">
-            <h3>Latest Sports Videos</h3>
+            <h3>{{obj.cate}}</h3>
           </div>
-          <div class="heading-right">
+          <!-- <div class="heading-right">
             <a href="#small-dialog8" class="play-icon popup-with-zoom-anim">Subscribe</a>
-          </div>
+          </div> -->
           <div class="clearfix"> </div>
         </div>
-        <div class="col-md-2 resent-grid recommended-grid sports-recommended-grid">
+        <div class="col-md-2 resent-grid recommended-grid sports-recommended-grid" *ngFor="let video of obj.videos">
           <div class="resent-grid-img recommended-grid-img">
-            <a routerLink="123"><img src="../../../../assets/images/g.jpg" alt="" /></a>
+            <a routerLink="{{video._id}}/{{video.thumbnail}}"><img src="http://localhost:8081/api/image/{{video.thumbnail}}" alt="" /></a>
             <div class="time small-time sports-tome">
               <p>7:30</p>
             </div>
@@ -22,12 +22,12 @@
             </div>
           </div>
           <div class="resent-grid-info recommended-grid-info">
-            <h5><a routerLink="123" class="title">Nullam interdum metus varius sit sed viverra</a></h5>
-            <p class="author"><a href="#" class="author">John Maniya</a></p>
-            <p class="views">2,114,200 views</p>
+            <h5><a routerLink="{{video._id}}/{{video.thumbnail}}" class="title">{{video.title}}</a></h5>
+            <p class="author"><a href="#" class="author">{{video.owner}}</a></p>
+            <p class="views">{{video.views}} views</p>
           </div>
         </div>
-        <div class="col-md-2 resent-grid recommended-grid sports-recommended-grid">
+        <!-- <div class="col-md-2 resent-grid recommended-grid sports-recommended-grid">
           <div class="resent-grid-img recommended-grid-img">
             <a routerLink="123"><img src="../../../../assets/images/g1.jpg" alt="" /></a>
             <div class="time small-time sports-tome">
@@ -106,11 +106,11 @@
             <p class="author"><a href="#" class="author">John Maniya</a></p>
             <p class="views">2,114,200 views</p>
           </div>
-        </div>
+        </div> -->
         <div class="clearfix"> </div>
       </div>
     </div>
-    <div class="recommended">
+    <!-- <div class="recommended">
       <div class="recommended-grids">
         <div class="recommended-info">
           <div class="heading">
@@ -329,6 +329,6 @@
         </div>
         <div class="clearfix"> </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>

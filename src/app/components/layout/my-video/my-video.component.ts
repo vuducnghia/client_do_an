@@ -8,19 +8,29 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./my-video.component.scss']
 })
 export class MyVideoComponent implements OnInit {
-
+  listCategory = new Set()
+  listObjectVideo = []
   constructor(
     private route: ActivatedRoute,
     private videoservice: VideoService
   ) { }
 
   ngOnInit() {
-    // this.route.params.subscribe(params => {
-    //   console.log(params.idVideo)
-    // })
+    
 
-    this.videoservice.getVideoByUser().subscribe(videos => {
-      console.log(videos)
+    this.videoservice.getVideoByUser().subscribe(arrvideos => {
+      arrvideos.forEach(video => {
+        this.listCategory.add(video.category)
+      })
+      this.listCategory.forEach(cate => {
+        let videos = [];
+        arrvideos.forEach(video => {
+          if (video.category === cate)
+            videos.push(video)
+        })
+        this.listObjectVideo.push({ videos: videos, cate: cate })
+      })
+
     }, err => {
       console.log(err)
     })
