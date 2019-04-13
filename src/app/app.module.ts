@@ -32,6 +32,7 @@ import { LoginAdminComponent } from './components/layout-admin/login-admin/login
 import { AdminService } from './services/admin.service';
 import { MenuAdminComponent } from './components/layout-admin/menu-admin/menu-admin.component';
 import { ManagerRequestComponent } from './components/layout-admin/manager-request/manager-request.component';
+import { TestAdminComponent } from './components/layout-admin/test-admin/test-admin.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ManagerRequestComponent } from './components/layout-admin/manager-reque
     TestComponent,
     LoginAdminComponent,
     MenuAdminComponent,
-    ManagerRequestComponent
+    ManagerRequestComponent,
+    TestAdminComponent
   ],
   imports: [
     BrowserModule,

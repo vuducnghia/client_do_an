@@ -13,6 +13,7 @@ import { VideoTranscriptComponent } from './components/layout/video-transcript/v
 import { TestComponent } from './components/layout/test/test.component';
 import { LoginAdminComponent } from './components/layout-admin/login-admin/login-admin.component';
 import { ManagerRequestComponent } from './components/layout-admin/manager-request/manager-request.component';
+import { TestAdminComponent } from './components/layout-admin/test-admin/test-admin.component';
 
 const routes: Routes = [
   {
@@ -41,7 +42,8 @@ const routes: Routes = [
   },
   { path: 'login-admin', component: LoginAdminComponent },
   { path: 'not-found', component: PageNotFoundComponent },
-  { path: 'test', component: TestComponent }
+  { path: 'test', component: TestComponent },
+  { path: 'admin-test', component: TestAdminComponent }
 
 ];
 

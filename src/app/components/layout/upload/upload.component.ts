@@ -85,7 +85,7 @@ export class UploadComponent implements OnInit {
 
         let result = JSON.parse(response)
         console.log(result)
-        this.engineService.startEngine(this.nameEngine, this.language, result.path).subscribe(data => {
+        this.engineService.startEngine(this.nameEngine, this.language, result.id).subscribe(data => {
           // this.videosAccount = data;
           console.log('videos: ', data)
         }, err => {

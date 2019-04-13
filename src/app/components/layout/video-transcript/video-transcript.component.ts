@@ -30,88 +30,77 @@ export class dateFormatPipe implements PipeTransform {
 })
 export class VideoTranscriptComponent implements OnInit {
   status = 'Private'
-  // url
-  url = 'http://localhost:8081/api/play/c8e2490ae61523fd1c2a990c1a6ed90f'
   myPlayer
-  stream1 = "http://localhost:8081/api/play/c55499cbeced27fbefb2590724f9f0df";
-  stream2 = "http://localhost:8081/api/play/c8e2490ae61523fd1c2a990c1a6ed90f";
-  current_stream = this.stream1;
+  url
+  _this = this
   constructor(
     private route: ActivatedRoute,
     private videoService: VideoService
-  ) {
-
-  }
+  ) { }
 
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      console.log(params)
-      // this.videoService.getVideoById(params.idVideo).subscribe((video: any) => {
-      //   console.log(video)
-      //   this.url="http://localhost:8081/api/play/c55499cbeced27fbefb2590724f9f0df"
-      //   console.log(this.url)        
-      // })
-      this.url = "http://localhost:8081/api/play/" + params.path;
-      // console.log(this.url)
-      // this.url="http://localhost:8081/api/play/c55499cbeced27fbefb2590724f9f0df"
+      this.videoService.getVideoById(params.idVideo).subscribe((video: any) => {
+
+        if (document.getElementById("showVideo").firstChild) {
+          document.getElementById("showVideo").firstChild.remove()
+        }
+        let x = Math.random() * 10;
+        let track
+        let idRandom ='id'+ Math.random().toString(36).substring(7);
+
+        document.getElementById("showVideo").innerHTML = `
+          <video id="${idRandom}" class="video-js vjs-default-skin" height="360px" width="650px" controls 
+          src="http://localhost:8081/api/play/`+ video.thumbnail + `">
+          <p>
+            Your browser doesn't support video. Please <a href="http://browsehappy.com/">upgrade your browser</a> to see
+            the example.
+          </p>
+        </video>
+          `
+        if (x > 5) {
+          console.log(1)
+          track = 'test.vtt'
+          videojs(`#${idRandom}`).addRemoteTextTrack({
+            kind: 'captions',
+            label: 'user defined',
+            src: 'http://localhost:4200/assets/test.vtt'
+          }, false)
+        }
+        else {
+          console.log(2)
+          track = 'test1.vtt'
+          videojs(`#${idRandom}`).addRemoteTextTrack({
+            kind: 'captions',
+            label: 'user defined',
+            src: 'http://localhost:4200/assets/test1.vtt'
+          }, false)
+        }
+
+        this.url = "http://localhost:8081/api/play/" + video.thumbnail
+        console.log(this.url)
+
+        this.init(idRandom)
+      })
     })
-    const _this = this;
-    // const player = videojs('video').ready(function () {
-    //   // fire up the plugin
-    //   // this['transcript'] = transcript
-
-    //   console.log('333333333333', _this.url)
-    //   let myPlayer = this;
-    //   myPlayer.src({ type: 'video/mp4', src: _this.url });
-    //   // myPlayer.play()
-
-    //   const transcriptElem = this.transcript({
-    //     autoscroll: true,
-    //     clickArea: 'text',
-    //     showTitle: true,
-    //     showTrackSelector: true,
-    //     followPlayerTrack: true,
-    //     scrollToCenter: false,
-    //     stopScrollWhenInUse: true,
-    //   })
-    //   // console.log('transcript', transcriptElem)
-    //   // attach the widget to the page
-    //   const transcriptContainer = document.querySelector('#transcript');
-    //   transcriptContainer.appendChild(transcriptElem.el());
-    // });
-
-
-  }
-  start() {
-    // const _this = this;
-    // const player = videojs('video')
-    // player.dispose()
-    // player.src({ type: 'video/mp4', src: _this.url })
-    // player.reset();
-    console.log(this.url)
-    videojs('video').src({ type: 'video/mp4', src: this.url })
   }
 
+  init(idRandom) {
+    const player = videojs(''+idRandom).ready(function () {
+      const transcriptElem = this.transcript({
+        autoscroll: true,
+        clickArea: 'text',
+        showTitle: true,
+        showTrackSelector: true,
+        followPlayerTrack: true,
+        scrollToCenter: false,
+        stopScrollWhenInUse: true,
+      })
 
-  start_viblast() {
-    videojs('#video', {});
-    videojs('#video').src({ type: 'video/mp4', src:this.current_stream});
-  }
-
-  stop_viblast() {
-    videojs('#video').pause();
-    videojs('#video').currentTime(0);
-
-  }
-
-  changesrc_viblast() {
-    if (this.current_stream === this.stream1) {
-      this.current_stream = this.stream2;
-    } else {
-      this.current_stream = this.stream1;
-    }
-    this.start_viblast();
+      const transcriptContainer = document.querySelector('#transcript');
+      transcriptContainer.appendChild(transcriptElem.el());
+    });
   }
 
   changeStatus() {

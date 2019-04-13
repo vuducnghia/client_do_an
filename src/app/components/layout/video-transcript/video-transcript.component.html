@@ -1,36 +1,21 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
   <div class="row">
     <div class="left-video col-sm-7">
-      <div class="player-content">
+      <div class="player-content" id="showVideo">
 
-        <video id="video" class="video-js vjs-default-skin" height="360px" width="100%" controls>
-          <p>
-            Your browser doesn't support video. Please <a href="http://browsehappy.com/">upgrade your browser</a> to see
-            the example.
-          </p>
-          <!-- <source src="{{url}}" type="video/mp4"> -->
-          <!-- <source src="../../../../assets/test.mp4" type="video/mp4"> -->
-          <track kind="captions" src="../../../../assets/test.vtt" srclang="en" label="English" default>
-
-        </video>
 
 
       </div>
       <div class="content">
         <a (click)="start_viblast()">start</a>
-        <a (click)="changesrc_viblast()">next</a>
+
+        <a (click)="reset()">reset</a>{{track}}
       </div>
     </div>
 
     <div class="right-video col-sm-5">
 
-      <div>
-        
-        <a class="status" (click)="changeStatus()">{{status}}</a>
-        <a class="editTrans"><i class="fa fa-pencil"></i></a>
-        <a class="editTrans"><i class="glyphicon glyphicon-download-alt"></i>Download transcript</a>
 
-      </div>
       <div id="transcript"></div>
       <!-- <table class="table">
         <tbody>
