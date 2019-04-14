@@ -30,9 +30,10 @@ import { EngineService } from './services/engine.service';
 import { TestComponent } from './components/layout/test/test.component';
 import { LoginAdminComponent } from './components/layout-admin/login-admin/login-admin.component';
 import { AdminService } from './services/admin.service';
-import { MenuAdminComponent } from './components/layout-admin/menu-admin/menu-admin.component';
 import { ManagerRequestComponent } from './components/layout-admin/manager-request/manager-request.component';
 import { TestAdminComponent } from './components/layout-admin/test-admin/test-admin.component';
+import { ProfileComponent } from './components/layout/profile/profile.component';
+import { ManagerVideoComponent } from './components/layout-admin/manager-video/manager-video.component';
 
 @NgModule({
   declarations: [
@@ -54,9 +55,10 @@ import { TestAdminComponent } from './components/layout-admin/test-admin/test-ad
     dateFormatPipe,
     TestComponent,
     LoginAdminComponent,
-    MenuAdminComponent,
     ManagerRequestComponent,
-    TestAdminComponent
+    TestAdminComponent,
+    ProfileComponent,
+    ManagerVideoComponent
   ],
   imports: [
     BrowserModule,

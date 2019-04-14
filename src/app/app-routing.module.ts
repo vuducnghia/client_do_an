@@ -14,6 +14,8 @@ import { TestComponent } from './components/layout/test/test.component';
 import { LoginAdminComponent } from './components/layout-admin/login-admin/login-admin.component';
 import { ManagerRequestComponent } from './components/layout-admin/manager-request/manager-request.component';
 import { TestAdminComponent } from './components/layout-admin/test-admin/test-admin.component';
+import { ProfileComponent } from './components/layout/profile/profile.component';
+import { ManagerVideoComponent } from './components/layout-admin/manager-video/manager-video.component';
 
 const routes: Routes = [
   {
@@ -27,7 +29,8 @@ const routes: Routes = [
           { path: '', component: BodyComponent },
           { path: 'history', component: HistoryComponent },
           { path: 'my-videos', component: MyVideoComponent },
-          { path: 'my-videos/:idVideo/:path', component: VideoTranscriptComponent },
+          { path: 'profile', component: ProfileComponent },
+          { path: 'my-videos/:idVideo', component: VideoTranscriptComponent },
           { path: 'show-video/:idVideo', component: ShowVideoComponent },
         ]
       },
@@ -37,7 +40,8 @@ const routes: Routes = [
   },
   {
     path: 'admin', component: LayoutAdminComponent, children: [
-      { path: '', component: ManagerRequestComponent }
+      { path: '', component: ManagerRequestComponent },
+      { path: 'manage-video', component: ManagerVideoComponent }
     ]
   },
   { path: 'login-admin', component: LoginAdminComponent },

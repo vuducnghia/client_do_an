@@ -29,9 +29,14 @@ export class dateFormatPipe implements PipeTransform {
   styleUrls: ['./video-transcript.component.scss']
 })
 export class VideoTranscriptComponent implements OnInit {
-  status = 'Private'
+  status
   myPlayer
   url
+  idVideo
+  nameEngine
+  engines =[]
+  transcripts = []
+  // engine
   _this = this
   constructor(
     private route: ActivatedRoute,
@@ -42,13 +47,21 @@ export class VideoTranscriptComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.videoService.getVideoById(params.idVideo).subscribe((video: any) => {
-
+        this.idVideo = video._id;
         if (document.getElementById("showVideo").firstChild) {
           document.getElementById("showVideo").firstChild.remove()
         }
-        let x = Math.random() * 10;
-        let track
-        let idRandom ='id'+ Math.random().toString(36).substring(7);
+        let tracks = []
+        let idRandom = 'id' + Math.random().toString(36).substring(7);
+        console.log(video)
+        this.status = video.status
+        video.transcripts.forEach(transcript => {
+          tracks.push({
+            src: `http://localhost:8081/api/transcript/${video._id}?engine=${transcript.nameEngine}`,
+            kind: 'captions', srclang: 'en', label: transcript.language
+          })
+          this.engines.push(transcript.nameEngine)
+        });
 
         document.getElementById("showVideo").innerHTML = `
           <video id="${idRandom}" class="video-js vjs-default-skin" height="360px" width="650px" controls 
@@ -59,24 +72,13 @@ export class VideoTranscriptComponent implements OnInit {
           </p>
         </video>
           `
-        if (x > 5) {
-          console.log(1)
-          track = 'test.vtt'
-          videojs(`#${idRandom}`).addRemoteTextTrack({
-            kind: 'captions',
-            label: 'user defined',
-            src: 'http://localhost:4200/assets/test.vtt'
-          }, false)
+
+        if (tracks.length > 0) {
+          videojs(`#${idRandom}`, {
+            tracks: tracks
+          });
         }
-        else {
-          console.log(2)
-          track = 'test1.vtt'
-          videojs(`#${idRandom}`).addRemoteTextTrack({
-            kind: 'captions',
-            label: 'user defined',
-            src: 'http://localhost:4200/assets/test1.vtt'
-          }, false)
-        }
+
 
         this.url = "http://localhost:8081/api/play/" + video.thumbnail
         console.log(this.url)
@@ -87,7 +89,7 @@ export class VideoTranscriptComponent implements OnInit {
   }
 
   init(idRandom) {
-    const player = videojs(''+idRandom).ready(function () {
+    const player = videojs('' + idRandom).ready(function () {
       const transcriptElem = this.transcript({
         autoscroll: true,
         clickArea: 'text',
@@ -105,5 +107,26 @@ export class VideoTranscriptComponent implements OnInit {
 
   changeStatus() {
     this.status = 'Request Public'
+    if (this.status !== 'requesting') {
+      this.videoService.updateStatusByIdVideo(this.idVideo, 'requesting')
+    }
   }
+
+
+  edit(){
+    console.log(this.engines[0])
+    if(this.engines[0]){
+      this.videoService.getDataTranscriptById(this.idVideo, this.engines[0]).subscribe((transcripts: any) => {
+        this.transcripts = transcripts
+      }, err => {
+        console.log(err)
+      })
+    }
+  }
+
+  saveTranscript(){
+
+  }
+
+
 }

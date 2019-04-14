@@ -7,10 +7,10 @@ const apiUrl = "http://localhost:8081/api/video/";
 // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 // console.log(currentUser)
 // console.log(typeof(currentUser))
-// const headers = new HttpHeaders({
-//   'Content-Type': 'application/json',
-//   // 'Authorization': currentUser.token
-// })
+const headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  // 'Authorization': currentUser.token
+})
 
 // const headerUpload = new HttpHeaders({
 //   'Content-Type': 'multipart/form-data',
@@ -50,14 +50,15 @@ export class VideoService {
   }
 
   updateCategoryByIdVideo(idvideo, cate){
-    return this.http.put(`${apiUrl}updateCate/${idvideo}`, cate);
+    return this.http.put(`${apiUrl}updateCate/${idvideo}`, {cate});
   }
 
   updateStatusByIdVideo(idvideo, status){
-    return this.http.put(`${apiUrl}updateStatus/${idvideo}`, status);
+    return this.http.put(`${apiUrl}updateStatus/${idvideo}`, {status});
   }
 
   updateStageByIdVideo(idvideo, stage){
-    return this.http.put(`${apiUrl}updateStage/${idvideo}`, stage);
+    return this.http.put(`${apiUrl}updateStage/${idvideo}`, {stage});
   }
+
 }
