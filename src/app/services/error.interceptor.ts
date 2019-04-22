@@ -16,7 +16,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // console.log(request)
     return next.handle(request).pipe(catchError((err: HttpErrorResponse) => {
-      // console.log(err)
+      console.log(err)
       if (err.status === 403 && request.url.includes('admin')) {
         console.log('403 admin')
         this.authService.logout();

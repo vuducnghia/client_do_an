@@ -34,6 +34,9 @@ import { ManagerRequestComponent } from './components/layout-admin/manager-reque
 import { TestAdminComponent } from './components/layout-admin/test-admin/test-admin.component';
 import { ProfileComponent } from './components/layout/profile/profile.component';
 import { ManagerVideoComponent } from './components/layout-admin/manager-video/manager-video.component';
+import { AnalysisComponent } from './components/layout-admin/analysis/analysis.component';
+import { ManagerUserComponent } from './components/layout-admin/manager-user/manager-user.component';
+import { ManagerEngineComponent } from './components/layout-admin/manager-engine/manager-engine.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,10 @@ import { ManagerVideoComponent } from './components/layout-admin/manager-video/m
     ManagerRequestComponent,
     TestAdminComponent,
     ProfileComponent,
-    ManagerVideoComponent
+    ManagerVideoComponent,
+    AnalysisComponent,
+    ManagerUserComponent,
+    ManagerEngineComponent
   ],
   imports: [
     BrowserModule,

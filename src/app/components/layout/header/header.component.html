@@ -14,23 +14,22 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <div class="top-search">
-        <form class="navbar-form navbar-right">
-          <input type="text" class="form-control" placeholder="Search...">
-          <input type="submit" value=" ">
+        <form class="search" [formGroup]="searchForm">
+          <input type="text" placeholder="Search..." formControlName="nameVideo" (input)="search()"/> 
+          <ul class="results" id="results">
+            <li *ngFor="let video of videos" >
+              <a routerLink="/show-video/{{video._id}}" (click)="reset()">{{video._id}}{{video.title}}
+                <br /><span>{{video.category}}</span></a>
+            </li>
+          </ul>
         </form>
 
-        <!-- <div>
-          <ul>
-            <li>aaaaaaaaaaaaaaaaaa</li>
-            <li>aaaaaaaaaaaaaaaaaa</li>
-          </ul>
-        </div> -->
       </div>
       <div class="header-top-right">
         <div class="file">
           <a class="pointer" (click)="gotoUpload()">Upload</a>
         </div>
-        <!-- <div class="signin" *ngIf="!isLogin">
+        <!-- <div class="signin" *ngIf="!isLogin">   
           <a href="#small-dialog2" class="play-icon popup-with-zoom-anim" data-toggle="modal"
             data-target="#signupModal">Sign Up</a>
         </div> -->
@@ -139,7 +138,8 @@
             formControlName="confirmPassword" />
         </form>
         <div class="continue-button">
-          <a href="#small-dialog3" class="hvr-shutter-out-horizontal play-icon popup-with-zoom-anim" (click)="signup()">CONTINUE</a>
+          <a href="#small-dialog3" class="hvr-shutter-out-horizontal play-icon popup-with-zoom-anim"
+            (click)="signup()">CONTINUE</a>
         </div>
       </div>
       <div class="clearfix"> </div>

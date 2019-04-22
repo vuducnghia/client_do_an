@@ -18,8 +18,8 @@ export class EngineService {
     return this.http.get<any>(`${apiUrl}/transcript`);
   }
 
-  startEngine(nameEngine, language, pathvideo){
-    return this.http.post(`${apiUrl}/startEngine/${nameEngine}/${language}`, pathvideo);
+  startEngine(nameEngine, language, idVideo){
+    return this.http.post(`${apiUrl}/startEngine/${nameEngine}/${language}`, {idVideo});
   }
 
   createEngine(){

@@ -49,6 +49,10 @@ export class VideoService {
     return this.http.get<any>(`${apiUrl}getVideoByStage/${name}`);
   }
 
+  getVideoByStatus(name){
+    return this.http.get<any>(`${apiUrl}getVideosByStatus/${name}`);
+  }
+
   updateCategoryByIdVideo(idvideo, cate){
     return this.http.put(`${apiUrl}updateCate/${idvideo}`, {cate});
   }
@@ -61,4 +65,7 @@ export class VideoService {
     return this.http.put(`${apiUrl}updateStage/${idvideo}`, {stage});
   }
 
+  searchByName(name){
+    return this.http.get<any>(`${apiUrl}findByName/${name}`);
+  }
 }

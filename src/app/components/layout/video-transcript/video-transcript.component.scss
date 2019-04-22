@@ -81,12 +81,22 @@
   background-color: transparent;
   border: 0;
 }
+
 .btn-secondary {
   color: #292b2c;
   background-color: #fff;
   border-color: #ccc;
 }
 
-a{
+a {
   cursor: pointer;
+}
+
+.row1 {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.player-content{
+  margin-left: -15px;
 }

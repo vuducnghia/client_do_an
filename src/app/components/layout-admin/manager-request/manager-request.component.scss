@@ -1,0 +1,38 @@
+.badge-danger {
+  color: #fff;
+  background-color: #dc3545;
+}
+
+
+.badge-warning {
+  color: #212529;
+  background-color: #ffc107;
+}
+
+.badge-success {
+  color: #fff;
+  background-color: #28a745;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: .25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+
+.btn-secondary {
+  color: #292b2c;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+a{
+  cursor: pointer;
+}

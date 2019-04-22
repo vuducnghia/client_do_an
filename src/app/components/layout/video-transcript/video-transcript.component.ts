@@ -34,7 +34,7 @@ export class VideoTranscriptComponent implements OnInit {
   url
   idVideo
   nameEngine
-  engines =[]
+  engines = []
   transcripts = []
   // engine
   _this = this
@@ -65,11 +65,12 @@ export class VideoTranscriptComponent implements OnInit {
 
         document.getElementById("showVideo").innerHTML = `
           <video id="${idRandom}" class="video-js vjs-default-skin" height="360px" width="650px" controls 
-          src="http://localhost:8081/api/play/`+ video.thumbnail + `">
+          >
           <p>
             Your browser doesn't support video. Please <a href="http://browsehappy.com/">upgrade your browser</a> to see
             the example.
           </p>
+          <source src="http://localhost:8081/api/play/`+ video.thumbnail + `" type="video/mp4">
         </video>
           `
 
@@ -108,14 +109,18 @@ export class VideoTranscriptComponent implements OnInit {
   changeStatus() {
     this.status = 'Request Public'
     if (this.status !== 'requesting') {
-      this.videoService.updateStatusByIdVideo(this.idVideo, 'requesting')
+      this.videoService.updateStatusByIdVideo(this.idVideo, 'requesting').subscribe(videos => {
+
+      }, err => {
+        console.log(err)
+      })
     }
   }
 
 
-  edit(){
+  edit() {
     console.log(this.engines[0])
-    if(this.engines[0]){
+    if (this.engines[0]) {
       this.videoService.getDataTranscriptById(this.idVideo, this.engines[0]).subscribe((transcripts: any) => {
         this.transcripts = transcripts
       }, err => {
@@ -124,7 +129,7 @@ export class VideoTranscriptComponent implements OnInit {
     }
   }
 
-  saveTranscript(){
+  saveTranscript() {
 
   }
 

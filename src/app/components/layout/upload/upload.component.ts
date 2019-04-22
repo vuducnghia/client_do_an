@@ -19,7 +19,7 @@ export class UploadComponent implements OnInit {
   // token = '';
   nameEngine = '';
   language = '';
-  category= '';
+  category = '';
   hasFile: boolean = false;
   file;
   listCategory = [];
@@ -92,7 +92,7 @@ export class UploadComponent implements OnInit {
           console.log(err)
         })
 
-        this.videoService.updateCategoryByIdVideo(result.id, {nameCate:this.category}).subscribe(data => {
+        this.videoService.updateCategoryByIdVideo(result.id, this.category).subscribe(data => {
           // this.videosAccount = data;
           console.log('videos: ', data)
         }, err => {
@@ -118,7 +118,7 @@ export class UploadComponent implements OnInit {
     this.language = language
   }
 
-  onChangeCategory(category){
+  onChangeCategory(category) {
     this.category = category;
   }
 }

@@ -8,7 +8,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    // return this.http.get<User[]>(`/users`);
+    return this.http.get<User[]>(apiUrl + `/user/allUser`);
   }
 
   getById(id: number) {
@@ -16,7 +16,7 @@ export class UserService {
   }
 
   register(user) {
-    return this.http.post(`/api/auth/signup`, user);
+    return this.http.post(apiUrl + `/auth/signup`, user);
   }
 
   update(user) {
@@ -25,5 +25,9 @@ export class UserService {
 
   delete(id: number) {
     // return this.http.delete(`/users/` + id);
+  }
+
+  updateStatusByIdUser(idUser, status){
+    return this.http.put(`${apiUrl}/user/updateStatusUser/${idUser}`, {status});
   }
 }

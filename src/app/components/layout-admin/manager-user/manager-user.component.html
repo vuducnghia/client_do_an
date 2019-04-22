@@ -1,0 +1,25 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Username</th>
+      <th>Last name</th>
+      <th>First Name</th>
+      <th>Role</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <th scope="row">1</th>
+      <td>{{user.username}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.role ==='user' ? 'user': (user.role ==='admin1' ? 'admin-video':'admin-user')}}</td>
+      <td>
+        <a (click)="changeStatus(user._id, 'ready', user)" *ngIf="user.status ==='block'"><span class="badge badge-danger">block</span></a>
+        <a (click)="changeStatus(user._id, 'block', user)" *ngIf="user.status ==='ready'"><span class="badge badge-success">ready</span></a>
+      </td>
+    </tr>
+  </tbody>
+</table>

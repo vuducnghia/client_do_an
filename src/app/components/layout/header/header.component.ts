@@ -4,6 +4,7 @@ import { AuthService } from '../../../services/auth.service';
 import { first } from 'rxjs/operators';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
+import { VideoService } from '../../../services/video.service';
 declare var $: any;
 
 @Component({
@@ -16,10 +17,11 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private videoService: VideoService
   ) {
   }
-
+  videos = [];
   isLogin: boolean;
   signupForm = new FormGroup(
     {
@@ -39,10 +41,17 @@ export class HeaderComponent implements OnInit {
       password: new FormControl('', [Validators.required])
     }
   );
+
+  searchForm = new FormGroup(
+    {
+      nameVideo: new FormControl('', [Validators.required])
+    }
+  )
+
   ngOnInit() {
-    if(this.authService.currentUserValue){
+    if (this.authService.currentUserValue) {
       this.isLogin = true;
-    }else{
+    } else {
       this.isLogin = false;
     }
   }
@@ -111,6 +120,26 @@ export class HeaderComponent implements OnInit {
       this.showModelLogin();
     }
   }
+
+  search() {
+    if (!this.searchForm.get('nameVideo').value) {
+      document.getElementById("results").style.display = 'none';
+    } else {
+      document.getElementById("results").style.display = 'block'
+      this.videoService.searchByName(this.searchForm.get('nameVideo').value).subscribe(
+        videos => {
+          this.videos = videos;
+        }, error => {
+          console.log(error)
+        })
+    }
+  }
+
+  reset() {
+    document.getElementById("results").style.display = 'none';
+    this.searchForm.setValue({ nameVideo: '' })
+  }
+
 }
 
 function passwordMatchValidator(g: FormGroup) {
