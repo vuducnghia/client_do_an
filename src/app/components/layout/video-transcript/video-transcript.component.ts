@@ -57,7 +57,7 @@ export class VideoTranscriptComponent implements OnInit {
         this.status = video.status
         video.transcripts.forEach(transcript => {
           tracks.push({
-            src: `http://localhost:8081/api/transcript/${video._id}?engine=${transcript.nameEngine}`,
+            src: `http://localhost:8081/api/transcript/${transcript.idTranscript}`,
             kind: 'captions', srclang: 'en', label: transcript.language
           })
           this.engines.push(transcript.nameEngine)

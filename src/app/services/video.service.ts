@@ -30,7 +30,7 @@ export class VideoService {
     return this.http.get(`${apiUrl}` + id);
   }
 
-  getVideoByCategory(name){
+  getVideoByCategory(name) {
     return this.http.get<any>(`${apiUrl}getVideoByCate/${name}`);
   }
   delete(id: number) {
@@ -38,34 +38,53 @@ export class VideoService {
   }
 
   getFileTranscriptById(id, engine) {
-    return this.http.get(`http://localhost:8081/api/transcript/${id}?engine=${engine}`, {responseType: 'text'});
+    return this.http.get(`http://localhost:8081/api/transcript/${id}?engine=${engine}`, { responseType: 'text' });
   }
 
   getDataTranscriptById(id, engine) {
     return this.http.get(`${apiUrl}transcriptData/${id}?engine=${engine}`);
   }
 
-  getVideoByStage(name){
+  getVideoByStage(name) {
     return this.http.get<any>(`${apiUrl}getVideoByStage/${name}`);
   }
 
-  getVideoByStatus(name){
+  getVideoByStatus(name) {
     return this.http.get<any>(`${apiUrl}getVideosByStatus/${name}`);
   }
 
-  updateCategoryByIdVideo(idvideo, cate){
-    return this.http.put(`${apiUrl}updateCate/${idvideo}`, {cate});
+  updateCategoryByIdVideo(idvideo, cate) {
+    return this.http.put(`${apiUrl}updateCate/${idvideo}`, { cate });
   }
 
-  updateStatusByIdVideo(idvideo, status){
-    return this.http.put(`${apiUrl}updateStatus/${idvideo}`, {status});
+  updateDetailByIdVideo(idvideo, detail) {
+    return this.http.put(`${apiUrl}updateDetail/${idvideo}`, { detail });
   }
 
-  updateStageByIdVideo(idvideo, stage){
-    return this.http.put(`${apiUrl}updateStage/${idvideo}`, {stage});
+  updateStatusByIdVideo(idvideo, status) {
+    return this.http.put(`${apiUrl}updateStatus/${idvideo}`, { status });
   }
 
-  searchByName(name){
+  updateStageByIdVideo(idvideo, stage) {
+    return this.http.put(`${apiUrl}updateStage/${idvideo}`, { stage });
+  }
+
+  searchByName(name) {
     return this.http.get<any>(`${apiUrl}findByName/${name}`);
+  }
+
+
+  //comment
+
+  addCommentByIdVideo(idvideo, comment) {
+    return this.http.put(`${apiUrl}addMainComment/${idvideo}`, { comment });
+  }
+
+  getCommentByIdVideo(idVideo) {
+    return this.http.get<any>(`${apiUrl}getCommentByIdVideo/${idVideo}`);
+  }
+
+  getCommentById(idComment) {
+    return this.http.get<any>(`${apiUrl}getCommentById/${idComment}`);
   }
 }

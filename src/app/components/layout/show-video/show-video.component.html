@@ -3,7 +3,7 @@
     <div class="col-sm-8 single-left">
       <div class="song">
         <div class="song-info">
-          <h3>Etiam molestie nisl eget consequat pharetra</h3>
+          <h3>{{videoOgirin?.title}}</h3>
         </div>
         <div>
           <video height="376px" width="100%" controls *ngIf="url" preload="auto" id="myVideo">
@@ -11,7 +11,10 @@
               Your browser doesn't support video.
             </p>
             <source src="{{url}}" type="video/mp4">
-            <track kind="captions" src="../../../../assets/test.vtt" srclang="en" label="English" default>
+            <!-- <track kind="captions" *ngFor="let transcript of videoOgirin.transcripts" src="http://localhost:8081/api/transcript/{{transcript.idTranscript}}.vtt"
+             srclang="{{transcript.language}}" label="{{transcript.language}}" default> -->
+            <!-- chu y phai co .vtt -->
+            <track kind="captions" src="../../../../assets/test" srclang="en" label="English" default>
           </video>
         </div>
       </div>
@@ -23,6 +26,7 @@
           <ul id="myList">
             <li>
               <h4>Published on 15 June 2015</h4>
+              <p>{{videoOgirin?.detail}}</p>
             </li>
             <li>
               <div class="load-grids">
@@ -43,59 +47,36 @@
           <a href="#">All Comments (8,657)</a>
           <div class="box">
             <form>
-              <textarea placeholder="Message" required=" "></textarea>
-              <input type="submit" value="SEND">
+              <textarea class="comment-message" placeholder="Message" #myInput></textarea>
+              <input type="submit" value="SEND" (click)="sendComment()">
               <div class="clearfix"> </div>
             </form>
           </div>
-          <div class="all-comments-buttons">
+          <!-- <div class="all-comments-buttons">
             <ul>
               <li><a href="#" class="top">Top Comments</a></li>
               <li><a href="#" class="top newest">Newest First</a></li>
               <li><a href="#" class="top my-comment">My Comments</a></li>
             </ul>
-          </div>
+          </div> -->
         </div>
-        <div class="media-grids">
-          <div class="media">
-            <h5>Tom Brown</h5>
+        <!-- <div class="media-grids">
+          <div class="media" *ngFor="let comment of comments">
+            <h5>{{comment.nameUser}}</h5>
             <div class="media-left">
               <a href="#">
 
               </a>
             </div>
             <div class="media-body">
-              <p>Maecenas ultricies rhoncus tincidunt maecenas imperdiet ipsum id ex pretium hendrerit maecenas
-                imperdiet ipsum id ex pretium hendrerit</p>
-              <span>View all posts by :<a href="#"> Admin </a></span>
+              <p>{{comment.content}}</p>
+              <span>{{comment.created.slice(0, 10)}}</span>
             </div>
           </div>
-          <div class="media">
-            <h5>Tom Brown</h5>
-            <div class="media-left">
-              <a href="#">
-
-              </a>
-            </div>
-            <div class="media-body">
-              <p>Maecenas ultricies rhoncus tincidunt maecenas imperdiet ipsum id ex pretium hendrerit maecenas
-                imperdiet ipsum id ex pretium hendrerit</p>
-              <span>View all posts by :<a href="#"> Admin </a></span>
-            </div>
-          </div>
-          <div class="media">
-            <h5>Tom Brown</h5>
-            <div class="media-left">
-              <a href="#">
-
-              </a>
-            </div>
-            <div class="media-body">
-              <p>Maecenas ultricies rhoncus tincidunt maecenas imperdiet ipsum id ex pretium hendrerit maecenas
-                imperdiet ipsum id ex pretium hendrerit</p>
-              <span>View all posts by :<a href="#"> Admin </a></span>
-            </div>
-          </div>
+        </div> -->
+        <!-- Contenedor Principal -->
+        <div *ngFor="let comment of comments">
+          <app-comment idComment="{{comment._id}}"></app-comment>
         </div>
       </div>
     </div>
@@ -104,7 +85,8 @@
       <div class="single-grid-right">
         <div class="single-right-grids" *ngFor="let video of listVideo">
           <div class="col-md-4 single-right-grid-left">
-            <a (click)="a(video.thumbnail)" routerLink="/show-video/{{video._id}}"><img src="http://localhost:8081/api/image/{{video.thumbnail}}" alt="" /></a>
+            <a (click)="a(video.thumbnail)" routerLink="/show-video/{{video._id}}"><img
+                src="http://localhost:8081/api/image/{{video.thumbnail}}" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
             <a (click)="a(video.thumbnail)" routerLink="/show-video/{{video._id}}" class="title">{{video.title}}</a>

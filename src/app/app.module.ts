@@ -37,6 +37,7 @@ import { ManagerVideoComponent } from './components/layout-admin/manager-video/m
 import { AnalysisComponent } from './components/layout-admin/analysis/analysis.component';
 import { ManagerUserComponent } from './components/layout-admin/manager-user/manager-user.component';
 import { ManagerEngineComponent } from './components/layout-admin/manager-engine/manager-engine.component';
+import { CommentComponent } from './components/layout/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ManagerEngineComponent } from './components/layout-admin/manager-engine
     ManagerVideoComponent,
     AnalysisComponent,
     ManagerUserComponent,
-    ManagerEngineComponent
+    ManagerEngineComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

@@ -17,8 +17,8 @@
       <td>{{user.firstName}}</td>
       <td>{{user.role ==='user' ? 'user': (user.role ==='admin1' ? 'admin-video':'admin-user')}}</td>
       <td>
-        <a (click)="changeStatus(user._id, 'ready', user)" *ngIf="user.status ==='block'"><span class="badge badge-danger">block</span></a>
-        <a (click)="changeStatus(user._id, 'block', user)" *ngIf="user.status ==='ready'"><span class="badge badge-success">ready</span></a>
+        <a (click)="changeStatus(user._id, 'ready', user)" *ngIf="user.status ==='block'"><span class="badge badge-danger">inactive</span></a>
+        <a (click)="changeStatus(user._id, 'block', user)" *ngIf="user.status ==='ready'"><span class="badge badge-success">active</span></a>
       </td>
     </tr>
   </tbody>

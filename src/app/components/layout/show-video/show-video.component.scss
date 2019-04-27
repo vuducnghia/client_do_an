@@ -1,7 +1,16 @@
-#myList li{
+#myList li {
   display: block;
 }
 
-.main{
+.main {
   padding: 10em 0 0 0;
+}
+
+.comment-message {
+  width: 100%;
+  min-height: 100px;
+}
+
+*{
+  background: #dee1e3;
 }

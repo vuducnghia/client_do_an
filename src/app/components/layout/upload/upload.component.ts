@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { VideoService } from '../../../services/video.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
@@ -15,6 +15,8 @@ const URL = 'http://localhost:8081/api/video/';
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
+  @ViewChild('myInput') myInput: ElementRef;
+
   videoForm: FormGroup;
   // token = '';
   nameEngine = '';
@@ -25,6 +27,7 @@ export class UploadComponent implements OnInit {
   listCategory = [];
   listEngineTranscript = [];
   listLanguage = [];
+  isUpload: boolean = false;
   constructor(
     public videoService: VideoService,
     private categoryService: CategoryService,
@@ -75,16 +78,19 @@ export class UploadComponent implements OnInit {
   }
 
   async upload() {
+    this.isUpload = true;
     this.uploader.uploadAll();
-    // this.videoService.createEngine(this.nameEngine, this.language)
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       if (status !== 200) {
-        alert('error upload file')
+        document.getElementById("progressBar").style.backgroundColor = "red";
+        alert('error upload file');
       } else {
-        // this.dialogRef.close();
+        document.getElementById("progressBar").style.width = "100%";
+        let result = JSON.parse(response);
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 8000);
 
-        let result = JSON.parse(response)
-        console.log(result)
         this.engineService.startEngine(this.nameEngine, this.language, result.id).subscribe(data => {
           // this.videosAccount = data;
           console.log('videos: ', data)
@@ -98,12 +104,15 @@ export class UploadComponent implements OnInit {
         }, err => {
           console.log(err)
         })
+
+        if (this.myInput.nativeElement.value != null) {
+          this.videoService.updateDetailByIdVideo(result.id, this.myInput.nativeElement.value).subscribe(data => {
+          }, err => {
+            console.log(err)
+          })
+        }
       }
     };
-
-
-
-
   }
 
   onChangeEngine(nameEngine) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VideoService } from '../../../services/video.service';
 
@@ -8,10 +8,13 @@ import { VideoService } from '../../../services/video.service';
   styleUrls: ['./show-video.component.scss']
 })
 export class ShowVideoComponent implements OnInit {
+  @ViewChild('myInput') myInput: ElementRef;
   idVideo
   videoOgirin: any
   url
-  listVideo = []
+  listVideo = [];
+  comments = [];
+  reply = false;
   constructor(
     private route: ActivatedRoute,
     private videoService: VideoService,
@@ -23,10 +26,16 @@ export class ShowVideoComponent implements OnInit {
       this.videoService.getVideoById(this.idVideo).subscribe(video => {
         this.videoOgirin = video
         this.url = "http://localhost:8081/api/play/" + this.videoOgirin.thumbnail;
+        console.log(this.videoOgirin)
         this.videoService.getVideoByCategory(this.videoOgirin.category).subscribe(videos => {
           this.listVideo = videos;
         })
-      })
+      });
+
+      this.videoService.getCommentByIdVideo(this.idVideo).subscribe(comments => {
+        console.log(comments)
+        this.comments = comments;
+      });
     });
   }
 
@@ -35,4 +44,17 @@ export class ShowVideoComponent implements OnInit {
     let x = <HTMLVideoElement>document.getElementById("myVideo");
     x.load();
   }
+
+  sendComment(){
+    console.log(this.myInput.nativeElement.value)
+    this.videoService.addCommentByIdVideo(this.idVideo, this.myInput.nativeElement.value).subscribe(data => {
+      console.log('details: ', data)
+    }, err => {
+      console.log(err)
+    })
+  }
+
+  // reply(id){
+
+  // }
 }
