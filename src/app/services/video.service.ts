@@ -80,6 +80,11 @@ export class VideoService {
     return this.http.put(`${apiUrl}addMainComment/${idvideo}`, { comment });
   }
 
+  updateCommentById(idComment, subContent) {
+    subContent = 'dsada'
+    return this.http.put(`${apiUrl}updateCommentById/${idComment}`, {subContent} );
+  }
+
   getCommentByIdVideo(idVideo) {
     return this.http.get<any>(`${apiUrl}getCommentByIdVideo/${idVideo}`);
   }

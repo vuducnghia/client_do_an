@@ -11,8 +11,8 @@ export class UserService {
     return this.http.get<User[]>(apiUrl + `/user/allUser`);
   }
 
-  getById(id: number) {
-    // return this.http.get(`/users/` + id);
+  getUserById(id: number) {
+    return this.http.get(apiUrl + `/user/getUserById/${id}`);
   }
 
   register(user) {
