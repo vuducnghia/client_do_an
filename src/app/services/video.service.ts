@@ -33,6 +33,11 @@ export class VideoService {
   getVideoByCategory(name) {
     return this.http.get<any>(`${apiUrl}getVideoByCate/${name}`);
   }
+
+  getVideoRecent(){
+    return this.http.get(`${apiUrl}getVideoRecent`);
+  }
+
   delete(id: number) {
     // return this.http.delete(`/users/` + id);
   }

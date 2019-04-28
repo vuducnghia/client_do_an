@@ -8,14 +8,18 @@ import { CategoryService } from '../../../services/category.service';
   styleUrls: ['./body.component.scss']
 })
 export class BodyComponent implements OnInit {
-  listCategory = []
-  listObjectVideo = []
+  listCategory = [];
+  listObjectVideo = [];
+  listVideoRecent;
   constructor(
     private videoservice: VideoService,
     private categoryService: CategoryService
   ) { }
 
   ngOnInit() {
+    this.videoservice.getVideoRecent().subscribe(videos => {
+      this.listVideoRecent = videos;
+    })
     this.categoryService.getAll().subscribe(data => {
       this.listCategory = data.map(cate => {
         return cate.category;
