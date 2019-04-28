@@ -52,29 +52,8 @@
               <div class="clearfix"> </div>
             </form>
           </div>
-          <!-- <div class="all-comments-buttons">
-            <ul>
-              <li><a href="#" class="top">Top Comments</a></li>
-              <li><a href="#" class="top newest">Newest First</a></li>
-              <li><a href="#" class="top my-comment">My Comments</a></li>
-            </ul>
-          </div> -->
         </div>
-        <!-- <div class="media-grids">
-          <div class="media" *ngFor="let comment of comments">
-            <h5>{{comment.nameUser}}</h5>
-            <div class="media-left">
-              <a href="#">
 
-              </a>
-            </div>
-            <div class="media-body">
-              <p>{{comment.content}}</p>
-              <span>{{comment.created.slice(0, 10)}}</span>
-            </div>
-          </div>
-        </div> -->
-        <!-- Contenedor Principal -->
         <div *ngFor="let comment of comments">
           <app-comment idComment="{{comment._id}}"></app-comment>
         </div>

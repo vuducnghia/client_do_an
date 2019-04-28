@@ -81,7 +81,6 @@ export class VideoService {
   }
 
   updateCommentById(idComment, subContent) {
-    subContent = 'dsada'
     return this.http.put(`${apiUrl}updateCommentById/${idComment}`, {subContent} );
   }
 

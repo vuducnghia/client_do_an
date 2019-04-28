@@ -13,7 +13,7 @@ export class CommentComponent implements OnInit {
   @Input('idComment') idComment: string;
 
   listSubComments = [];
-  mainComment;
+  mainComment: any = {};
   reply = false;
   userCurrent;
   constructor(
@@ -24,18 +24,25 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
     this.userCurrent = this.authService.currentUserValue;
+
     this.videoService.getCommentById(this.idComment).subscribe(comment => {
-      console.log(comment)
-      this.mainComment = comment;
+
       this.userService.getUserById(comment.createBy).subscribe((user: any) => {
+        this.mainComment = comment;
+        this.mainComment.avatar = user.avatar;
+        this.mainComment.name = user.firstName + ' ' + user.lastName;
         comment.subContent.forEach(element => {
-          this.listSubComments.push({
-            comment,
-            avatar: user.avatar,
-            name: user.name
+          this.userService.getUserById(element.createBy).subscribe((user: any) => {
+            this.listSubComments.push({
+              content: element.content,
+              createBy: element.createBy,
+              created: element.created,
+              avatar: user.avatar,
+              name: user.firstName + ' ' + user.lastName
+            })
           })
         });
-        console.log(this.listSubComments)
+
       });
     })
   }
@@ -44,18 +51,24 @@ export class CommentComponent implements OnInit {
     if (!this.userCurrent) {
 
     } else {
+      let utc = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+      // document.write(utc);
       if (this.CommentInput.nativeElement.value) {
         let subComment = {
           content: this.CommentInput.nativeElement.value,
           createBy: this.userCurrent.id
         }
-        console.log(subComment)
         this.mainComment.subContent.push(subComment);
+        this.listSubComments.push(
+          {
+            content: this.CommentInput.nativeElement.value,
+            created: utc,
+            avatar: this.userCurrent.avatar,
+            name: this.userCurrent.name
 
-        // this.listSubComments.push(this.CommentInput.nativeElement.value);
-        console.log(this.mainComment.subContent);
+          });
+          this.CommentInput.nativeElement.value= ''
         this.videoService.updateCommentById(this.mainComment._id, this.mainComment.subContent).subscribe(result => {
-          console.log(result)
         })
       }
     }

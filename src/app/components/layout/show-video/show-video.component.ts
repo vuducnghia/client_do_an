@@ -26,14 +26,12 @@ export class ShowVideoComponent implements OnInit {
       this.videoService.getVideoById(this.idVideo).subscribe(video => {
         this.videoOgirin = video
         this.url = "http://localhost:8081/api/play/" + this.videoOgirin.thumbnail;
-        console.log(this.videoOgirin)
         this.videoService.getVideoByCategory(this.videoOgirin.category).subscribe(videos => {
           this.listVideo = videos;
         })
       });
 
       this.videoService.getCommentByIdVideo(this.idVideo).subscribe(comments => {
-        console.log(comments)
         this.comments = comments;
       });
     });
@@ -45,16 +43,16 @@ export class ShowVideoComponent implements OnInit {
     x.load();
   }
 
-  sendComment(){
-    console.log(this.myInput.nativeElement.value)
-    this.videoService.addCommentByIdVideo(this.idVideo, this.myInput.nativeElement.value).subscribe(data => {
-      console.log('details: ', data)
-    }, err => {
-      console.log(err)
-    })
+  sendComment() {
+    if (this.myInput.nativeElement.value) {
+      
+      this.videoService.addCommentByIdVideo(this.idVideo, this.myInput.nativeElement.value).subscribe(data => {
+        this.myInput.nativeElement.value = ''
+        this.comments.unshift(data)
+      }, err => {
+        console.log(err)
+      })
+    }
+
   }
-
-  // reply(id){
-
-  // }
 }
