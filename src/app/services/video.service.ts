@@ -85,6 +85,10 @@ export class VideoService {
   countVideoByCateGory(nameCategory){
     return this.http.get<any>(`${apiUrl}countVideoByCateGory/${nameCategory}`);
   }
+
+  countVideoByLanguage(nameLanguage){
+    return this.http.get<any>(`${apiUrl}countVideoByLanguage/${nameLanguage}`);
+  }
   //comment
 
   addCommentByIdVideo(idvideo, comment) {
