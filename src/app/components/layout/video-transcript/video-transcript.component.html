@@ -2,12 +2,37 @@
   <div class="row row1">
     <div class="left-video col-sm-7">
       <div class="player-content" id="showVideo">
-
-
-
       </div>
       <div class="content">
+        <h3>{{nameVideo}}</h3>
+        <div class="translateEngine">
+          Translate to
+          <a class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" id="dropdownLanguage" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Language<i class="fa fa-arrow-down"></i>
+            </a>
 
+            <div class="dropdown-menu" aria-labelledby="dropdownLanguage">
+              <a class="dropdown-item">English</a>
+              <a class="dropdown-item">Spanish</a>
+              <a class="dropdown-item">Arabic</a>
+            </div>
+          </a>
+          by
+          <a class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" id="dropdownEngineTranslate" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Engine<i class="fa fa-arrow-down"></i>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownEngineTranslate">
+              <a class="dropdown-item">Google</a>
+              <a class="dropdown-item">Amazon</a>
+              <a class="dropdown-item">Microsoft</a>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -19,23 +44,15 @@
           {{status}}
         </button>
 
-        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="modal" data-target=".bd-example-modal-lg" (click)="edit()">
-            <i class="fa fa-pencil"></i>Edit
-        </button>
-        <!-- <a class="editTrans"><i class="glyphicon glyphicon-download-alt"></i>Download transcript</a> -->
-
-        <!-- <select [(value)]="nameEngine">
-          <option *ngFor="let engine of engines" [value]="engine">{{engine}}</option>
-        </select> -->
-
         <a class="dropdown show">
           <a class="btn btn-secondary dropdown-toggle" id="dropdownEngine" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            Engine<span class="glyphicon glyphicon-menu-down"></span>
+            aria-expanded="false"><i class="fa fa-pencil"></i>
+            Edit<span class="glyphicon glyphicon-menu-down"></span>
           </a>
 
           <div class="dropdown-menu" aria-labelledby="dropdownEngine">
-            <a class="dropdown-item" *ngFor="let engine of engines">{{engine}}</a>
+            <a class="dropdown-item" *ngFor="let language of listLanguages" (click)="edit(language.idTranscript)"
+              data-toggle="modal" data-target=".bd-example-modal-lg">{{language.language}}</a>
           </div>
         </a>
 
@@ -48,12 +65,9 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" *ngFor="let engine of engines"
               href="http://localhost:8081/api/video/downloadTranscript/{{engine}}/{{idVideo}}">Transcript</a>
-            <a class="dropdown-item" 
-            href="http://localhost:8081/api/video/downloadVideo/{{idVideo}}">Video</a>
+            <a class="dropdown-item" href="http://localhost:8081/api/video/downloadVideo/{{idVideo}}">Video</a>
           </div>
         </a>
-
-
       </div>
 
       <div id="transcript"></div>

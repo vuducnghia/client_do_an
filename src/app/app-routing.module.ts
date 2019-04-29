@@ -19,6 +19,7 @@ import { ManagerVideoComponent } from './components/layout-admin/manager-video/m
 import { AnalysisComponent } from './components/layout-admin/analysis/analysis.component';
 import { ManagerUserComponent } from './components/layout-admin/manager-user/manager-user.component';
 import { ManagerEngineComponent } from './components/layout-admin/manager-engine/manager-engine.component';
+import { VideoCategoryComponent } from './components/layout/video-category/video-category.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
           { path: 'profile', component: ProfileComponent },
           { path: 'my-videos/:idVideo', component: VideoTranscriptComponent },
           { path: 'show-video/:idVideo', component: ShowVideoComponent },
+          { path: 'category/:category', component: VideoCategoryComponent },
         ]
       },
       { path: 'upload', component: UploadComponent }
@@ -48,7 +50,7 @@ const routes: Routes = [
       { path: 'manage-video', component: ManagerVideoComponent },
       { path: 'manage-users', component: ManagerUserComponent },
       { path: 'manage-engine', component: ManagerEngineComponent }
-      
+
     ]
   },
   { path: 'login-admin', component: LoginAdminComponent },

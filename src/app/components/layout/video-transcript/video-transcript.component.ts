@@ -35,8 +35,10 @@ export class VideoTranscriptComponent implements OnInit {
   idVideo
   nameEngine
   engines = []
-  transcripts = []
+  transcripts = [];
+  listLanguages = [];
   // engine
+  nameVideo='';
   _this = this
   constructor(
     private route: ActivatedRoute,
@@ -47,6 +49,8 @@ export class VideoTranscriptComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.videoService.getVideoById(params.idVideo).subscribe((video: any) => {
+        this.nameVideo = video.title;
+        // console.log(video)
         this.idVideo = video._id;
         if (document.getElementById("showVideo").firstChild) {
           document.getElementById("showVideo").firstChild.remove()
@@ -60,9 +64,14 @@ export class VideoTranscriptComponent implements OnInit {
             src: `http://localhost:8081/api/transcript/${transcript.idTranscript}`,
             kind: 'captions', srclang: 'en', label: transcript.language
           })
+          this.listLanguages.push({
+            language: transcript.language,
+            idTranscript: transcript.idTranscript
+          })
           this.engines.push(transcript.nameEngine)
         });
 
+        console.log(this.nameEngine)
         document.getElementById("showVideo").innerHTML = `
           <video id="${idRandom}" class="video-js vjs-default-skin" height="360px" width="650px" controls 
           >
@@ -118,10 +127,9 @@ export class VideoTranscriptComponent implements OnInit {
   }
 
 
-  edit() {
-    console.log(this.engines[0])
-    if (this.engines[0]) {
-      this.videoService.getDataTranscriptById(this.idVideo, this.engines[0]).subscribe((transcripts: any) => {
+  edit(idTranscript) {
+    if (idTranscript) {
+      this.videoService.getDataTranscriptById(idTranscript).subscribe((transcripts: any) => {
         this.transcripts = transcripts
       }, err => {
         console.log(err)

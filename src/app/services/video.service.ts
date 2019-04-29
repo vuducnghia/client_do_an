@@ -34,8 +34,12 @@ export class VideoService {
     return this.http.get<any>(`${apiUrl}getVideoByCate/${name}`);
   }
 
+  getVideoByLanguage(name, limit) {
+    return this.http.get<any>(`${apiUrl}getVideoByLanguage/${name}?limit=${limit}`);
+  }
+
   getVideoRecent(){
-    return this.http.get(`${apiUrl}getVideoRecent`);
+    return this.http.get<any>(`${apiUrl}getVideoRecent`);
   }
 
   delete(id: number) {
@@ -46,8 +50,8 @@ export class VideoService {
     return this.http.get(`http://localhost:8081/api/transcript/${id}?engine=${engine}`, { responseType: 'text' });
   }
 
-  getDataTranscriptById(id, engine) {
-    return this.http.get(`${apiUrl}transcriptData/${id}?engine=${engine}`);
+  getDataTranscriptById(path) {
+    return this.http.get(`${apiUrl}transcriptData/${path}`);
   }
 
   getVideoByStage(name) {
@@ -78,7 +82,9 @@ export class VideoService {
     return this.http.get<any>(`${apiUrl}findByName/${name}`);
   }
 
-
+  countVideoByCateGory(nameCategory){
+    return this.http.get<any>(`${apiUrl}countVideoByCateGory/${nameCategory}`);
+  }
   //comment
 
   addCommentByIdVideo(idvideo, comment) {

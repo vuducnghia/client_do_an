@@ -11,16 +11,20 @@
             aria-hidden="true"></span>Category<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
       </li>
       <ul class="cl-effect-2">
-        <li *ngFor="let category of listCategory"><a>{{category}}</a></li>
+        <li *ngFor="let category of listCategory"><a routerLink="/category/{{category}}">{{category}}</a></li>
       </ul>
 
-      <li (click)="showLanguage()"><a class="menu"><span class="glyphicon glyphicon-film glyphicon-king"
-            aria-hidden="true"></span>Language<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
+      <li (click)="showLanguage()">
+        <a class="menu">
+          <span class="glyphicon glyphicon-film glyphicon-king"
+            aria-hidden="true"></span>Language
+            <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+          </a>
       </li>
       <ul class="cl-effect-1">
-        <li><a>English</a></li>
-        <li><a>Spanish</a></li>
-        <li><a>Arabic</a></li>
+        <li><a routerLink="/category/English">English</a></li>
+        <li><a routerLink="/category/Spanish">Spanish</a></li>
+        <li><a routerLink="/category/Arabic">Arabic</a></li>
       </ul>
     </ul>
 
