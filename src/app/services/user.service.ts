@@ -11,7 +11,7 @@ export class UserService {
     return this.http.get<User[]>(apiUrl + `/user/allUser`);
   }
 
-  getUserById(id: number) {
+  getUserById(id) {
     return this.http.get(apiUrl + `/user/getUserById/${id}`);
   }
 
@@ -19,15 +19,15 @@ export class UserService {
     return this.http.post(apiUrl + `/auth/signup`, user);
   }
 
-  update(user) {
-    // return this.http.put(`/users/` + user.id, user);
+  updateProfileUser(user) {
+    return this.http.put(apiUrl + `/user/updateProfileUser`, user);
   }
 
   delete(id: number) {
     // return this.http.delete(`/users/` + id);
   }
 
-  updateStatusByIdUser(idUser, status){
-    return this.http.put(`${apiUrl}/user/updateStatusUser/${idUser}`, {status});
+  updateStatusByIdUser(idUser, status) {
+    return this.http.put(`${apiUrl}/user/updateStatusUser/${idUser}`, { status });
   }
 }

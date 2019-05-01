@@ -15,9 +15,9 @@
     <div id="navbar" class="navbar-collapse collapse">
       <div class="top-search">
         <form class="search" [formGroup]="searchForm">
-          <input type="text" placeholder="Search..." formControlName="nameVideo" (input)="search()"/> 
+          <input type="text" placeholder="Search..." formControlName="nameVideo" (input)="search()" />
           <ul class="results" id="results">
-            <li *ngFor="let video of videos" >
+            <li *ngFor="let video of videos">
               <a routerLink="/show-video/{{video._id}}" (click)="reset()">{{video._id}}{{video.title}}
                 <br /><span>{{video.category}}</span></a>
             </li>
@@ -37,7 +37,7 @@
           <a href="#small-dialog" class="play-icon popup-with-zoom-anim" data-toggle="modal"
             data-target="#loginModal">Sign In</a>
         </div>
-        <div class="profile_details" *ngIf="isLogin">
+        <!-- <div class="profile_details" *ngIf="isLogin">
           <ul>
             <li class="dropdown profile_details_drop">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -47,17 +47,36 @@
                     <p>Malorum</p>
                     <span>Administrator</span>
                   </div>
-                  <i class="fa fa-angle-down lnr"></i>
-                  <i class="fa fa-angle-up lnr"></i>
+                  <i class="fa fa-sort-desc" style="position: absolute;
+                  top: 34%;
+                  right: 8%;
+                  color: #68AE00;
+                  font-size: 1.6em"></i>
                   <div class="clearfix"></div>
                 </div>
               </a>
               <ul class="dropdown-menu drp-mnu">
-                <li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li>
-                <li> <a href="#" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                <li> <a routerLink="/profile"><i class="fa fa-user"></i> Profile</a> </li>
+                <li> <a (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a> </li>
               </ul>
             </li>
           </ul>
+        </div> -->
+
+        <div class="pp" *ngIf="isLogin">
+          <div class="menu-container">
+            <button class="menu-button"  (click)="showDetailUser()"> <img src="http://localhost:8081/api/image/{{currentUser.avatar}}">
+              <span class="title"> {{currentUser.name}} </span></button>
+
+            <div class="menu-dropdown">
+              <div class="content">
+                <ul>
+                  <li> <a routerLink="/profile"><i class="fa fa-user"></i> Profile</a> </li>
+                  <li> <a (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="clearfix"></div>
       </div>
@@ -92,6 +111,7 @@
             formControlName="username" />
           <input type="password" class="email" placeholder="Password" maxlength="50" pattern="[1-9]{1}\d{9}"
             formControlName="password" />
+          <div *ngIf="isErrorLogin" style="color: red">Username or password not found</div>
           <input type="submit" value="LOGIN" (click)="login()" />
         </form>
         <div class="forgot">

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+declare var $: any;
 
-
-declare const videojs: any
 import '../../../../assets/js/videojs-transcript.js'
 
 @Component({
@@ -10,39 +9,33 @@ import '../../../../assets/js/videojs-transcript.js'
   styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements OnInit {
-  data = {
-    logs: [
-      {
-        title: 'John Doe',
-        time: '14.12.2018 13:05',
-        content: 'Lorem ipsum, dolor sit amet consectetur adipisicing.',
-        avatar: 'https://picsum.photos/400/400?image=1074',
-        type: 'primary'
-      },
-      {
-        title: 'Jane Doe',
-        time: '14.12.2018 13:05',
-        content: 'Soluta perferendis, explicabo fuga amet sit ab!',
-        avatar: 'https://picsum.photos/400/400?image=1027',
-        type: 'secondary'
-      },
-      {
-        title: 'Mark Doe',
-        time: '14.12.2018 13:05',
-        content: 'Sit quod tempora optio magnam autem. Possimus?',
-        avatar: 'https://picsum.photos/400/400?image=1010',
-        type: 'secondary'
-      },
-    ]
-  };
+
   constructor() { }
 
   ngOnInit() {
 
+    $(document).ready(function () {
 
-    // this.data = 
+      var readURL = function (input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
 
-    // document.getElementById('template').innerHTML = output;
+          reader.onload = function (e) {
+            // $('.profile-pic').attr('src', e.target.result);
+          }
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      $(".file-upload").on('change', function () {
+        readURL(this);
+      });
+
+      $(".upload-button").on('click', function () {
+        $(".file-upload").click();
+      });
+    });
   }
 
 }

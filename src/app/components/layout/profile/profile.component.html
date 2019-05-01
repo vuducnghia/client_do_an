@@ -1,122 +1,78 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main1">
-  <div id="user-profile-2" class="user-profile main-grids">
-    <div class="tabbable">
 
+  <div class="">
+    <div class="">
+      <div class="panel panel-default panel-info Profile">
+        <div class="panel-heading"> My Profile </div>
+        <div class="alert alert-success" *ngIf="isUpdateSuccess">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Success!</strong> Profile successfully saved
+        </div>
+        <div class="alert alert-warning" *ngIf="isError">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Oops!</strong> Profile not saved. Try later.
+        </div>
 
-      <div class="tab-content no-border padding-24">
-        <div id="home" class="tab-pane in active">
-          <div class="row">
-            <div class="col-xs-12 col-sm-3 center">
-              <span class="profile-picture">
-                <img class="editable img-responsive" alt=" Avatar" id="avatar2"
-                  src="http://bootdey.com/img/Content/avatar/avatar6.png">
-              </span>
+        <div class="panel-body">
+          <div class="avatar-wrapper">
+            <img class="profile-pic" src="" />
+            <div class="upload-button">
+              <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+            </div>
+            <form [formGroup]="avatarForm">
+              <input class="file-upload" type="file" accept="image/*" ng2FileSelect [uploader]="uploader" formControlName="avatar" name="avatar"/>
+            </form>
 
-              <div class="space space-4"></div>
-
-              <a href="#" class="btn btn-sm btn-block btn-success">
-                <i class="ace-icon fa fa-plus-circle bigger-120"></i>
-                <span class="bigger-110">Add as a friend</span>
-              </a>
-
-              <a href="#" class="btn btn-sm btn-block btn-primary">
-                <i class="ace-icon fa fa-envelope-o bigger-110"></i>
-                <span class="bigger-110">Send a message</span>
-              </a>
-            </div><!-- /.col -->
-
-            <div class="col-xs-12 col-sm-9">
-              <h4 class="blue">
-                <span class="middle">John Doe</span>
-
-                <span class="label label-purple arrowed-in-right">
-                  <i class="ace-icon fa fa-circle smaller-80 align-middle"></i>
-                  online
-                </span>
-              </h4>
-
-              <div class="profile-user-info">
-                <div class="profile-info-row">
-                  <div class="profile-info-name"> Username </div>
-
-                  <div class="profile-info-value">
-                    <span>alexdoe</span>
-                  </div>
-                </div>
-
-                <div class="profile-info-row">
-                  <div class="profile-info-name"> Location </div>
-
-                  <div class="profile-info-value">
-                    <i class="fa fa-map-marker light-orange bigger-110"></i>
-                    <span>Netherlands</span>
-                    <span>Amsterdam</span>
-                  </div>
-                </div>
-
-                <div class="profile-info-row">
-                  <div class="profile-info-name"> Age </div>
-
-                  <div class="profile-info-value">
-                    <span>38</span>
-                  </div>
-                </div>
-
-                <div class="profile-info-row">
-                  <div class="profile-info-name"> Joined </div>
-
-                  <div class="profile-info-value">
-                    <span>2010/06/20</span>
-                  </div>
-                </div>
-
-                <div class="profile-info-row">
-                  <div class="profile-info-name"> Last Online </div>
-
-                  <div class="profile-info-value">
-                    <span>3 hours ago</span>
-                  </div>
+          </div>
+          <div class="form-horizontal">
+            <form [formGroup]="userForm">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">First Name</label>
+                <div class="col-sm-4">
+                  <input class="form-control" type="text" placeholder="First Name" formControlName="firstName">
                 </div>
               </div>
-
-              <div class="hr hr-8 dotted"></div>
-
-              <div class="profile-user-info">
-                <div class="profile-info-row">
-                  <div class="profile-info-name"> Website </div>
-
-                  <div class="profile-info-value">
-                    <a href="#" target="_blank">www.alexdoe.com</a>
-                  </div>
-                </div>
-
-                <div class="profile-info-row">
-                  <div class="profile-info-name">
-                    <i class="middle ace-icon fa fa-facebook-square bigger-150 blue"></i>
-                  </div>
-
-                  <div class="profile-info-value">
-                    <a href="#">Find me on Facebook</a>
-                  </div>
-                </div>
-
-                <div class="profile-info-row">
-                  <div class="profile-info-name">
-                    <i class="middle ace-icon fa fa-twitter-square bigger-150 light-blue"></i>
-                  </div>
-
-                  <div class="profile-info-value">
-                    <a href="#">Follow me on Twitter</a>
-                  </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Last Name</label>
+                <div class="col-sm-4">
+                  <input class="form-control" type="text" placeholder="Last Name" formControlName="lastName">
                 </div>
               </div>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-
-          <div class="space-20"></div>
-
-          
-        </div><!-- /#home -->
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Username</label>
+                <div class="col-sm-4">
+                  <input class="form-control" type="text" formControlName="username" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Current Password</label>
+                <div class="col-sm-4">
+                  <input class="form-control" type="text" name="department" placeholder="Current Password"
+                    formControlName="password">
+                </div>
+              </div>
+              <!-- <div class="form-group">
+                <label class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-4">
+                  <input class="form-control" type="text" name="department" placeholder="New Password"
+                  formControlName="password">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Confirm Password</label>
+                <div class="col-sm-4">
+                  <input class="form-control" type="text" name="department" placeholder="Comfirm password"
+                  formControlName="confirmPassword">
+                </div>
+              </div> -->
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button class="btn btn-primary" (click)="updateMe()" [disabled]="disableButton">Update</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>

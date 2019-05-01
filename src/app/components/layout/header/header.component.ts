@@ -22,7 +22,9 @@ export class HeaderComponent implements OnInit {
   ) {
   }
   videos = [];
-  isLogin: boolean;
+  isLogin: boolean = false;
+  isErrorLogin: boolean = false;
+  currentUser = {};
   signupForm = new FormGroup(
     {
       firstName: new FormControl('', [Validators.required]),
@@ -49,7 +51,10 @@ export class HeaderComponent implements OnInit {
   )
 
   ngOnInit() {
+
     if (this.authService.currentUserValue) {
+      console.log(this.authService.currentUserValue)
+      this.currentUser = this.authService.currentUserValue;
       this.isLogin = true;
     } else {
       this.isLogin = false;
@@ -76,6 +81,7 @@ export class HeaderComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
         this.isLogin = true;
+        this.isErrorLogin = false;
         $('#loginModal').modal('hide');
         // if (this.authService.currentUserValue.role ==='user') {
         //   console.log('login success')
@@ -83,6 +89,7 @@ export class HeaderComponent implements OnInit {
         // }
       }, error => {
         console.log(JSON.stringify(error))
+        this.isErrorLogin = true;
       })
   }
 
@@ -140,6 +147,15 @@ export class HeaderComponent implements OnInit {
     this.searchForm.setValue({ nameVideo: '' })
   }
 
+  showDetailUser() {
+    let parent = document.querySelector(".menu-container");
+    
+    if (parent.classList.contains("open")) {
+      parent.classList.remove("open");
+    } else {
+      parent.classList.add("open");
+    }
+  }
 }
 
 function passwordMatchValidator(g: FormGroup) {

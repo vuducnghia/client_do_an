@@ -11,6 +11,7 @@ ul.dropdown-menu {
 .dropdown-menu>li>a {
   padding: 3px 15px;
   font-size: 1em;
+  cursor: pointer;
 }
 
 .profile_details {
@@ -258,3 +259,112 @@ input {
   display: block;
 }
 
+// @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+$button-height: 44px;
+$avatar-size: 30px;
+$border-radius: $button-height/2;
+$button-padding: ($button-height+4 - $avatar-size)-10px;
+
+.pp {
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // height: 100vh;
+  // background: linear-gradient(#e52d27, #b31217);
+}
+
+.menu-container {
+  position: relative;
+  border-radius: $border-radius;
+
+  // border: 1px solid #fafafa;
+  &.open {
+    >.menu-button {
+      color: #000;
+    }
+
+    >.menu-dropdown {
+      opacity: 1;
+      border-radius: $border-radius/2;
+
+      transition: opacity 0.2s, box-shadow 0.3s, border-radius 0.3s, transform 0.2s 0s ease-out;
+      transform: none;
+    }
+  }
+}
+
+.menu-button {
+  background: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  background-color: #fff;
+  border: none;
+  padding: 0 $button-padding;
+  padding-right: 20px;
+  height: $button-height;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  outline: none !important;
+  background-color: transparent;
+  color: #fff;
+  z-index: 1;
+  position: relative;
+
+  >img {
+    border-radius: 100%;
+    height: $avatar-size;
+    width: $avatar-size;
+    margin-right: $button-padding + 5px;
+  }
+}
+
+.menu-dropdown {
+  //display: none;
+  box-shadow: 0 0 60px 5px rgba(#000, 0.3);
+  opacity: 0;
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  padding: 0;
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  right: -1px;
+  overflow: hidden;
+  border-radius: $border-radius $border-radius $border-radius/2 $border-radius/2;
+  transition: opacity 0.2s, box-shadow 0.4s, border-radius 0.4s, transform 0s 0.2s ease-out;
+  transform: translateY(10px);
+  transform-origin: 0 0;
+  padding-top: $button-height;
+
+  .content {
+    overflow: hidden;
+    padding: $button-padding $button-padding*1.5 $button-padding/3;
+
+    >ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      >li {
+        list-style: none;
+        font-size: 16px;
+        margin: 0 0 15px;
+        padding: 0;
+        cursor: pointer;
+      }
+    }
+  }
+
+  >.menu-button {
+    border: none;
+    color: #000;
+  }
+}
