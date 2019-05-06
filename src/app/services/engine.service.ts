@@ -22,7 +22,7 @@ export class EngineService {
     return this.http.post(`${apiUrl}/startEngine/${nameEngine}/${language}`, {idVideo});
   }
 
-  createEngine(){
-
+  translateEngine(nameEngine, language, idVideo){
+    return this.http.post(`${apiUrl}/translateEngine/${nameEngine}/${language}`, {idVideo});
   }
 }

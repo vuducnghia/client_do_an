@@ -4,6 +4,7 @@ declare const videojs: any
 import '../../../../assets/js/videojs-transcript.js'
 import { ActivatedRoute } from '@angular/router';
 import { VideoService } from '../../../services/video.service';
+import { EngineService } from '../../../services/engine.service';
 
 @Pipe({
   name: 'dateFormatPipe',
@@ -38,17 +39,19 @@ export class VideoTranscriptComponent implements OnInit {
   transcripts = [];
   listLanguages = [];
   // engine
-  nameVideo='';
+  nameVideo = '';
   _this = this
   constructor(
     private route: ActivatedRoute,
-    private videoService: VideoService
+    private videoService: VideoService,
+    private engineService:EngineService
   ) { }
 
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.videoService.getVideoById(params.idVideo).subscribe((video: any) => {
+        console.log(video)
         this.nameVideo = video.title;
         // console.log(video)
         this.idVideo = video._id;
@@ -141,5 +144,9 @@ export class VideoTranscriptComponent implements OnInit {
 
   }
 
-
+  startTranslate() {
+    this.engineService.translateEngine('google', 'English', this.idVideo).subscribe(result => {
+      console.log(result)
+    })
+  }
 }
