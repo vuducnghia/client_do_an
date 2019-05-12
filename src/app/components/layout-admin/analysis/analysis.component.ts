@@ -27,7 +27,7 @@ export class AnalysisComponent implements OnInit {
         animationEnabled: true,
         exportEnabled: true,
         title: {
-          text: "Videos/Language"
+          text: "Videos/Category"
         },
         data: [{
           type: "pie",
@@ -49,13 +49,13 @@ export class AnalysisComponent implements OnInit {
   async drawLanguage() {
     await this.getCountLanguage('English');
     await this.getCountLanguage('Spanish');
-    await this.getCountLanguage('Arabic');
+    await this.getCountLanguage('Vietnamese');
     console.log(this.listVideoOfLanguage)
     let chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       exportEnabled: true,
       title: {
-        text: "Videos/Category"
+        text: "Videos/Language"
       },
       data: [{
         type: "column",

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoService } from '../../../services/video.service';
 import { ActivatedRoute } from '@angular/router';
-
+declare var $: any;
 @Component({
   selector: 'app-my-video',
   templateUrl: './my-video.component.html',
@@ -16,7 +16,7 @@ export class MyVideoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    // $('.btn').button('loading');
 
     this.videoservice.getVideoByUser().subscribe(arrvideos => {
       arrvideos.forEach(video => {

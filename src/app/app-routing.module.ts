@@ -20,6 +20,7 @@ import { AnalysisComponent } from './components/layout-admin/analysis/analysis.c
 import { ManagerUserComponent } from './components/layout-admin/manager-user/manager-user.component';
 import { ManagerEngineComponent } from './components/layout-admin/manager-engine/manager-engine.component';
 import { VideoCategoryComponent } from './components/layout/video-category/video-category.component';
+import { ManagerLanguageComponent } from './components/layout-admin/manager-language/manager-language.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
       {
         path: '', component: HomeComponent, children: [
           { path: '', component: BodyComponent },
-          { path: 'history', component: HistoryComponent },
+          // { path: 'history', component: HistoryComponent },
           { path: 'my-videos', component: MyVideoComponent },
           { path: 'profile', component: ProfileComponent },
           { path: 'my-videos/:idVideo', component: VideoTranscriptComponent },
@@ -47,9 +48,10 @@ const routes: Routes = [
     path: 'admin', component: LayoutAdminComponent, children: [
       { path: '', component: AnalysisComponent },
       { path: 'manage-request', component: ManagerRequestComponent },
-      { path: 'manage-video', component: ManagerVideoComponent },
+      { path: 'manage-category', component: ManagerVideoComponent },
       { path: 'manage-users', component: ManagerUserComponent },
-      { path: 'manage-engine', component: ManagerEngineComponent }
+      { path: 'manage-engine', component: ManagerEngineComponent },
+      { path: 'manage-language', component: ManagerLanguageComponent }
 
     ]
   },

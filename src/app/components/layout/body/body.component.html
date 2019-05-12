@@ -6,7 +6,7 @@
       </div>
       <div class="col-md-4 resent-grid recommended-grid slider-top-grids" *ngFor="let video of listVideoRecent">
         <div class="resent-grid-img recommended-grid-img">
-          <a routerLink="show-video/{{video._id}}"><img src="http://localhost:8081/api/image/{{video.thumbnail}}" alt="" /></a>
+          <a routerLink="show-video/{{video._id}}"><img style="height: 200px;" src="http://localhost:8081/api/image/{{video.thumbnail}}" alt="" /></a>
           <div class="time">
             <p>3:04</p>
           </div>
@@ -36,7 +36,7 @@
         </div>
         <div class="col-md-3 resent-grid recommended-grid end" *ngFor="let video of obj.videos">
           <div class="resent-grid-img recommended-grid-img">
-            <a routerLink="show-video/{{video._id}}"><img src="http://localhost:8081/api/image/{{video.thumbnail}}" alt="" /></a>
+            <a routerLink="show-video/{{video._id}}"><img style="height: 150px;" src="http://localhost:8081/api/image/{{video.thumbnail}}" alt="" /></a>
             <div class="time small-time">
               <p>2:34</p>
             </div>

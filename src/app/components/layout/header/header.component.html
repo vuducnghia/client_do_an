@@ -18,7 +18,7 @@
           <input type="text" placeholder="Search..." formControlName="nameVideo" (input)="search()" />
           <ul class="results" id="results">
             <li *ngFor="let video of videos">
-              <a routerLink="/show-video/{{video._id}}" (click)="reset()">{{video._id}}{{video.title}}
+              <a routerLink="/show-video/{{video._id}}" (click)="reset()"><b>{{video.title}}</b>
                 <br /><span>{{video.category}}</span></a>
             </li>
           </ul>
@@ -64,10 +64,23 @@
         </div> -->
 
         <div class="pp" *ngIf="isLogin">
-          <div class="menu-container">
+          <!-- <div class="menu-container">
             <button class="menu-button"  (click)="showDetailUser()"> <img src="http://localhost:8081/api/image/{{currentUser.avatar}}">
               <span class="title"> {{currentUser.name}} </span></button>
 
+            <div class="menu-dropdown">
+              <div class="content">
+                <ul>
+                  <li> <a routerLink="/profile"><i class="fa fa-user"></i> Profile</a> </li>
+                  <li> <a (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                </ul>
+              </div>
+            </div>
+          </div> -->
+          <div class="menu-container">
+            <button class="menu-button" (click)="showDetailUser()"> <img src="http://localhost:8081/api/image/{{currentUser.avatar}}">
+              <span class="title"> {{currentUser.name}} </span></button>
+              <!-- <span class="title"> {{currentUser.name}} </span> -->
             <div class="menu-dropdown">
               <div class="content">
                 <ul>

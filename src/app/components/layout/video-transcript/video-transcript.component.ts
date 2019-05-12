@@ -5,7 +5,7 @@ import '../../../../assets/js/videojs-transcript.js'
 import { ActivatedRoute } from '@angular/router';
 import { VideoService } from '../../../services/video.service';
 import { EngineService } from '../../../services/engine.service';
-
+declare var $: any;
 @Pipe({
   name: 'dateFormatPipe',
 })
@@ -39,12 +39,14 @@ export class VideoTranscriptComponent implements OnInit {
   transcripts = [];
   listLanguages = [];
   // engine
+  nameEngineTranslate = 'google';
+  languageTranslate = 'english';
   nameVideo = '';
   _this = this
   constructor(
     private route: ActivatedRoute,
     private videoService: VideoService,
-    private engineService:EngineService
+    private engineService: EngineService
   ) { }
 
 
@@ -141,12 +143,22 @@ export class VideoTranscriptComponent implements OnInit {
   }
 
   saveTranscript() {
-
+    $('.bd-example-modal-lg').modal('hide');
   }
 
   startTranslate() {
-    this.engineService.translateEngine('google', 'English', this.idVideo).subscribe(result => {
-      console.log(result)
-    })
+    if (this.nameEngineTranslate && this.languageTranslate) {
+      this.engineService.translateEngine(this.nameEngineTranslate, this.languageTranslate, this.idVideo).subscribe(result => {
+        console.log(result)
+      })
+      $('.translate-bd-example-modal-lg').modal('hide');
+    }
+  }
+
+  onChangeEngineTranslate(value) {
+    this.nameEngineTranslate = value;
+  }
+  onChangeLanguage(language) {
+    this.languageTranslate = language;
   }
 }

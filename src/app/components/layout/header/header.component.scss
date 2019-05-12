@@ -144,6 +144,7 @@ input {
 
 
 .search .results {
+  font-size: 1.4em;
   display: none;
   position: absolute;
   top: 35px;
@@ -289,7 +290,8 @@ $button-padding: ($button-height+4 - $avatar-size)-10px;
     }
 
     >.menu-dropdown {
-      opacity: 1;
+      // opacity: 1;
+      display: block;
       border-radius: $border-radius/2;
 
       transition: opacity 0.2s, box-shadow 0.3s, border-radius 0.3s, transform 0.2s 0s ease-out;
@@ -297,6 +299,7 @@ $button-padding: ($button-height+4 - $avatar-size)-10px;
     }
   }
 }
+
 
 .menu-button {
   background: none;
@@ -329,7 +332,8 @@ $button-padding: ($button-height+4 - $avatar-size)-10px;
 .menu-dropdown {
   //display: none;
   box-shadow: 0 0 60px 5px rgba(#000, 0.3);
-  opacity: 0;
+  // opacity: 0;
+  display: none;
   background-color: #fff;
   border: 1px solid #eaeaea;
   padding: 0;

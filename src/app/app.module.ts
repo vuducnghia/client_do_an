@@ -39,7 +39,8 @@ import { ManagerUserComponent } from './components/layout-admin/manager-user/man
 import { ManagerEngineComponent } from './components/layout-admin/manager-engine/manager-engine.component';
 import { CommentComponent } from './components/layout/comment/comment.component';
 import { VideoCategoryComponent } from './components/layout/video-category/video-category.component';
-
+import { ManagerLanguageComponent } from './components/layout-admin/manager-language/manager-language.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +69,8 @@ import { VideoCategoryComponent } from './components/layout/video-category/video
     ManagerUserComponent,
     ManagerEngineComponent,
     CommentComponent,
-    VideoCategoryComponent
+    VideoCategoryComponent,
+    ManagerLanguageComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,7 @@ import { VideoCategoryComponent } from './components/layout/video-category/video
     AppRoutingModule,
     
     FormsModule,
-    
+    Ng2SearchPipeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

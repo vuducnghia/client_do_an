@@ -11,10 +11,8 @@
               Your browser doesn't support video.
             </p>
             <source src="{{url}}" type="video/mp4">
-            <!-- <track kind="captions" *ngFor="let transcript of videoOgirin.transcripts" src="http://localhost:8081/api/transcript/{{transcript.idTranscript}}.vtt"
-             srclang="{{transcript.language}}" label="{{transcript.language}}" default> -->
-            <!-- chu y phai co .vtt -->
-            <track kind="captions" src="../../../../assets/test" srclang="en" label="English" default>
+            <track kind="captions" *ngFor="let transcript of videoOgirin.transcripts" src="../../../../assets/transcripts/{{transcript.idTranscript}}.vtt"
+             srclang="{{transcript.language}}" label="{{transcript.language}}">
           </video>
         </div>
       </div>

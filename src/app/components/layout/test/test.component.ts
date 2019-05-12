@@ -13,29 +13,16 @@ export class TestComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    $('.btn').button('loading');
 
-    $(document).ready(function () {
-
-      var readURL = function (input) {
-        if (input.files && input.files[0]) {
-          var reader = new FileReader();
-
-          reader.onload = function (e) {
-            // $('.profile-pic').attr('src', e.target.result);
-          }
-
-          reader.readAsDataURL(input.files[0]);
-        }
-      }
-
-      $(".file-upload").on('change', function () {
-        readURL(this);
-      });
-
-      $(".upload-button").on('click', function () {
-        $(".file-upload").click();
-      });
-    });
+    // $('.btn').on('click', function () {
+    //   var $this = $(this);
+    //   console.log($this)
+    //   $this.button('loading');
+    //   // setTimeout(function () {
+    //   //   // $this.button('reset');
+    //   // }, 8000);
+    // });
   }
 
 }

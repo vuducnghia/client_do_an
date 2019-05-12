@@ -34,7 +34,11 @@ export class ManagerRequestComponent implements OnInit {
   }
 
   approve(id) {
-    this.videoService.updateStatusByIdVideo(id, 'public')
+    this.videoService.updateStatusByIdVideo(id, 'public').subscribe(videos => {
+
+    }, err => {
+      console.log(err)
+    })
   }
 
   addClass(event, name, bool) {

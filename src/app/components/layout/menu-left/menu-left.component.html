@@ -1,30 +1,30 @@
 <div class="col-sm-3 col-md-2 sidebar">
   <div class="drop-navigation drop-navigation">
     <ul class="nav nav-sidebar">
-      <li class="active"><a routerLink="/" class="home-icon"><span class="glyphicon glyphicon-home"
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/" class="home-icon"><span class="glyphicon glyphicon-home"
             aria-hidden="true"></span>Home</a></li>
-      <li *ngIf="isLogin"><a routerLink="/my-videos" class="user-icon"><span
+      <li *ngIf="isLogin" routerLinkActive="active"><a routerLink="/my-videos" class="user-icon"><span
             class="glyphicon glyphicon-home glyphicon-blackboard" aria-hidden="true"></span>My videos</a></li>
-      <li><a routerLink="/history" class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass"
-            aria-hidden="true"></span>History</a></li>
-      <li (click)="showCategory()"><a class="menu1"><span class="glyphicon glyphicon-film"
+      <!-- <li  routerLinkActive="active"><a routerLink="/history" class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass"
+            aria-hidden="true"></span>History</a></li> -->
+      <li (click)="showCategory()" routerLinkActive="active"><a class="menu1"><span class="glyphicon glyphicon-film"
             aria-hidden="true"></span>Category<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a>
       </li>
       <ul class="cl-effect-2">
-        <li *ngFor="let category of listCategory"><a routerLink="/category/{{category}}">{{category}}</a></li>
+        <li *ngFor="let category of listCategory" routerLinkActive="active"><a
+            routerLink="/category/{{category}}">{{category}}</a></li>
       </ul>
 
       <li (click)="showLanguage()">
         <a class="menu">
-          <span class="glyphicon glyphicon-film glyphicon-king"
-            aria-hidden="true"></span>Language
-            <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-          </a>
+          <span class="glyphicon glyphicon-film glyphicon-king" aria-hidden="true"></span>Language
+          <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+        </a>
       </li>
       <ul class="cl-effect-1">
-        <li><a routerLink="/category/English">English</a></li>
-        <li><a routerLink="/category/Spanish">Spanish</a></li>
-        <li><a routerLink="/category/Arabic">Arabic</a></li>
+        <li routerLinkActive="active"><a routerLink="/category/English">English</a></li>
+        <li routerLinkActive="active"><a routerLink="/category/Spanish">Spanish</a></li>
+        <li routerLinkActive="active"><a routerLink="/category/Vietnamese">Vietnamese</a></li>
       </ul>
     </ul>
 

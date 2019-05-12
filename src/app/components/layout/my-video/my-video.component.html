@@ -10,7 +10,8 @@
         </div>
         <div class="col-md-2 resent-grid recommended-grid sports-recommended-grid" *ngFor="let video of obj.videos">
           <div class="resent-grid-img recommended-grid-img">
-            <a routerLink="{{video._id}}"><img src="http://localhost:8081/api/image/{{video.thumbnail}}" alt="" /></a>
+            <a routerLink="{{video._id}}"><img style="height: 100px;"
+                src="http://localhost:8081/api/image/{{video.thumbnail}}" alt="" /></a>
             <div class="time small-time sports-tome">
               <p>7:30</p>
             </div>
@@ -20,7 +21,17 @@
           </div>
           <div class="resent-grid-info recommended-grid-info">
             <h5><a routerLink="{{video._id}}" class="title">{{video.title}}</a></h5>
-            <p class="author"><a><i class="fa fa-eye" aria-hidden="true"></i>{{video.status}}</a></p>
+            <!-- <p class="author"><a><i class="fa fa-eye" aria-hidden="true"></i>{{video.status}}</a></p> -->
+            <!-- <div class="loader" id="loader-1"></div> -->
+            <div class="status1">
+              <div class="loader" id="loader-6" *ngIf="video.status==='processing'">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <i class="fa fa-check-circle" aria-hidden="true"  *ngIf="video.status==='public'"></i>{{video.status}}
+            </div>
             <p class="views">{{video.views}} views</p>
           </div>
         </div>

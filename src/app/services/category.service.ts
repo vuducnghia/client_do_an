@@ -9,4 +9,8 @@ export class CategoryService {
   getAll() {
     return this.http.get<any>(`${apiUrl}`);
   }
+
+  updateCategory(idCategory, category){
+    return this.http.put(`${apiUrl}/updateCategory/${idCategory}`, { category });
+  }
 }

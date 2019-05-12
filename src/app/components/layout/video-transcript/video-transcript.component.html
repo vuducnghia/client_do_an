@@ -6,33 +6,9 @@
       <div class="content">
         <h3>{{nameVideo}}</h3>
         <div class="translateEngine">
-          Translate to
-          <a class="dropdown show">
-            <a class="btn btn-secondary dropdown-toggle" id="dropdownLanguage" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Language<i class="fa fa-arrow-down"></i>
-            </a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownLanguage">
-              <a class="dropdown-item">English</a>
-              <a class="dropdown-item">Spanish</a>
-              <a class="dropdown-item">Arabic</a>
-            </div>
-          </a>
-          by
-          <a class="dropdown show">
-            <a class="btn btn-secondary dropdown-toggle" id="dropdownEngineTranslate" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Engine<i class="fa fa-arrow-down"></i>
-            </a>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownEngineTranslate">
-              <a class="dropdown-item">Google</a>
-              <a class="dropdown-item">Amazon</a>
-              <a class="dropdown-item">Microsoft</a>
-            </div>
-          </a>
-          <button (click)="startTranslate()">Start</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal"
+            data-target=".translate-bd-example-modal-lg">Translate</button>
         </div>
       </div>
     </div>
@@ -104,6 +80,46 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" (click)="saveTranscript()">Save</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade translate-bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Translate</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="Select1">Engine Translate</label>
+            <select class="form-control" id="Select1" (change)="onChangeEngineTranslate($event.target.value)"
+              name="test">
+              <option value="google">Google</option>
+              <option value="amazon">Amazon</option>
+              <option value="microsoft">Microsoft</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="Select2">Language</label>
+            <select class="form-control" id="Select2" (change)="onChangeLanguage($event.target.value)" name="test1">
+              <option value="English">English</option>
+              <option value="Vietnamese">Vietnamese</option>
+              <option value="Spanish">Spanish</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="startTranslate()">Save</button>
       </div>
 
     </div>
