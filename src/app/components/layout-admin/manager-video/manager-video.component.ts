@@ -16,15 +16,29 @@ export class ManagerVideoComponent implements OnInit {
   ngOnInit() {
     this.categoryService.getAll().subscribe(async categorys => {
       this.listCategory = categorys;
-      console.log(this.listCategory)
     })
   }
 
   updateCategory(cate){
     let value = $("#id_"+cate._id).val();
     this.categoryService.updateCategory(cate._id, value).subscribe(result=>{
-      console.log(result);
       cate.category = value
+    })
+  }
+
+  delete(id, index){
+    this.categoryService.deleteCategory(id, this.listCategory[index].category).subscribe(result=>{
+      this.listCategory.splice(index, 1);
+    }, error=>{
+      alert('do not delete the category because this category is used');
+    })
+  }
+
+  addCategory(){
+    let value = $('#NewCate').val();
+    this.categoryService.addCategory(value).subscribe(result=>{
+      this.listCategory.push(result);
+      $('#NewCate').val('');
     })
   }
 }

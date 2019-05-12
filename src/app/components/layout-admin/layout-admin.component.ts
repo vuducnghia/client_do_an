@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
 import * as $ from 'jquery';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-layout-admin',
   templateUrl: './layout-admin.component.html',
@@ -8,7 +10,10 @@ import * as $ from 'jquery';
 })
 export class LayoutAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     $('#menu-action').click(function() {
@@ -31,4 +36,8 @@ export class LayoutAdminComponent implements OnInit {
     });
   }
 
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/login-admin'])
+  }
 }

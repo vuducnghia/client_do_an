@@ -372,3 +372,123 @@ $button-padding: ($button-height+4 - $avatar-size)-10px;
     color: #000;
   }
 }
+
+
+$primary: #2c3e50;
+$width: 100%;
+$box-shadow: 0px 2px 5px 1px #7f8c8d;
+
+// EXTEND
+%centered {
+  justify-content: center;
+  align-items: center;
+}
+
+
+.wrap {
+  width: $width;
+  height: 100vh;
+  // background: rgba(lighten($primary,40%), 0.5);
+  display: flex;
+  @extend %centered;
+}
+
+.login {
+  width: 300px;
+  background-color: #fff;
+  box-shadow: $box-shadow;
+}
+
+.toggle-bar {
+  width: $width;
+  height: 50px;
+  display: flex;
+  
+   & > :first-child {
+    border-right: 1px solid $primary/1.2;
+  }
+  & > :last-child {
+    border-left: 1px solid $primary/1.2;
+  }
+}
+
+.toggle-login, .toggle-register {
+  width: $width/2;
+  background-color: $primary;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s;
+  span {
+    color: #fff;
+    text-transform: uppercase;
+    font: {
+      family: 'Lato', sans-serif;
+    }
+  }
+  &:hover {
+    background-color: $primary * 1.5;
+  }
+}
+
+.active {
+  background-color: $primary * 1.5;
+}
+
+.login-body, .register-body {
+  width: $width;
+  height: $width;
+  display: flex;
+  flex-direction: column;
+  @extend %centered;
+  & p {
+    color: #5f5f5f;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: color 0.2s;
+    margin-bottom: 8px;
+  }
+  & p:hover {
+    color: #2f2f2f;
+  }
+}
+
+.input-section {
+  width: $width;
+  text-align: center;
+  &:first-child {
+    margin-top: 20px;
+  }
+}
+
+input, .btn {
+  width: 150px;
+  padding: 10px 15px;
+  margin-top: 10px;
+  &.user-input {
+    border: 1px solid #ddd;
+  }
+}
+
+.btn {
+    background-color: $primary;
+    color: #fff;
+    border: none;
+    margin-bottom: 30px;
+    transition: background-color 0.2s;
+  }
+
+.btn:hover {
+  background-color: $primary * 1.5;
+  cursor: pointer;
+}
+
+i {
+  color: $primary;
+  margin-right: 5px;
+}
+
+.user-input:focus {
+  border: 1px solid #aaa;
+}

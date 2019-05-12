@@ -1,4 +1,8 @@
 <div class="hipsum">
+  <div>
+    <input type="text" placeholder="Add new Category" id="NewCate">
+    <button (click)="addCategory()">Add</button>
+  </div>
   <div id="app">
     <div class="search-wrapper">
       <input type="text" placeholder="Start searching for category" [(ngModel)]="searchText" >
@@ -22,7 +26,7 @@
           <input type="text" placeholder="{{cate.category}}" id="id_{{cate._id}}">
           <button (click)="updateCategory(cate)">Save</button>
         </td>
-        <td><button (click)="delete(cate)">Delete</button></td>
+        <td><button (click)="delete(cate._id, i)">Delete</button></td>
       </tr>
     </tbody>
   </table>

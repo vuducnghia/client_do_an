@@ -13,16 +13,23 @@ export class TestComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    $('.btn').button('loading');
-
-    // $('.btn').on('click', function () {
-    //   var $this = $(this);
-    //   console.log($this)
-    //   $this.button('loading');
-    //   // setTimeout(function () {
-    //   //   // $this.button('reset');
-    //   // }, 8000);
-    // });
+    $('.toggle-register').click(function(){
+      $(this).addClass('active');
+      $('.toggle-login').removeClass('active');
+      $('.login-body').slideUp("slow");
+      $('.register-body').delay(625).slideDown("slow");
+    });
+    
+    $('.toggle-login').click(function(){
+      $(this).addClass('active');
+      $('.toggle-register').removeClass('active');
+      $('.register-body').slideUp("slow");
+      $('.login-body').delay(625).slideDown("slow");
+    });
+    
+    $('#registered').click(function(){
+      $('.toggle-login').click();
+    });
   }
 
 }

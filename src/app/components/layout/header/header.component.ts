@@ -59,16 +59,24 @@ export class HeaderComponent implements OnInit {
     } else {
       this.isLogin = false;
     }
-  }
 
-  showModelLogin() {
-    $('#signupModal').modal('hide');
-    $('#loginModal').modal('show');
-  }
-
-  showModelSignUp() {
-    $('#signupModal').modal('show');
-    $('#loginModal').modal('hide');
+    $('.toggle-register').click(function(){
+      $(this).addClass('active');
+      $('.toggle-login').removeClass('active');
+      $('.login-body').slideUp("slow");
+      $('.register-body').delay(625).slideDown("slow");
+    });
+    
+    $('.toggle-login').click(function(){
+      $(this).addClass('active');
+      $('.toggle-register').removeClass('active');
+      $('.register-body').slideUp("slow");
+      $('.login-body').delay(625).slideDown("slow");
+    });
+    
+    $('#registered').click(function(){
+      $('.toggle-login').click();
+    });
   }
 
   login(): void {
@@ -124,7 +132,7 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/upload']);
     }
     else {
-      this.showModelLogin();
+      $('#loginModal').modal('show');
     }
   }
 

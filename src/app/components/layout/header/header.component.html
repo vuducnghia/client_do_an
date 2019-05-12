@@ -29,58 +29,17 @@
         <div class="file">
           <a class="pointer" (click)="gotoUpload()">Upload</a>
         </div>
-        <!-- <div class="signin" *ngIf="!isLogin">   
-          <a href="#small-dialog2" class="play-icon popup-with-zoom-anim" data-toggle="modal"
-            data-target="#signupModal">Sign Up</a>
-        </div> -->
+
         <div class="signin" *ngIf="!isLogin">
           <a href="#small-dialog" class="play-icon popup-with-zoom-anim" data-toggle="modal"
             data-target="#loginModal">Sign In</a>
         </div>
-        <!-- <div class="profile_details" *ngIf="isLogin">
-          <ul>
-            <li class="dropdown profile_details_drop">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <div class="profile_img">
-                  <span class="prfil-img"><img src="../../../../assets/images/b3.png" alt=""> </span>
-                  <div class="user-name">
-                    <p>Malorum</p>
-                    <span>Administrator</span>
-                  </div>
-                  <i class="fa fa-sort-desc" style="position: absolute;
-                  top: 34%;
-                  right: 8%;
-                  color: #68AE00;
-                  font-size: 1.6em"></i>
-                  <div class="clearfix"></div>
-                </div>
-              </a>
-              <ul class="dropdown-menu drp-mnu">
-                <li> <a routerLink="/profile"><i class="fa fa-user"></i> Profile</a> </li>
-                <li> <a (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a> </li>
-              </ul>
-            </li>
-          </ul>
-        </div> -->
-
         <div class="pp" *ngIf="isLogin">
-          <!-- <div class="menu-container">
-            <button class="menu-button"  (click)="showDetailUser()"> <img src="http://localhost:8081/api/image/{{currentUser.avatar}}">
-              <span class="title"> {{currentUser.name}} </span></button>
-
-            <div class="menu-dropdown">
-              <div class="content">
-                <ul>
-                  <li> <a routerLink="/profile"><i class="fa fa-user"></i> Profile</a> </li>
-                  <li> <a (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a> </li>
-                </ul>
-              </div>
-            </div>
-          </div> -->
           <div class="menu-container">
-            <button class="menu-button" (click)="showDetailUser()"> <img src="http://localhost:8081/api/image/{{currentUser.avatar}}">
+            <button class="menu-button" (click)="showDetailUser()"> <img
+                src="http://localhost:8081/api/image/{{currentUser.avatar}}">
               <span class="title"> {{currentUser.name}} </span></button>
-              <!-- <span class="title"> {{currentUser.name}} </span> -->
+            <!-- <span class="title"> {{currentUser.name}} </span> -->
             <div class="menu-dropdown">
               <div class="content">
                 <ul>
@@ -98,84 +57,73 @@
   </div>
 </nav>
 
-
-<!-- Modal login -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div id="small-dialog">
-      <h3>Login</h3>
-      <div class="social-sits">
-        <div class="facebook-button">
-          <a href="#">Connect with Facebook</a>
+  <div class="modal-dialog" style="margin: 0px auto">
+    <div class="wrap">
+      <div class="login" style="width: 100%">
+        <div class="toggle-bar">
+          <div class="toggle-login active">
+            <span>Login</span>
+          </div>
+          <div class="toggle-register">
+            <span>Register</span>
+          </div>
         </div>
-        <div class="chrome-button">
-          <a href="#">Connect with Google</a>
-        </div>
-        <div class="button-bottom">
-          <p>New account? <a href="#small-dialog2" class="play-icon popup-with-zoom-anim"
-              (click)="showModelSignUp()">Signup</a></p>
-        </div>
-      </div>
-      <div class="signup">
         <form [formGroup]="signInForm">
+          <div class="login-body">
 
-          <input type="text" class="email" placeholder="Username" maxlength="50" pattern="[1-9]{1}\d{9}"
-            formControlName="username" />
-          <input type="password" class="email" placeholder="Password" maxlength="50" pattern="[1-9]{1}\d{9}"
-            formControlName="password" />
-          <div *ngIf="isErrorLogin" style="color: red">Username or password not found</div>
-          <input type="submit" value="LOGIN" (click)="login()" />
+            <div class="input-section">
+              <i class="fas fa-user"></i>
+              <input class="user-input" type="text" placeholder="Username" formControlName="username">
+            </div>
+            <div class="input-section">
+              <i class="fas fa-lock"></i>
+              <input class="user-input" type="password" placeholder="Password" formControlName="password">
+            </div>
+            <div *ngIf="isErrorLogin" style="color: red">Username or password not found</div>
+            <p id="forgot-password">Forgot your password?</p>
+            <button class="btn" id="btn-login" (click)="login()">Login</button>
+
+          </div>
         </form>
-        <div class="forgot">
-          <a href="#">Forgot password ?</a>
-        </div>
-      </div>
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</div>
-
-
-<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div id="small-dialog2">
-      <h3>Create Account</h3>
-      <div class="social-sits">
-        <div class="facebook-button">
-          <a href="#">Connect with Facebook</a>
-        </div>
-        <div class="chrome-button">
-          <a href="#">Connect with Google</a>
-        </div>
-        <div class="button-bottom">
-          <p>Already have an account? <a href="#small-dialog" class="play-icon popup-with-zoom-anim"
-              (click)="showModelLogin()">Login</a>
-          </p>
-        </div>
-      </div>
-      <div class="signup">
         <form [formGroup]="signupForm">
-          <input type="text" class="email" placeholder="First name" maxlength="50" pattern="[1-9]{1}\d{9}"
-            formControlName="firstName" />
-          <input type="text" class="email" placeholder="Last name" maxlength="50" pattern="[1-9]{1}\d{9}"
-            formControlName="lastName" />
-          <input type="text" class="email" placeholder="Email" maxlength="50" pattern="[1-9]{1}\d{9}"
-            formControlName="email" />
-          <input type="text" class="email" placeholder="Username" maxlength="50" pattern="[1-9]{1}\d{9}"
-            formControlName="username" />
-          <input type="password" class="email" placeholder="Password" maxlength="50" pattern="[1-9]{1}\d{9}"
-            formControlName="password" />
-          <input type="password" class="email" placeholder="Comfirm password" maxlength="50" pattern="[1-9]{1}\d{9}"
-            formControlName="confirmPassword" />
+          <div class="register-body" style="display:none;">
+            <div class="input-section">
+              <i class="fas fa-user"></i>
+              <input class="user-input" type="text" placeholder="First name" maxlength="50" pattern="[1-9]{1}\d{9}"
+                formControlName="firstName">
+            </div>
+            <div class="input-section">
+              <i class="fas fa-user"></i>
+              <input class="user-input" type="text" placeholder="Last name" maxlength="50" pattern="[1-9]{1}\d{9}"
+                formControlName="lastName">
+            </div>
+            <div class="input-section">
+              <i class="fas fa-user"></i>
+              <input class="user-input" type="text" placeholder="Email" maxlength="50" pattern="[1-9]{1}\d{9}"
+                formControlName="email">
+            </div>
+            <div class="input-section">
+              <i class="fas fa-user"></i>
+              <input class="user-input" type="text" placeholder="Username" maxlength="50" pattern="[1-9]{1}\d{9}"
+                formControlName="username">
+            </div>
+            <div class="input-section">
+              <i class="fas fa-user"></i>
+              <input class="user-input" type="text" placeholder="Password" maxlength="50" pattern="[1-9]{1}\d{9}"
+              formControlName="password">
+            </div>
+            <div class="input-section">
+              <i class="fas fa-lock"></i>
+              <input class="user-input" type="password" placeholder="Comfirm password" maxlength="50" pattern="[1-9]{1}\d{9}"
+              formControlName="confirmPassword">
+            </div>
+            <p id="registered">Already registered?</p>
+            <button class="btn" id="btn-signup" (click)="signup()">Register</button>
+          </div>
         </form>
-        <div class="continue-button">
-          <a href="#small-dialog3" class="hvr-shutter-out-horizontal play-icon popup-with-zoom-anim"
-            (click)="signup()">CONTINUE</a>
-        </div>
       </div>
-      <div class="clearfix"> </div>
     </div>
   </div>
 </div>
