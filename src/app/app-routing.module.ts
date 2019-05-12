@@ -21,26 +21,25 @@ import { ManagerUserComponent } from './components/layout-admin/manager-user/man
 import { ManagerEngineComponent } from './components/layout-admin/manager-engine/manager-engine.component';
 import { VideoCategoryComponent } from './components/layout/video-category/video-category.component';
 import { ManagerLanguageComponent } from './components/layout-admin/manager-language/manager-language.component';
+import { AuthUserGuard } from './services/guardUser.service';
+import { AuthAdminGuard } from './services/guardAdmin.service';
 
 const routes: Routes = [
   {
     path: '', component: LayoutComponent,
     children: [
-      // {path: '', component: BodyComponent},
-      // {path: 'history', component: HistoryComponent},
-      // {path: 'show-video', component: ShowVideoComponent},
       {
         path: '', component: HomeComponent, children: [
           { path: '', component: BodyComponent },
           // { path: 'history', component: HistoryComponent },
-          { path: 'my-videos', component: MyVideoComponent },
-          { path: 'profile', component: ProfileComponent },
-          { path: 'my-videos/:idVideo', component: VideoTranscriptComponent },
+          { path: 'my-videos', component: MyVideoComponent, canActivate: [AuthUserGuard] },
+          { path: 'profile', component: ProfileComponent, canActivate: [AuthUserGuard] },
+          { path: 'my-videos/:idVideo', component: VideoTranscriptComponent, canActivate: [AuthUserGuard] },
           { path: 'show-video/:idVideo', component: ShowVideoComponent },
           { path: 'category/:category', component: VideoCategoryComponent },
         ]
       },
-      { path: 'upload', component: UploadComponent }
+      { path: 'upload', component: UploadComponent, canActivate: [AuthUserGuard] }
 
     ]
   },
@@ -53,7 +52,7 @@ const routes: Routes = [
       { path: 'manage-engine', component: ManagerEngineComponent },
       { path: 'manage-language', component: ManagerLanguageComponent }
 
-    ]
+    ], canActivate:[AuthAdminGuard]
   },
   { path: 'login-admin', component: LoginAdminComponent },
   { path: 'not-found', component: PageNotFoundComponent },

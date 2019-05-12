@@ -90,11 +90,8 @@ export class HeaderComponent implements OnInit {
       .subscribe(data => {
         this.isLogin = true;
         this.isErrorLogin = false;
+        this.currentUser = data
         $('#loginModal').modal('hide');
-        // if (this.authService.currentUserValue.role ==='user') {
-        //   console.log('login success')
-        //   // this.router.navigate([`/home/${this.authService.currentUserValue.id}`]);
-        // }
       }, error => {
         console.log(JSON.stringify(error))
         this.isErrorLogin = true;

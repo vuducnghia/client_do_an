@@ -10,7 +10,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./login-admin.component.scss']
 })
 export class LoginAdminComponent implements OnInit {
-
+  messageError = '';
   constructor(
     private authService: AuthService,
     private router: Router
@@ -37,7 +37,8 @@ export class LoginAdminComponent implements OnInit {
         console.log(data)
         this.router.navigate(['/admin']);
       }, error => {
-        console.log(JSON.stringify(error))
+        console.log(error)
+        this.messageError = error
       })
   }
 }

@@ -30,6 +30,7 @@
                 </span>
                 <div class="clearfix"> </div>
               </div>
+              <div *ngIf="messageError" style="color: red">{{messageError}}</div>
               <input type="submit" value="Login to your account" (click)="login()">
             </form>
           </div>

@@ -23,8 +23,9 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.router.navigate(['/login-admin'])
       }
 
-      const error = err.error.message || err.statusText;
-      return throwError(error);
+      // const error = err.error.message || err.statusText;
+      // console.log(error)
+      return throwError(err);
     }))
   }
 }
