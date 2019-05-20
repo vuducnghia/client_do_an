@@ -30,7 +30,7 @@ export class VideoCategoryComponent implements OnInit {
         this.videos = [];
         if (this.listCategory.includes(params.category)) {
           this.category = params.category;
-          this.videoservice.getVideoByCategory(params.category).subscribe(videos => {
+          this.videoservice.getVideoByCategory(params.category, true).subscribe(videos => {
             videos.forEach(video => {
               this.userService.getUserById(video.createBy).subscribe((user: any) => {
                 this.videos.push({
@@ -52,7 +52,7 @@ export class VideoCategoryComponent implements OnInit {
       if (params.category === 'English' || params.category === 'Spanish' || params.category === 'Arabic') {
         this.category = params.category;
         this.videos = [];
-        this.videoservice.getVideoByLanguage(params.category, 6).subscribe(videos => {
+        this.videoservice.getVideoByLanguage(params.category, 8).subscribe(videos => {
           videos.forEach(video => {
             this.userService.getUserById(video.createBy).subscribe((user: any) => {
               this.videos.push({

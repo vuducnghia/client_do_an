@@ -63,7 +63,7 @@
     position: absolute;
     background: #c7cacb;
     bottom: 0;
-    left: 27px;
+    left: 29px;
     width: 7px;
     height: 7px;
     border: 3px solid #dee1e3;
@@ -166,7 +166,7 @@
     display: block;
     border-width: 10px 12px 10px 0;
     border-style: solid;
-    border-color: transparent #FCFCFC;
+    border-color: transparent #ece8e5;
     top: 8px;
     left: -11px;
   }
@@ -182,7 +182,7 @@
   }
 
   .comment-box .comment-head {
-    background: #FCFCFC;
+    background: #ece8e5;
     padding: 10px 12px;
     border-bottom: 1px solid #E5E5E5;
     overflow: hidden;
@@ -216,7 +216,7 @@
   }
 
   .comment-box .comment-name a {
-    color: #283035;
+    // color: #283035;
   }
 
   .comment-box .comment-head span {

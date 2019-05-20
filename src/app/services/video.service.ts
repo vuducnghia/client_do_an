@@ -30,8 +30,8 @@ export class VideoService {
     return this.http.get(`${apiUrl}` + id);
   }
 
-  getVideoByCategory(name) {
-    return this.http.get<any>(`${apiUrl}getVideoByCate/${name}`);
+  getVideoByCategory(name, isPublic = false) {
+    return this.http.get<any>(`${apiUrl}getVideoByCate/${name}?isPublic=${isPublic}`);
   }
 
   getVideoByLanguage(name, limit) {

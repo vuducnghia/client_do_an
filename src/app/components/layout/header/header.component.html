@@ -36,8 +36,9 @@
         </div>
         <div class="pp" *ngIf="isLogin">
           <div class="menu-container">
-            <button class="menu-button" (click)="showDetailUser()"> <img
-                src="http://localhost:8081/api/image/{{currentUser.avatar}}">
+            <button class="menu-button" (click)="showDetailUser()">
+              <img src="http://localhost:8081/api/image/{{currentUser.avatar}}" *ngIf="currentUser.avatar">
+              <img src="../../../../assets/images/default_avatar.png" *ngIf="!currentUser.avatar">
               <span class="title"> {{currentUser.name}} </span></button>
             <!-- <span class="title"> {{currentUser.name}} </span> -->
             <div class="menu-dropdown">
@@ -112,12 +113,12 @@
             <div class="input-section">
               <i class="fas fa-user"></i>
               <input class="user-input" type="text" placeholder="Password" maxlength="50" pattern="[1-9]{1}\d{9}"
-              formControlName="password">
+                formControlName="password">
             </div>
             <div class="input-section">
               <i class="fas fa-lock"></i>
-              <input class="user-input" type="password" placeholder="Comfirm password" maxlength="50" pattern="[1-9]{1}\d{9}"
-              formControlName="confirmPassword">
+              <input class="user-input" type="password" placeholder="Comfirm password" maxlength="50"
+                pattern="[1-9]{1}\d{9}" formControlName="confirmPassword">
             </div>
             <p id="registered">Already registered?</p>
             <button class="btn" id="btn-signup" (click)="signup()">Register</button>

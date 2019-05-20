@@ -26,7 +26,7 @@ export class ShowVideoComponent implements OnInit {
       this.videoService.getVideoById(this.idVideo).subscribe(video => {
         this.videoOgirin = video
         this.url = "http://localhost:8081/api/play/" + this.videoOgirin.thumbnail;
-        this.videoService.getVideoByCategory(this.videoOgirin.category).subscribe(videos => {
+        this.videoService.getVideoByCategory(this.videoOgirin.category, true).subscribe(videos => {
           this.listVideo = videos;
         })
       });

@@ -13,6 +13,7 @@ export class AuthAdminGuard implements CanActivate {
         console.log(111111)
         return true;
       }else{
+        this.router.navigate(['/login-admin'], { queryParams: { returnUrl: state.url } });
         return false;
       }
       

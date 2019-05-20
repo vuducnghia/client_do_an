@@ -30,7 +30,10 @@
                 <span></span>
                 <span></span>
               </div>
-              <i class="fa fa-check-circle" aria-hidden="true"  *ngIf="video.status==='public'"></i>{{video.status}}
+              <i class="fa fa-check-circle" aria-hidden="true"  *ngIf="video.status==='public'"></i>
+              <i class="fa fa-user-secret" aria-hidden="true" *ngIf="video.status==='private'"></i>
+              <i class="fa fa-spinner" aria-hidden="true" *ngIf="video.status==='requesting'"></i>
+              <i class="fa fa-times" aria-hidden="true" *ngIf="video.status==='reject'"></i>{{video.status}}
             </div>
             <p class="views">{{video.views}} views</p>
           </div>

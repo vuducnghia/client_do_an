@@ -37,7 +37,7 @@ export class BodyComponent implements OnInit {
         return cate.category;
       })
       this.listCategory.forEach(cate => {
-        this.videoservice.getVideoByCategory(cate).subscribe( async videos => {
+        this.videoservice.getVideoByCategory(cate, true).subscribe( async videos => {
           let arrVideo = []
           await videos.forEach(video => {
             this.userService.getUserById(video.createBy).subscribe((user: any) => {

@@ -5,7 +5,10 @@
       <li >
         <div class="comment-main-level">
           <!-- Avatar -->
-          <div class="comment-avatar"><img src="http://localhost:8081/api/image/{{mainComment?.avatar}}" alt=""></div>
+          <div class="comment-avatar">
+            <img src="http://localhost:8081/api/image/{{mainComment?.avatar}}"*ngIf="mainComment?.avatar">
+            <img src="../../../../assets/images/default_avatar.png" *ngIf="!mainComment?.avatar">
+          </div>
           <!-- Contenedor del Comentario -->
           <div class="comment-box">
             <div class="comment-head">
@@ -23,11 +26,14 @@
         <ul class="comments-list reply-list">
           <li *ngFor="let comment of listSubComments">
             <!-- Avatar -->
-            <div class="comment-avatar"><img src="http://localhost:8081/api/image/{{comment.avatar}}" alt=""></div>
+            <div class="comment-avatar">
+              <img src="http://localhost:8081/api/image/{{comment.avatar}}" *ngIf="comment.avatar">
+              <img src="../../../../assets/images/default_avatar.png" *ngIf="!comment.avatar">
+            </div>
             <!-- Contenedor del Comentario -->
             <div class="comment-box">
               <div class="comment-head">
-                <h6 class="comment-name"><a>{{comment.name}}</a></h6>
+                <h6 class="comment-name"><a>{{comment.name}}{{comment.avatar}}</a></h6>
                 <span>{{comment.created.slice(0,10)}}</span>
                 <i class="fa fa-reply" (click)="changReply()"></i>
                 <i class="fa fa-heart"></i>
@@ -39,7 +45,10 @@
           </li>
 
           <li *ngIf="reply">
-            <div class="comment-avatar"><img src="http://localhost:8081/api/image/{{userCurrent.avatar}}" alt=""></div>
+            <div class="comment-avatar">
+              <img src="http://localhost:8081/api/image/{{userCurrent.avatar}}" *ngIf="!userCurrent.avatar">
+              <img src="../../../../assets/images/default_avatar.png" *ngIf="userCurrent.avatar">
+            </div>
             <div class="comment-box">
               <div class="comment-head">
                 <h6 class="comment-name by-author"><a>{{userCurrent.name}}</a></h6>
