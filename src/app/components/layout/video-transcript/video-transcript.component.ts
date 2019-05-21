@@ -144,6 +144,7 @@ export class VideoTranscriptComponent implements OnInit {
 
   saveTranscript() {
     $('.bd-example-modal-lg').modal('hide');
+    
   }
 
   startTranslate() {
