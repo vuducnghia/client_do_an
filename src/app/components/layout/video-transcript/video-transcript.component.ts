@@ -34,7 +34,6 @@ export class VideoTranscriptComponent implements OnInit {
   myPlayer
   url
   idVideo
-  nameEngine
   engines = []
   transcripts = [];
   listLanguages = [];
@@ -42,6 +41,7 @@ export class VideoTranscriptComponent implements OnInit {
   nameEngineTranslate = 'google';
   languageTranslate = 'english';
   nameVideo = '';
+  idTranscript = '';
   _this = this
   constructor(
     private route: ActivatedRoute,
@@ -55,7 +55,6 @@ export class VideoTranscriptComponent implements OnInit {
       this.videoService.getVideoById(params.idVideo).subscribe((video: any) => {
         console.log(video)
         this.nameVideo = video.title;
-        // console.log(video)
         this.idVideo = video._id;
         if (document.getElementById("showVideo").firstChild) {
           document.getElementById("showVideo").firstChild.remove()
@@ -67,7 +66,7 @@ export class VideoTranscriptComponent implements OnInit {
         video.transcripts.forEach(transcript => {
           tracks.push({
             src: `http://localhost:8081/api/transcript/${transcript.idTranscript}`,
-            kind: 'captions', srclang: 'en', label: transcript.language
+            kind: 'captions', srclang: transcript.language
           })
           this.listLanguages.push({
             language: transcript.language,
@@ -76,16 +75,14 @@ export class VideoTranscriptComponent implements OnInit {
           this.engines.push(transcript.nameEngine)
         });
 
-        console.log(this.nameEngine)
         document.getElementById("showVideo").innerHTML = `
-          <video id="${idRandom}" class="video-js vjs-default-skin" height="360px" width="650px" controls 
-          >
-          <p>
-            Your browser doesn't support video. Please <a href="http://browsehappy.com/">upgrade your browser</a> to see
-            the example.
-          </p>
-          <source src="http://localhost:8081/api/play/`+ video.thumbnail + `" type="video/mp4">
-        </video>
+          <video id="${idRandom}" class="video-js vjs-default-skin" height="360px" width="650px" controls >
+            <p>
+              Your browser doesn't support video. Please <a href="http://browsehappy.com/">upgrade your browser</a> to see
+              the example.
+            </p>
+            <source src="http://localhost:8081/api/play/`+ video.thumbnail + `" type="video/mp4">
+          </video>
           `
 
         if (tracks.length > 0) {
@@ -116,6 +113,10 @@ export class VideoTranscriptComponent implements OnInit {
       })
 
       const transcriptContainer = document.querySelector('#transcript');
+      // delete all transcript template before add transcript
+      while (transcriptContainer.firstChild) {
+        transcriptContainer.removeChild(transcriptContainer.firstChild);
+      }
       transcriptContainer.appendChild(transcriptElem.el());
     });
   }
@@ -134,17 +135,31 @@ export class VideoTranscriptComponent implements OnInit {
 
   edit(idTranscript) {
     if (idTranscript) {
+      this.idTranscript = idTranscript;
       this.videoService.getDataTranscriptById(idTranscript).subscribe((transcripts: any) => {
         this.transcripts = transcripts
       }, err => {
-        console.log(err)
+        console.log(err);
       })
     }
   }
 
   saveTranscript() {
     $('.bd-example-modal-lg').modal('hide');
-    
+    console.log(this.transcripts);
+    if (this.idTranscript) {
+      this.videoService.updateTranscript(this.idVideo, this.idTranscript, this.transcripts).subscribe(result => {
+        console.log(result);
+        this.idTranscript = '';
+        if (document.getElementById("showVideo").firstChild) {
+          document.getElementById("showVideo").firstChild.remove()
+        }
+        this.ngOnInit();
+      }, err => {
+        console.log(err);
+      })
+    }
+
   }
 
   startTranslate() {

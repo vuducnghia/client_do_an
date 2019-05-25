@@ -78,6 +78,10 @@ export class VideoService {
     return this.http.put(`${apiUrl}updateStage/${idvideo}`, { stage });
   }
 
+  updateTranscript(idVideo, idTranscript, transcript){
+    return this.http.put(`${apiUrl}updateTranscript/${idVideo}/${idTranscript}`, { transcript });
+  }
+
   searchByName(name) {
     return this.http.get<any>(`${apiUrl}findByName/${name}`);
   }

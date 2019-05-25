@@ -66,11 +66,11 @@
       <div class="modal-body">
         <table class="table">
           <tbody>
-            <tr *ngFor="let transcript of transcripts">
+            <tr *ngFor="let transcript of transcripts;let index = index">
               <th scope="col"><span class="time1">{{transcript.start| dateFormatPipe}}</span></th>
               <th scope="col">
                 <span class="content">
-                  <textarea type="text" value="{{transcript.text}}" style="width: 100%"></textarea>
+                  <textarea type="text" value="{{transcript.text}}" style="width: 100%" [(ngModel)]="transcripts[index].text"></textarea>
                 </span>
               </th>
             </tr>

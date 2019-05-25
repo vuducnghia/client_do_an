@@ -5,15 +5,7 @@
         <div class="song-info">
           <h3>{{videoOgirin?.title}}</h3>
         </div>
-        <div>
-          <video height="376px" width="100%" controls *ngIf="url" preload="auto" id="myVideo">
-            <p>
-              Your browser doesn't support video.
-            </p>
-            <source src="{{url}}" type="video/mp4">
-            <track kind="captions" *ngFor="let transcript of videoOgirin.transcripts" src="../../../../assets/transcripts/{{transcript.idTranscript}}.vtt"
-             srclang="{{transcript.language}}" label="{{transcript.language}}">
-          </video>
+        <div id="showVideo" style="height:376px; width: 700px">
         </div>
       </div>
 
@@ -61,11 +53,11 @@
       <div class="single-grid-right">
         <div class="single-right-grids" *ngFor="let video of listVideo">
           <div class="col-md-4 single-right-grid-left">
-            <a (click)="a(video.thumbnail)" routerLink="/show-video/{{video._id}}"><img
+            <a  routerLink="/show-video/{{video._id}}"><img
                 src="http://localhost:8081/api/image/{{video.thumbnail}}" alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
-            <a (click)="a(video.thumbnail)" routerLink="/show-video/{{video._id}}" class="title">{{video.title}}</a>
+            <a routerLink="/show-video/{{video._id}}" class="title">{{video.title}}</a>
             <p class="author"><a href="#" class="author">{{video.owner}}</a></p>
             <p class="views">{{video.views}} views</p>
           </div>
