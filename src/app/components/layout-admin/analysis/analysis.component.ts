@@ -10,6 +10,7 @@ import { CategoryService } from '../../../services/category.service';
 export class AnalysisComponent implements OnInit {
   listVideoOfCategory = [];
   listVideoOfLanguage = [];
+  listVideoStatus = [];
   constructor(
     private videoService: VideoService,
     private categoryService: CategoryService
@@ -17,7 +18,6 @@ export class AnalysisComponent implements OnInit {
 
   ngOnInit() {
     this.categoryService.getAll().subscribe(async data => {
-      console.log(data)
       for (let i = 0; i < data.length; ++i) {
         let x = await this.getCountCategory(data[i].category)
 
@@ -42,7 +42,7 @@ export class AnalysisComponent implements OnInit {
     })
 
     this.drawLanguage()
-
+    this.drawStatus()
 
   }
 
@@ -50,7 +50,6 @@ export class AnalysisComponent implements OnInit {
     await this.getCountLanguage('English');
     await this.getCountLanguage('Spanish');
     await this.getCountLanguage('Vietnamese');
-    console.log(this.listVideoOfLanguage)
     let chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       exportEnabled: true,
@@ -66,14 +65,34 @@ export class AnalysisComponent implements OnInit {
     chart.render();
   }
 
+  async drawStatus() {
+    await this.getCountStatus('private');
+    await this.getCountStatus('public');
+    await this.getCountStatus('processing');
+    await this.getCountStatus('requesting');
+    await this.getCountStatus('reject');
+    console.log(this.listVideoStatus)
+    let chart = new CanvasJS.Chart("chartContainer3", {
+      animationEnabled: true,
+      exportEnabled: true,
+      title: {
+        text: "Videos/Status"
+      },
+      data: [{
+        type: "column",
+        dataPoints: this.listVideoStatus
+      }]
+    });
+
+    chart.render();
+  }
+
   getCountLanguage(nameLanguage) {
     return new Promise((resolve, reject) => {
       this.videoService.countVideoByLanguage(nameLanguage).subscribe(result => {
-        console.log(result, nameLanguage)
         this.listVideoOfLanguage.push({
           y: result, label: nameLanguage
         })
-        console.log(this.listVideoOfLanguage)
         resolve();
       })
     })
@@ -84,6 +103,18 @@ export class AnalysisComponent implements OnInit {
       this.videoService.countVideoByCateGory(nameCate).subscribe(result => {
         this.listVideoOfCategory.push({
           y: result, name: nameCate
+        })
+        resolve();
+      })
+    })
+  }
+
+  getCountStatus(status) {
+    return new Promise((resolve, reject) => {
+      this.videoService.countVideoByStatus(status).subscribe(result => {
+        console.log(result, status)
+        this.listVideoStatus.push({
+          y: result, label: status
         })
         resolve();
       })

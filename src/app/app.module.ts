@@ -42,7 +42,8 @@ import { VideoCategoryComponent } from './components/layout/video-category/video
 import { ManagerLanguageComponent } from './components/layout-admin/manager-language/manager-language.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AuthUserGuard } from './services/guardUser.service';
-import { AuthAdminGuard } from './services/guardAdmin.service';
+import { AuthAdminVideoGuard } from './services/guardAdminVideo.service';
+import { AuthAdminSystemGuard } from './services/guardAdminSystem.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,7 +95,8 @@ import { AuthAdminGuard } from './services/guardAdmin.service';
     CategoryService,
     EngineService,
     AuthUserGuard,
-    AuthAdminGuard
+    AuthAdminVideoGuard,
+    AuthAdminSystemGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,33 @@
-<p>
-  manager-language works!
-</p>
+<div class="hipsum">
+  <div>
+    <input type="text" placeholder="Add new Category" id="NewCate">
+    <button (click)="addCategory()">Add</button>
+  </div>
+  <div id="app">
+    <div class="search-wrapper">
+      <input type="text" placeholder="Start searching for language" [(ngModel)]="searchText">
+      <label for="">Search title:</label>
+    </div>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th style="width: 10%">#</th>
+        <th style="width: 20%">Language</th>
+        <th style="width: 40%">Edit Name</th>
+        <th style="width: 30%">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let language of listLanguage| filter:searchText;index as i">
+        <th scope="row">{{i+1}}</th>
+        <td>{{language}}</td>
+        <td>
+          <input type="text" placeholder="{{language}}">
+          <button (click)="updateCategory()">Save</button>
+        </td>
+        <td><button (click)="delete()">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

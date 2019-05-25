@@ -1,24 +1,32 @@
+<div id="app">
+  <div class="search-wrapper">
+    <input type="text" placeholder="Start searching for category" [(ngModel)]="searchText">
+    <label for="">Search title:</label>
+  </div>
+</div>
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>#</th>
-      <th>Username</th>
-      <th>Last name</th>
-      <th>First Name</th>
-      <th>Role</th>
-      <th>Action</th>
+      <th style="width: 5%">#</th>
+      <th style="width: 15%">Username</th>
+      <th style="width: 15%">Last name</th>
+      <th style="width: 15%">First Name</th>
+      <th style="width: 15%">Role</th>
+      <th style="width: 15%">Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users; index as i">
+    <tr *ngFor="let user of users| filter:searchText;index as i">
       <th scope="row">{{i+1}}</th>
       <td>{{user.username}}</td>
       <td>{{user.lastName}}</td>
       <td>{{user.firstName}}</td>
       <td>{{user.role ==='user' ? 'user': (user.role ==='admin1' ? 'admin-video':'admin-user')}}</td>
       <td>
-        <a (click)="changeStatus(user._id, 'ready', user)" *ngIf="user.status ==='block'"><span class="badge badge-danger">inactive</span></a>
-        <a (click)="changeStatus(user._id, 'block', user)" *ngIf="user.status ==='ready'"><span class="badge badge-success">active</span></a>
+        <a (click)="changeStatus(user._id, 'ready', user)" *ngIf="user.status ==='block'"><span
+            *ngIf="user.role !=='admin2'" class="badge badge-danger">inactive</span></a>
+        <a (click)="changeStatus(user._id, 'block', user)" *ngIf="user.status ==='ready'"><span
+            *ngIf="user.role !=='admin2'" class="badge badge-success">active</span></a>
       </td>
     </tr>
   </tbody>

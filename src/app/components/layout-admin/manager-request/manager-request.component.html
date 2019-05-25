@@ -1,33 +1,34 @@
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>#</th>
-      <th>Category</th>
-      <th>Name</th>
-      <th>Current Status</th>
-      <th>
+      <th style="width: 5%">#</th>
+      <th style="width: 10%">Category</th>
+      <th style="width: 40%">Name</th>
+      <th style="width: 10%">Current Status</th>
+      <th style="width: 25%">
         <a (click)="addClass($event, 'badge-danger',rejected = !rejected)"><span class="badge ">rejected</span></a>
         <a (click)="addClass($event, 'badge-warning',pending = !pending)"><span
             class="badge badge-warning">pending</span></a>
         <a (click)="addClass($event, 'badge-success',public = !public)"><span class="badge">public</span></a>
       </th>
+      <th style="width: 10%"> Link Video</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let video of videos">
-      <th scope="row">1</th>
-      <td>{{video.category}}</td>
-      <td>{{video.title}}</td>
-      <td>
+    <tr *ngFor="let video of videos; let index = index">
+      <th scope="row" style="width: 5%">{{index+1}}</th>
+      <td style="width: 10%">{{video.category}}</td>
+      <td style="width: 40%">{{video.title}}</td>
+      <td style="width: 10%">
         <span *ngIf="video.status==='reject'" class="badge badge-danger">rejected</span>
         <span *ngIf="video.status==='requesting'" class="badge badge-warning">pending</span>
         <span *ngIf="video.status==='public'" class="badge badge-success">public</span>
       </td>
-      <td>
-        <button class="btn btn-danger btn-sm" (click)="reject(video._id)">Reject</button>
-        <button type="button" class="btn btn-success btn-sm" (click)="approve(video._id)">Approve</button>
-        <a href="http://localhost:8081/api/play/{{video._id}}" target="_blank">Open Video</a>
+      <td style="width: 25%">
+        <button *ngIf ="video.status!=='public'" class="btn btn-danger btn-sm" (click)="reject(video._id)">Reject</button>
+        <button *ngIf ="video.status!=='public'" type="button" class="btn btn-success btn-sm" (click)="approve(video._id)">Approve</button>
       </td>
+      <td><a href="http://localhost:8081/api/play/{{video._id}}" target="_blank">Open Video</a></td>
     </tr>
   </tbody>
 </table>

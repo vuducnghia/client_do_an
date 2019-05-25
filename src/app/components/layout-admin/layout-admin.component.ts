@@ -9,18 +9,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./layout-admin.component.scss']
 })
 export class LayoutAdminComponent implements OnInit {
-
+  isAdmin2 = false;
   constructor(
     private router: Router,
     private authService: AuthService
   ) { }
 
   ngOnInit() {
-    $('#menu-action').click(function() {
+    console.log('currentUser', this.authService.currentUserValue)
+    if (this.authService.currentUserValue.role === 'admin2') {
+      this.isAdmin2 = true;
+    }
+    $('#menu-action').click(function () {
       $('.sidebar').toggleClass('active');
       $('.main').toggleClass('active');
       $(this).toggleClass('active');
-    
+
       if ($('.sidebar').hasClass('active')) {
         $(this).find('i').addClass('fa-close');
         $(this).find('i').removeClass('fa-bars');
@@ -29,14 +33,14 @@ export class LayoutAdminComponent implements OnInit {
         $(this).find('i').removeClass('fa-close');
       }
     });
-    
+
     // Add hover feedback on menu
-    $('#menu-action').hover(function() {
-        $('.sidebar').toggleClass('hovered');
+    $('#menu-action').hover(function () {
+      $('.sidebar').toggleClass('hovered');
     });
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
     this.router.navigate(['/login-admin'])
   }

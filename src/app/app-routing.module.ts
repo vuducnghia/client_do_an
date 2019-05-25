@@ -22,7 +22,8 @@ import { ManagerEngineComponent } from './components/layout-admin/manager-engine
 import { VideoCategoryComponent } from './components/layout/video-category/video-category.component';
 import { ManagerLanguageComponent } from './components/layout-admin/manager-language/manager-language.component';
 import { AuthUserGuard } from './services/guardUser.service';
-import { AuthAdminGuard } from './services/guardAdmin.service';
+import { AuthAdminVideoGuard } from './services/guardAdminVideo.service';
+import { AuthAdminSystemGuard } from './services/guardAdminSystem.service';
 
 const routes: Routes = [
   {
@@ -46,13 +47,13 @@ const routes: Routes = [
   {
     path: 'admin', component: LayoutAdminComponent, children: [
       { path: '', component: AnalysisComponent },
-      { path: 'manage-request', component: ManagerRequestComponent },
-      { path: 'manage-category', component: ManagerVideoComponent },
-      { path: 'manage-users', component: ManagerUserComponent },
-      { path: 'manage-engine', component: ManagerEngineComponent },
-      { path: 'manage-language', component: ManagerLanguageComponent }
+      { path: 'manage-request', component: ManagerRequestComponent , canActivate:[AuthAdminVideoGuard]},
+      { path: 'manage-category', component: ManagerVideoComponent , canActivate:[AuthAdminVideoGuard]},
+      { path: 'manage-users', component: ManagerUserComponent , canActivate:[AuthAdminSystemGuard]},
+      { path: 'manage-engine', component: ManagerEngineComponent , canActivate:[AuthAdminVideoGuard]},
+      { path: 'manage-language', component: ManagerLanguageComponent , canActivate:[AuthAdminVideoGuard]}
 
-    ], canActivate:[AuthAdminGuard]
+    ]
   },
   { path: 'login-admin', component: LoginAdminComponent },
   { path: 'not-found', component: PageNotFoundComponent },

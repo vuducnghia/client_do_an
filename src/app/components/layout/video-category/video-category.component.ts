@@ -49,7 +49,7 @@ export class VideoCategoryComponent implements OnInit {
         }
       })
 
-      if (params.category === 'English' || params.category === 'Spanish' || params.category === 'Arabic') {
+      if (params.category === 'English' || params.category === 'Spanish' || params.category === 'Vietnamese') {
         this.category = params.category;
         this.videos = [];
         this.videoservice.getVideoByLanguage(params.category, 8).subscribe(videos => {

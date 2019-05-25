@@ -35,7 +35,11 @@ export class LoginAdminComponent implements OnInit {
       .pipe(first())
       .subscribe(data => {
         console.log(data)
-        this.router.navigate(['/admin']);
+        if (data.role === 'admin1') {
+          this.router.navigate(['/admin']);
+        } else if (data.role === 'admin2') {
+          this.router.navigate(['/admin/manage-users']);
+        }
       }, error => {
         console.log(error)
         this.messageError = error
