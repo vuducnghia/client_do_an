@@ -9,6 +9,7 @@
 
           <button type="button" class="btn btn-primary" data-toggle="modal"
             data-target=".translate-bd-example-modal-lg">Translate</button>
+          <button type="button" class="btn btn-danger" [disabled]="status === 'public' || status === 'processing'" (click)="deleteVideo()">Delete Video</button>
         </div>
       </div>
     </div>
@@ -17,7 +18,7 @@
       <div style="display: flex;justify-content: space-between;">
 
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false" (click)="changeStatus()">
+          aria-haspopup="true" aria-expanded="false" (click)="changeStatus()" [disabled]="isDisable">
           {{status}}
         </button>
 
@@ -35,13 +36,14 @@
 
         <a class="dropdown show">
           <a class="btn btn-secondary dropdown-toggle" id="dropdownDownload" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
+            aria-expanded="false" style="margin-right: 20px">
             Download<span class="glyphicon glyphicon-download-alt"></span>
           </a>
 
           <div class="dropdown-menu" aria-labelledby="dropdownDownload">
-            <a class="dropdown-item" *ngFor="let engine of engines"
-              href="http://localhost:8081/api/video/downloadTranscript/{{engine}}/{{idVideo}}">Transcript</a>
+            <a class="dropdown-item" *ngFor="let transcript of listIdTranscript"
+              href="http://localhost:8081/api/video/downloadTranscript/{{transcript.id}}">{{transcript.language}}
+              transcript</a>
             <a class="dropdown-item" href="http://localhost:8081/api/video/downloadVideo/{{idVideo}}">Video</a>
           </div>
         </a>
@@ -70,7 +72,8 @@
               <th scope="col"><span class="time1">{{transcript.start| dateFormatPipe}}</span></th>
               <th scope="col">
                 <span class="content">
-                  <textarea type="text" value="{{transcript.text}}" style="width: 100%" [(ngModel)]="transcripts[index].text"></textarea>
+                  <textarea type="text" value="{{transcript.text}}" style="width: 100%"
+                    [(ngModel)]="transcripts[index].text"></textarea>
                 </span>
               </th>
             </tr>

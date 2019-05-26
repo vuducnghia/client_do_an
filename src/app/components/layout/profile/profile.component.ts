@@ -12,7 +12,7 @@ const URL = 'http://localhost:8081/api/user/avatar';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  isError: boolean=false;
+  isError: boolean = false;
   user = {};
   userForm = new FormGroup(
     {
@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
   avatarForm: FormGroup;
   file;
   disableButton: boolean = true;
-  isUpdateSuccess:boolean=false;
+  isUpdateSuccess: boolean = false;
   constructor(
     private _formBuilder: FormBuilder,
     private authService: AuthService,
@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUserById(this.authService.currentUserValue.id).subscribe((user: any) => {
-      console.log(user)
+      // console.log(user)
       this.userForm.setValue({
         firstName: user.firstName,
         lastName: user.lastName,
@@ -54,7 +54,6 @@ export class ProfileComponent implements OnInit {
     this.init();
 
     this.uploader.onAfterAddingFile = (file) => {
-      // console.log(file)
       this.file = file;
       file.withCredentials = false;
       this.uploader.authToken = JSON.parse(localStorage.getItem('currentUser')).token || '';
@@ -89,31 +88,36 @@ export class ProfileComponent implements OnInit {
   });
 
   updateMe() {
-    console.log(this.disableButton)
     let user = {
       username: this.userForm.get('username').value,
       password: this.userForm.get('password').value,
       firstName: this.userForm.get('firstName').value,
       lastName: this.userForm.get('lastName').value,
     }
-    if (user.password) {
+    if (user.password && !this.file) {
       this.userService.updateProfileUser(user).subscribe(result => {
         this.isUpdateSuccess = true;
+      }, err => {
+        this.isError = true;
       })
     }
-    if (this.file) {
-      this.uploader.uploadAll();
-      this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-        if (status !== 200) {
-          this.isError = true;
-          // alert('error upload file');
-        } else {
-          this.isUpdateSuccess = true;
-          // console.log('upload success');
+    if (user.password && this.file) {
+      this.userService.updateProfileUser(user).subscribe(result => {
+        if (this.file) {
+          this.uploader.uploadAll();
+          this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+            if (status !== 200) {
+              this.isError = true;
+            } else {
+              this.isUpdateSuccess = true;
+            }
+          }
         }
-      }
-    }
+      }, err => {
+        this.isError = true;
+      })
 
+    }
   }
 }
 

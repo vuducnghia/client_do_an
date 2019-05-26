@@ -75,53 +75,53 @@
           <div class="login-body">
 
             <div class="input-section">
-              <i class="fas fa-user"></i>
+              <i class="fa fa-user" aria-hidden="true"></i>
               <input class="user-input" type="text" placeholder="Username" formControlName="username">
             </div>
             <div class="input-section">
-              <i class="fas fa-lock"></i>
+              <i class="fa fa-key" aria-hidden="true"></i>
               <input class="user-input" type="password" placeholder="Password" formControlName="password">
             </div>
             <div *ngIf="isErrorLogin" style="color: red">Username or password not found</div>
             <p id="forgot-password">Forgot your password?</p>
-            <button class="btn" id="btn-login" (click)="login()">Login</button>
+            <button class="btn" id="btn-login" (click)="login()" [disabled]="!signInForm.valid">Login</button>
 
           </div>
         </form>
         <form [formGroup]="signupForm">
           <div class="register-body" style="display:none;">
             <div class="input-section">
-              <i class="fas fa-user"></i>
+              <i class="fa fa-user" aria-hidden="true"></i>
               <input class="user-input" type="text" placeholder="First name" maxlength="50" pattern="[1-9]{1}\d{9}"
                 formControlName="firstName">
             </div>
             <div class="input-section">
-              <i class="fas fa-user"></i>
+              <i class="fa fa-user" aria-hidden="true"></i>
               <input class="user-input" type="text" placeholder="Last name" maxlength="50" pattern="[1-9]{1}\d{9}"
                 formControlName="lastName">
             </div>
             <div class="input-section">
-              <i class="fas fa-user"></i>
+              <i class="fa fa-envelope-o" aria-hidden="true"></i>
               <input class="user-input" type="text" placeholder="Email" maxlength="50" pattern="[1-9]{1}\d{9}"
                 formControlName="email">
             </div>
             <div class="input-section">
-              <i class="fas fa-user"></i>
+              <i class="fa fa-user" aria-hidden="true"></i>
               <input class="user-input" type="text" placeholder="Username" maxlength="50" pattern="[1-9]{1}\d{9}"
                 formControlName="username">
             </div>
             <div class="input-section">
-              <i class="fas fa-user"></i>
+              <i class="fa fa-key" aria-hidden="true"></i>
               <input class="user-input" type="text" placeholder="Password" maxlength="50" pattern="[1-9]{1}\d{9}"
                 formControlName="password">
             </div>
             <div class="input-section">
-              <i class="fas fa-lock"></i>
+              <i class="fa fa-key" aria-hidden="true"></i>
               <input class="user-input" type="password" placeholder="Comfirm password" maxlength="50"
                 pattern="[1-9]{1}\d{9}" formControlName="confirmPassword">
             </div>
             <p id="registered">Already registered?</p>
-            <button class="btn" id="btn-signup" (click)="signup()">Register</button>
+            <button class="btn" id="btn-signup" (click)="signup()" [disabled]="!signupForm.valid">Register</button>
           </div>
         </form>
       </div>

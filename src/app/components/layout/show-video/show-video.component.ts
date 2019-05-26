@@ -13,7 +13,8 @@ export class ShowVideoComponent implements OnInit {
   @ViewChild('myInput') myInput: ElementRef;
   idVideo
   videoOgirin: any
-  url
+  url;
+  listIdTranscript = [];
   listVideo = [];
   comments = [];
   reply = false;
@@ -48,6 +49,10 @@ export class ShowVideoComponent implements OnInit {
           tracks.push({
             src: `http://localhost:8081/api/transcript/${transcript.idTranscript}`,
             kind: 'captions', srclang: 'en', label: transcript.language
+          });
+          this.listIdTranscript.push({
+            language: transcript.language,
+            id: transcript.idTranscript
           })
         });
 

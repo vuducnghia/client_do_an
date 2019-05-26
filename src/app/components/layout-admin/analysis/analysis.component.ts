@@ -71,6 +71,7 @@ export class AnalysisComponent implements OnInit {
     await this.getCountStatus('processing');
     await this.getCountStatus('requesting');
     await this.getCountStatus('reject');
+    await this.getCountStatus('deleted');
     console.log(this.listVideoStatus)
     let chart = new CanvasJS.Chart("chartContainer3", {
       animationEnabled: true,

@@ -18,7 +18,9 @@ export class UserService {
   register(user) {
     return this.http.post(apiUrl + `/auth/signup`, user);
   }
-
+  createAccount(user){
+    return this.http.post(apiUrl + `/auth/createAccount`, user);
+  }
   updateProfileUser(user) {
     return this.http.put(apiUrl + `/user/updateProfileUser`, user);
   }

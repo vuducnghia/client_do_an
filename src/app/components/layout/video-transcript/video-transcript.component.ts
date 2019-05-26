@@ -2,7 +2,7 @@ import { Component, OnInit, Pipe, PipeTransform, AfterViewInit } from '@angular/
 import * as videojs from '../../../../assets/js/video.js'
 declare const videojs: any
 import '../../../../assets/js/videojs-transcript.js'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VideoService } from '../../../services/video.service';
 import { EngineService } from '../../../services/engine.service';
 declare var $: any;
@@ -34,9 +34,11 @@ export class VideoTranscriptComponent implements OnInit {
   myPlayer
   url
   idVideo
-  engines = []
+  engines = [];
+  listIdTranscript = [];
   transcripts = [];
   listLanguages = [];
+  isDisable: Boolean = false;
   // engine
   nameEngineTranslate = 'google';
   languageTranslate = 'english';
@@ -45,28 +47,36 @@ export class VideoTranscriptComponent implements OnInit {
   _this = this
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private videoService: VideoService,
     private engineService: EngineService
   ) { }
 
 
   ngOnInit() {
+
     this.route.params.subscribe(params => {
       this.videoService.getVideoById(params.idVideo).subscribe((video: any) => {
-        console.log(video)
         this.nameVideo = video.title;
         this.idVideo = video._id;
         if (document.getElementById("showVideo").firstChild) {
           document.getElementById("showVideo").firstChild.remove()
         }
         let tracks = []
+        this.listIdTranscript = [];
         let idRandom = 'id' + Math.random().toString(36).substring(7);
-        console.log(video)
-        this.status = video.status
+        this.status = video.status;
+        if (status === 'processing' || status === 'public' || status === 'reject') {
+          this.isDisable = true
+        }
         video.transcripts.forEach(transcript => {
           tracks.push({
             src: `http://localhost:8081/api/transcript/${transcript.idTranscript}`,
             kind: 'captions', srclang: transcript.language
+          });
+          this.listIdTranscript.push({
+            language: transcript.language,
+            id: transcript.idTranscript
           })
           this.listLanguages.push({
             language: transcript.language,
@@ -122,10 +132,16 @@ export class VideoTranscriptComponent implements OnInit {
   }
 
   changeStatus() {
-    this.status = 'Request Public'
-    if (this.status !== 'requesting') {
+    if (this.status === 'private') {
       this.videoService.updateStatusByIdVideo(this.idVideo, 'requesting').subscribe(videos => {
-
+        this.status = 'requesting'
+      }, err => {
+        console.log(err)
+      })
+    }
+    if (this.status === 'requesting') {
+      this.videoService.updateStatusByIdVideo(this.idVideo, 'private').subscribe(videos => {
+        this.status = 'private'
       }, err => {
         console.log(err)
       })
@@ -176,5 +192,16 @@ export class VideoTranscriptComponent implements OnInit {
   }
   onChangeLanguage(language) {
     this.languageTranslate = language;
+  }
+
+  deleteVideo() {
+
+    this.router.navigate(['/my-videos']);
+    this.videoService.updateStatusByIdVideo(this.idVideo, 'deleted').subscribe(videos => {
+      alert('delete success');
+      this.router.navigate(['/my-videos']);
+    }, err => {
+      console.log(err)
+    })
   }
 }

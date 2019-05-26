@@ -24,7 +24,7 @@
                   <p>Category</p>
                 </div>
                 <div class="load-grid">
-                  <a href="/movies.html">{{videoOgirin?.category}}</a>
+                  <a routerLink="/category/{{videoOgirin?.category}}">{{videoOgirin?.category}}</a>
                 </div>
                 <div class="clearfix"> </div>
               </div>
@@ -49,12 +49,28 @@
       </div>
     </div>
     <div class="col-md-4 single-right">
-      <h3>Up Next</h3>
+      <div class="sub_menu">
+        <h3>Up Next</h3>
+        <a class="dropdown show">
+          <a class="btn btn-secondary dropdown-toggle" id="dropdownDownload" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" style="margin-right: 20px">
+            Download<span class="glyphicon glyphicon-download-alt"></span>
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownDownload">
+            <a class="dropdown-item" *ngFor="let transcript of listIdTranscript"
+              href="http://localhost:8081/api/video/downloadTranscript/{{transcript.id}}">{{transcript.language}}
+              transcript</a>
+            <a class="dropdown-item" href="http://localhost:8081/api/video/downloadVideo/{{idVideo}}">Video</a>
+          </div>
+        </a>
+      </div>
+
       <div class="single-grid-right">
         <div class="single-right-grids" *ngFor="let video of listVideo">
           <div class="col-md-4 single-right-grid-left">
-            <a  routerLink="/show-video/{{video._id}}"><img
-                src="http://localhost:8081/api/image/{{video.thumbnail}}" alt="" /></a>
+            <a routerLink="/show-video/{{video._id}}"><img src="http://localhost:8081/api/image/{{video.thumbnail}}"
+                alt="" /></a>
           </div>
           <div class="col-md-8 single-right-grid-right">
             <a routerLink="/show-video/{{video._id}}" class="title">{{video.title}}</a>

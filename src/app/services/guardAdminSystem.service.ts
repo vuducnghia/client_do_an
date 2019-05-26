@@ -10,7 +10,6 @@ export class AuthAdminSystemGuard implements CanActivate {
     let user = localStorage.getItem('currentUser')
     if (user) {
       if (JSON.parse(user).role === 'admin2') {
-        console.log(111111)
         return true;
       }else{
         this.router.navigate(['/login-admin'], { queryParams: { returnUrl: state.url } });
