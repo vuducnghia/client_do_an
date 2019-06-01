@@ -13,7 +13,7 @@
     <li *ngIf="!isAdmin2"><a routerLink="/admin"><i class="fas fa-tachometer-alt"></i><span>Analysis</span></a></li>
     <li *ngIf="isAdmin2"><a routerLink="manage-users"><i class="fas fa-users"></i><span>Account management</span></a></li>
     <li *ngIf="!isAdmin2"><a routerLink="manage-category"><i class="fas fa-suitcase"></i><span>Category management</span></a></li>
-    <li *ngIf="!isAdmin2"><a routerLink="manage-request"><i class="fas fa-home"></i><span>Requirement management</span></a></li>
+    <li *ngIf="!isAdmin2"><a routerLink="manage-request"><i class="fas fa-unlock"></i><span>Requirement management</span></a></li>
     <li *ngIf="!isAdmin2"><a routerLink="manage-language"><i class="fas fa-gamepad"></i><span>Language management</span></a></li>
     <li ><a (click)="logout()"><i class="fas fa-suitcase"></i><span>Logout</span></a></li>
   </ul>

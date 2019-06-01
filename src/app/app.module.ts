@@ -44,6 +44,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AuthUserGuard } from './services/guardUser.service';
 import { AuthAdminVideoGuard } from './services/guardAdminVideo.service';
 import { AuthAdminSystemGuard } from './services/guardAdminSystem.service';
+import { LanguageService } from './services/language.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,6 +94,7 @@ import { AuthAdminSystemGuard } from './services/guardAdminSystem.service';
     AdminService,
     VideoService,
     CategoryService,
+    LanguageService,
     EngineService,
     AuthUserGuard,
     AuthAdminVideoGuard,

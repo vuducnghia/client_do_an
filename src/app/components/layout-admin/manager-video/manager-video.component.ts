@@ -19,26 +19,36 @@ export class ManagerVideoComponent implements OnInit {
     })
   }
 
-  updateCategory(cate){
-    let value = $("#id_"+cate._id).val();
-    this.categoryService.updateCategory(cate._id, value).subscribe(result=>{
+  updateCategory(cate) {
+    let value = $("#id_" + cate._id).val();
+    this.categoryService.updateCategory(cate._id, value).subscribe(result => {
       cate.category = value
     })
   }
 
-  delete(id, index){
-    this.categoryService.deleteCategory(id, this.listCategory[index].category).subscribe(result=>{
+  delete(id, index) {
+    this.categoryService.deleteCategory(id, this.listCategory[index].category).subscribe(result => {
       this.listCategory.splice(index, 1);
-    }, error=>{
+    }, error => {
       alert('do not delete the category because this category is used');
     })
   }
 
-  addCategory(){
+  addCategory() {
     let value = $('#NewCate').val();
-    this.categoryService.addCategory(value).subscribe(result=>{
-      this.listCategory.push(result);
-      $('#NewCate').val('');
+    let check = false;
+    this.listCategory.forEach(category => {
+      if (category.category === value) {
+        check = true
+      }
     })
+    if (!check) {
+      this.categoryService.addCategory(value).subscribe(result => {
+        this.listCategory.push(result);
+        $('#NewCate').val('');
+      })
+    } else {
+      alert('category already exists');
+    }
   }
 }

@@ -117,6 +117,7 @@ export class UploadComponent implements OnInit {
 
   onChangeEngine(nameEngine) {
     this.nameEngine = nameEngine
+    console.log('listEngineTranscript', this.listEngineTranscript)
     let x: any = this.listEngineTranscript.filter(engine => {
       return engine.name === nameEngine
     })

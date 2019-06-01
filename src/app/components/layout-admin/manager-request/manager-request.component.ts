@@ -8,15 +8,15 @@ import { VideoService } from '../../../services/video.service';
 })
 export class ManagerRequestComponent implements OnInit {
   rejected = false;
-  pending = true;
-  public = false;
+  pending = false;
+  public = true;
   videos = []
   constructor(
     private videoService: VideoService
   ) { }
 
   ngOnInit() {
-    this.videoService.getVideoByStatus('requesting').subscribe(videos => {
+    this.videoService.getVideoByStatus('public').subscribe(videos => {
       console.log(videos)
       this.videos = videos;
     }, err => {

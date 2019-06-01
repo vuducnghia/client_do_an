@@ -1,7 +1,7 @@
 <div class="hipsum">
   <div>
-    <input type="text" placeholder="Add new Category" id="NewCate">
-    <button (click)="addCategory()">Add</button>
+    <input type="text" placeholder="Add new Language" id="NewCate">
+    <button (click)="addLanguage()">Add</button>
   </div>
   <div id="app">
     <div class="search-wrapper">
@@ -21,12 +21,12 @@
     <tbody>
       <tr *ngFor="let language of listLanguage| filter:searchText;index as i">
         <th scope="row">{{i+1}}</th>
-        <td>{{language}}</td>
+        <td>{{language.language}}</td>
         <td>
-          <input type="text" placeholder="{{language}}">
-          <button (click)="updateCategory()">Save</button>
+          <input type="text" placeholder="{{language.language}}" id="id_{{language._id}}">
+          <button (click)="updateLanguage(language)">Save</button>
         </td>
-        <td><button (click)="delete()">Delete</button></td>
+        <td><button (click)="delete(language._id, i)">Delete</button></td>
       </tr>
     </tbody>
   </table>
