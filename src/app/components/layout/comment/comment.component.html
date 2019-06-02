@@ -12,7 +12,8 @@
           <!-- Contenedor del Comentario -->
           <div class="comment-box">
             <div class="comment-head">
-              <h6 class="comment-name by-author"><a>{{mainComment.name}}</a></h6>
+              <h6 class="comment-name" *ngIf="idAutor!==mainComment.id"><a>{{mainComment.name}}</a></h6>
+              <h6 class="comment-name by-author" *ngIf="idAutor===mainComment.id"><a>{{mainComment.name}}</a></h6>
               <span>{{mainComment?.created?.slice(0,10)}}</span>
               <i class="fa fa-reply" (click)="changReply()"></i>
               <i class="fa fa-heart"></i>
@@ -33,7 +34,7 @@
             <!-- Contenedor del Comentario -->
             <div class="comment-box">
               <div class="comment-head">
-                <h6 class="comment-name"><a>{{comment.name}}{{comment.avatar}}</a></h6>
+                <h6 class="comment-name"><a>{{comment.name}}</a></h6>
                 <span>{{comment.created.slice(0,10)}}</span>
                 <i class="fa fa-reply" (click)="changReply()"></i>
                 <i class="fa fa-heart"></i>
@@ -51,7 +52,8 @@
             </div>
             <div class="comment-box">
               <div class="comment-head">
-                <h6 class="comment-name by-author"><a>{{userCurrent.name}}</a></h6>
+                <h6 class="comment-name" *ngIf="idAutor!==userCurrent.id"><a>{{userCurrent.name}}</a></h6>
+                <h6 class="comment-name by-author" *ngIf="idAutor===userCurrent.id"><a>{{userCurrent.name}}</a></h6>
                 <span>now</span>
                 <i class="fa fa-reply"></i>
                 <i class="fa fa-heart"></i>

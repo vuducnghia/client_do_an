@@ -11,7 +11,8 @@ import { AuthService } from '../../../services/auth.service';
 export class CommentComponent implements OnInit {
   @ViewChild('comment') CommentInput: ElementRef;
   @Input('idComment') idComment: string;
-
+  @Input('autor') autor: string;
+  @Input('idAutor') idAutor: string;
   listSubComments = [];
   mainComment: any = {};
   reply = false;
@@ -24,13 +25,13 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
     this.userCurrent = this.authService.currentUserValue;
-
     this.videoService.getCommentById(this.idComment).subscribe(comment => {
 
       this.userService.getUserById(comment.createBy).subscribe((user: any) => {
         this.mainComment = comment;
         this.mainComment.avatar = user.avatar;
         this.mainComment.name = user.firstName + ' ' + user.lastName;
+        this.mainComment.id = user._id;
         comment.subContent.forEach(element => {
           this.userService.getUserById(element.createBy).subscribe((user: any) => {
             this.listSubComments.push({

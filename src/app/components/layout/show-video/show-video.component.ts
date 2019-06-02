@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VideoService } from '../../../services/video.service';
 import * as videojs from '../../../../assets/js/video.js'
+import { UserService } from '../../../services/user.service';
 declare const videojs: any;
 declare var $: any;
 @Component({
@@ -11,6 +12,8 @@ declare var $: any;
 })
 export class ShowVideoComponent implements OnInit {
   @ViewChild('myInput') myInput: ElementRef;
+  autor = ''
+  idAutor = ''
   idVideo
   videoOgirin: any
   url;
@@ -21,6 +24,7 @@ export class ShowVideoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private videoService: VideoService,
+    private userService: UserService
   ) { }
   // aaa='http://localhost:8081/api/transcript/5554ca03-2712-4299-8dbd-b139c691f6a1Vietnamese500427796'
   ngOnInit() {
@@ -61,12 +65,14 @@ export class ShowVideoComponent implements OnInit {
             tracks: tracks
           });
         }
+        this.videoService.getCommentByIdVideo(this.idVideo).subscribe(comments => {
+          this.userService.getUserById(this.videoOgirin.createBy).subscribe((user: any) => {
+            this.autor = user.firstName + ' ' + user.lastName
+            this.idAutor = user._id
+          })
+          this.comments = comments;
+        });
 
-
-      });
-
-      this.videoService.getCommentByIdVideo(this.idVideo).subscribe(comments => {
-        this.comments = comments;
       });
     });
   }
